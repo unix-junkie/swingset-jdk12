@@ -6,6 +6,7 @@
  */
  
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.text.*;
 import javax.accessibility.*;
 
