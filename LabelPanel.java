@@ -15,25 +15,25 @@ import java.awt.*;
  * @version 1.1 11/14/97
  * @author Jeff Dinkins
  */
-public class LabelPanel extends JPanel 
+public final class LabelPanel extends JPanel 
 {
     private static final long serialVersionUID = -4110003342622117824L;
 
-    public LabelPanel(SwingSet swing) {
+    public LabelPanel(final SwingSet swing) {
 	setBorder(SwingSet.emptyBorder5);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 	setOpaque(false);
 
 	JLabel label;
 
-	JPanel labelsPanel = SwingSet.createVerticalPanel(true);
+	final JPanel labelsPanel = SwingSet.createVerticalPanel(true);
 	labelsPanel.setOpaque(false);
 
-	JPanel row1 = SwingSet.createHorizontalPanel(false);
-	JPanel row2 = SwingSet.createHorizontalPanel(false);
-	JPanel row3 = SwingSet.createHorizontalPanel(false);
-	JPanel row4 = SwingSet.createHorizontalPanel(false);
-	JPanel row5 = SwingSet.createHorizontalPanel(false);
+	final JPanel row1 = SwingSet.createHorizontalPanel(false);
+	final JPanel row2 = SwingSet.createHorizontalPanel(false);
+	final JPanel row3 = SwingSet.createHorizontalPanel(false);
+	final JPanel row4 = SwingSet.createHorizontalPanel(false);
+	final JPanel row5 = SwingSet.createHorizontalPanel(false);
  
         label = new BorderedSwingSetLabel("Label 1");
 	label.setToolTipText("Duke says \"Howdy!\"");
@@ -118,7 +118,7 @@ public class LabelPanel extends JPanel
         swing.labels.addElement(label);
 
 	// Add label panels to labelPanel
-	JPanel labelPanel = SwingSet.createVerticalPanel(true);
+	final JPanel labelPanel = SwingSet.createVerticalPanel(true);
 	labelPanel.setAlignmentX(LEFT_ALIGNMENT);
 	labelPanel.setAlignmentY(TOP_ALIGNMENT);
 
@@ -132,7 +132,7 @@ public class LabelPanel extends JPanel
 
 
 	// *************** Create the button controls ****************
-	JPanel controls = new JPanel() {
+	final JPanel controls = new JPanel() {
 	    private static final long serialVersionUID = -3079252719266522268L;
 
 	    public Dimension getMaximumSize() {
@@ -143,15 +143,15 @@ public class LabelPanel extends JPanel
 	controls.setAlignmentY(TOP_ALIGNMENT);
 	controls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel buttonControls = SwingSet.createHorizontalPanel(true);
+	final JPanel buttonControls = SwingSet.createHorizontalPanel(true);
 	buttonControls.setAlignmentY(TOP_ALIGNMENT);
 	buttonControls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel leftColumn = SwingSet.createVerticalPanel(false);
+	final JPanel leftColumn = SwingSet.createVerticalPanel(false);
 	leftColumn.setAlignmentX(LEFT_ALIGNMENT);
 	leftColumn.setAlignmentY(TOP_ALIGNMENT);
 
-	JPanel rightColumn = new LayoutControlPanel(swing, swing.labels);
+	final JPanel rightColumn = new LayoutControlPanel(swing, swing.labels);
 
 	buttonControls.add(leftColumn);
 	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
@@ -165,19 +165,19 @@ public class LabelPanel extends JPanel
 	leftColumn.add(l);
 	l.setFont(swing.boldFont);
 
-	JCheckBox bordered = new JCheckBox("Paint Border");
+	final JCheckBox bordered = new JCheckBox("Paint Border");
 	bordered.setEnabled(false);
         bordered.setMnemonic('b');
  	bordered.addItemListener(swing.buttonDisplayListener);
  	leftColumn.add(bordered);
  
- 	JCheckBox focused = new JCheckBox("Paint Focus");
+ 	final JCheckBox focused = new JCheckBox("Paint Focus");
 	focused.setEnabled(false);
         focused.setMnemonic('f');
  	focused.addItemListener(swing.buttonDisplayListener);
  	leftColumn.add(focused);
 
-	JCheckBox enabled = new JCheckBox("Enabled");
+	final JCheckBox enabled = new JCheckBox("Enabled");
 	enabled.setToolTipText("Click here to enable or disable all labels.");
 	enabled.setSelected(true);
         enabled.setMnemonic('e');
@@ -192,8 +192,8 @@ public class LabelPanel extends JPanel
 	leftColumn.add(l);
 	l.setFont(swing.boldFont);
 	
-	ButtonGroup group = new ButtonGroup();
-	JRadioButton defaultPad = new JRadioButton("Default");
+	final ButtonGroup group = new ButtonGroup();
+	final JRadioButton defaultPad = new JRadioButton("Default");
 	defaultPad.setEnabled(false);
         defaultPad.setMnemonic('d');
 	group.add(defaultPad);
@@ -201,14 +201,14 @@ public class LabelPanel extends JPanel
  	defaultPad.addItemListener(swing.buttonPadListener);
 	leftColumn.add(defaultPad);
 
-	JRadioButton zeroPad = new JRadioButton("0");
+	final JRadioButton zeroPad = new JRadioButton("0");
         zeroPad.setMnemonic('0');
 	zeroPad.setEnabled(false);
 	group.add(zeroPad);
  	zeroPad.addItemListener(swing.buttonPadListener);
 	leftColumn.add(zeroPad);
 
-	JRadioButton tenPad = new JRadioButton("10");
+	final JRadioButton tenPad = new JRadioButton("10");
         tenPad.setMnemonic('1');
 	tenPad.setEnabled(false);
 	group.add(tenPad);
@@ -225,12 +225,12 @@ public class LabelPanel extends JPanel
 
 	private static final long serialVersionUID = 2466844272753587241L;
 
-	BorderedSwingSetLabel(String text) {
+	BorderedSwingSetLabel(final String text) {
 	    super(text);
 	}
 
 	public Insets getInsets() {
-	    Insets insets = super.getInsets();
+	    final Insets insets = super.getInsets();
 	    insets.left += 3;
 	    insets.right += 3;
 	    insets.top += 3;
@@ -250,7 +250,7 @@ public class LabelPanel extends JPanel
 	    return new Dimension(250, 160);
 	}
 
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 	    super.paint(g);
 	    g.setColor(Color.black);
 	    g.drawRect(1, 1, getWidth() - 2, getHeight() - 2);

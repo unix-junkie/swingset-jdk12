@@ -18,7 +18,7 @@ import java.awt.event.*;
  * @author Jeff Dinkins
  # @author Peter Korn (accessibility support)
  */
-public class ProgressPanel extends JPanel implements ActionListener {
+public final class ProgressPanel extends JPanel implements ActionListener {
     private static final long serialVersionUID = 6399341973797545023L;
 
     JProgressBar progressBar;
@@ -31,7 +31,7 @@ public class ProgressPanel extends JPanel implements ActionListener {
     public ProgressPanel() {
 	setLayout(new BorderLayout());
 
-	JPanel textWrapper = new JPanel(new BorderLayout());
+	final JPanel textWrapper = new JPanel(new BorderLayout());
 	textWrapper.setBorder(SwingSet.loweredBorder);
 	textWrapper.setAlignmentX(LEFT_ALIGNMENT);
 	progressTextArea = new MyTextArea();
@@ -41,7 +41,7 @@ public class ProgressPanel extends JPanel implements ActionListener {
 
 	add(textWrapper, BorderLayout.CENTER);
 
-	JPanel progressPanel = new JPanel();
+	final JPanel progressPanel = new JPanel();
 	add(progressPanel, BorderLayout.SOUTH);
 
 	progressBar = new JProgressBar(SwingConstants.HORIZONTAL,
@@ -57,7 +57,7 @@ public class ProgressPanel extends JPanel implements ActionListener {
 
 	loadButton = new JButton("Start Loading Text");
 	loadButton.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		startLoading();
 	    }
 	});
@@ -65,7 +65,7 @@ public class ProgressPanel extends JPanel implements ActionListener {
 
         stopButton = new JButton("Stop Loading Text");
         stopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 stopLoading();
             }
         });
@@ -112,7 +112,7 @@ public class ProgressPanel extends JPanel implements ActionListener {
     	 "          Well... it seemed like a good idea...\n\n\n\n\n\n\n\n\n\n" +
  	 "             Hi Ewan and Montana!";
 
-    public void actionPerformed (ActionEvent e) {
+    public void actionPerformed (final ActionEvent e) {
 	    if(progressBar.getValue() < progressBar.getMaximum()) {
 		progressBar.setValue(progressBar.getValue() + 1);
 		progressTextArea.append(text.substring(textLocation, textLocation+1));

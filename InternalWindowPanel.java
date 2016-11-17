@@ -18,7 +18,7 @@ import java.awt.Container;
  * @author Dave Kloba
  * @author Peter Korn (accessibility support)
  */
-public class InternalWindowPanel extends JPanel implements ActionListener     {
+public final class InternalWindowPanel extends JPanel implements ActionListener     {
     private static final long serialVersionUID = -3310369790601473507L;
 
     // Maker values
@@ -108,7 +108,7 @@ public class InternalWindowPanel extends JPanel implements ActionListener     {
         return w;
     }
 
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(final ActionEvent e) {
         if(e.getSource() == closeAllButton) {
             lc.removeAll();
             lc.add(maker);
@@ -121,7 +121,7 @@ public class InternalWindowPanel extends JPanel implements ActionListener     {
             w.setClosable(closeBox.isSelected());
             w.setMaximizable(maxBox.isSelected());
             w.setIconifiable(iconBox.isSelected());
-	    String title = titleField.getText();
+	    final String title = titleField.getText();
 	    if(title.equals("")) {
                 w.setTitle("Internal Frame " + (makeCount+1));
 	    } else {
@@ -130,7 +130,7 @@ public class InternalWindowPanel extends JPanel implements ActionListener     {
             w.setResizable(resizeBox.isSelected());
 	    try { 
                 layer = Integer.parseInt(layerField.getText()); 
-	    } catch (NumberFormatException e2) {
+	    } catch (final NumberFormatException e2) {
 	        layer = 0;
 	    }
             makeCount++;
@@ -139,7 +139,7 @@ public class InternalWindowPanel extends JPanel implements ActionListener     {
                 
 	    w.setVisible(true);
             lc.add(w, new Integer(layer));  
-            try { w.setSelected(true); } catch (java.beans.PropertyVetoException e2) {}
+            try { w.setSelected(true); } catch (final java.beans.PropertyVetoException e2) {}
         }
     }
 
@@ -151,7 +151,7 @@ class MyScrollPane extends JScrollPane
 
     static ImageIcon[] icon = new ImageIcon[5];
 
-    public MyScrollPane(int layer, int count)
+    public MyScrollPane(final int layer, final int count)
     {
         if(icon[0] == null) {
            icon[0] = SwingSet.sharedInstance().loadImageIcon("images/ImageClub/misc/horn.gif", "Horn");
@@ -160,10 +160,10 @@ class MyScrollPane extends JScrollPane
            icon[3] = SwingSet.sharedInstance().loadImageIcon("images/ImageClub/misc/sun.gif",  "Sun");
            icon[4] = SwingSet.sharedInstance().loadImageIcon("images/ImageClub/misc/cab.gif",  "Yellow Cab");
         }
-	JPanel p = new JPanel();
+	final JPanel p = new JPanel();
        	p.setOpaque(false);
 	p.setLayout(new BorderLayout() );
-	JLabel layerLabel = new JLabel("Layer "+layer);
+	final JLabel layerLabel = new JLabel("Layer "+layer);
 	layerLabel.setOpaque(false);
         
 	p.add(new JLabel(icon[count % icon.length]), BorderLayout.CENTER);

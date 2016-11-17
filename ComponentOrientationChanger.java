@@ -16,7 +16,7 @@ import java.awt.event.*;
  * entire Component tree and changing each Components orientation setting to
  * the selected value.
  */
-class ComponentOrientationChanger extends JMenu implements ItemListener {
+final class ComponentOrientationChanger extends JMenu implements ItemListener {
 
     private static final long serialVersionUID = 6012088503691186810L;
 
@@ -28,13 +28,13 @@ class ComponentOrientationChanger extends JMenu implements ItemListener {
 
     }
 
-    public ComponentOrientationChanger() {
+    ComponentOrientationChanger() {
         super("Component Orientation");
 
         getAccessibleContext().setAccessibleDescription(
            "Sub-menu containing options for changing the orientation of the Swing Components.");
 
-        ButtonGroup orientationGroup = new ButtonGroup();
+        final ButtonGroup orientationGroup = new ButtonGroup();
 
         ltrRb = (JRadioButtonMenuItem)add(new JRadioButtonMenuItem("Left To Right"));
         ltrRb.getAccessibleContext().setAccessibleDescription("Orient Components for left to right languages.");
@@ -50,18 +50,18 @@ class ComponentOrientationChanger extends JMenu implements ItemListener {
 
     JRadioButtonMenuItem ltrRb, rtlRb;
 
-    public void itemStateChanged(ItemEvent e) {
+    public void itemStateChanged(final ItemEvent e) {
         
-        JRadioButtonMenuItem rb = (JRadioButtonMenuItem) e.getSource();
+        final JRadioButtonMenuItem rb = (JRadioButtonMenuItem) e.getSource();
         if (rb.isSelected()) {
-            String selected = rb.getText();
+            final String selected = rb.getText();
             ComponentOrientation orientation;
             if (selected.equals("Left To Right")) {
                 orientation = ComponentOrientation.LEFT_TO_RIGHT;
             } else  {
                 orientation = ComponentOrientation.RIGHT_TO_LEFT;
             } 
-            Container swingRoot = SwingSet.sharedInstance().getRootComponent();
+            final Container swingRoot = SwingSet.sharedInstance().getRootComponent();
             applyOrientation( swingRoot, orientation );
             fireActionPerformed(new ActionEvent(this,0,"OrientationChanged"));
             swingRoot.validate();
@@ -71,19 +71,19 @@ class ComponentOrientationChanger extends JMenu implements ItemListener {
     }
 
     
-    private void applyOrientation(Component c, ComponentOrientation o) {
+    private void applyOrientation(final Component c, final ComponentOrientation o) {
         c.setComponentOrientation(o);
 
         if( c instanceof JMenu ) {
-            JMenu menu = (JMenu)c;
-            int ncomponents = menu.getMenuComponentCount();
+            final JMenu menu = (JMenu)c;
+            final int ncomponents = menu.getMenuComponentCount();
             for (int i = 0 ; i < ncomponents ; ++i) {
                 applyOrientation( menu.getMenuComponent(i), o );
             }
         }
         else if( c instanceof Container ) {
-            Container container = (Container)c;
-            int ncomponents = container.getComponentCount();
+            final Container container = (Container)c;
+            final int ncomponents = container.getComponentCount();
             for (int i = 0 ; i < ncomponents ; ++i) {
                 applyOrientation( container.getComponent(i), o );
             }

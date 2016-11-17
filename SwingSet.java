@@ -190,7 +190,7 @@ public class SwingSet extends JPanel
     /*******************************************/
     /****** Construct the SwingSet demo ********/
     /*******************************************/
-    public SwingSet(java.applet.Applet anApplet) {
+    public SwingSet(final java.applet.Applet anApplet) {
 	super(true); // double buffer
 
 	instance = this;
@@ -219,8 +219,8 @@ public class SwingSet extends JPanel
 
 	// Add the Button panel
 	progressLabel.setText("Loading Title Page");
-	ImageIcon swingLogo = loadImageIcon("images/swingLabelSmall.gif","Swing!");
-	JPanel logoPanel = createLogo();
+	final ImageIcon swingLogo = loadImageIcon("images/swingLabelSmall.gif","Swing!");
+	final JPanel logoPanel = createLogo();
 	tabbedPane.addTab("", swingLogo, logoPanel);
 	// set the Tab's AccessibleName 'cause we are using a graphic only
 	tabbedPane.getAccessibleContext().getAccessibleChild(tabbedPane.indexOfTab(swingLogo)).getAccessibleContext().setAccessibleName("Swing!");
@@ -300,8 +300,8 @@ public class SwingSet extends JPanel
 	// hanging when you switch tabs -- better underlying 
 	// support will exist in future versions.
 	tabbedPane.addContainerListener(new ContainerAdapter() {
-	    public void componentRemoved(ContainerEvent e) {
-		Component c = e.getChild();
+	    public void componentRemoved(final ContainerEvent e) {
+		final Component c = e.getChild();
 		if (c == menuPanel) {
 		    menuBar.setSelected(null);
 		}
@@ -383,7 +383,7 @@ public class SwingSet extends JPanel
     class ToggleLogging extends AbstractAction {
 	private static final long serialVersionUID = 6026428299399537057L;
 
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
            Timer.setLogTimers(!Timer.getLogTimers());
         }
 
@@ -416,14 +416,14 @@ public class SwingSet extends JPanel
         StringTokenizer descriptionTokens;
         String descriptionText;
 	JMenuItem menuItem;
-        public AccessibilityEasterListener(JMenuItem mi, String descs) {
+        public AccessibilityEasterListener(final JMenuItem mi, final String descs) {
 	    super();
 	    descriptionTokens = new StringTokenizer(descs, ",");
 	    descriptionText = descs;
 	    menuItem = mi;
         }
 
-        public void mouseEntered(MouseEvent e) {
+        public void mouseEntered(final MouseEvent e) {
             if (!descriptionTokens.hasMoreTokens()) {
 	        descriptionTokens = new StringTokenizer(descriptionText, ",");
             }
@@ -445,12 +445,12 @@ public class SwingSet extends JPanel
      * L&F options should be active or inactive.
      *
      */
-     protected static boolean isAvailableLookAndFeel(String classname) {
+     protected static boolean isAvailableLookAndFeel(final String classname) {
 	 try { // Try to create a L&F given a String
-	     Class lnfClass = Class.forName(classname);
-	     LookAndFeel newLAF = (LookAndFeel)lnfClass.newInstance();
+	     final Class lnfClass = Class.forName(classname);
+	     final LookAndFeel newLAF = (LookAndFeel)lnfClass.newInstance();
 	     return newLAF.isSupportedLookAndFeel();
-	 } catch(Exception e) { // If ANYTHING weird happens, return false
+	 } catch(final Exception e) { // If ANYTHING weird happens, return false
 	     return false;
 	 }
      }
@@ -465,36 +465,36 @@ public class SwingSet extends JPanel
 
     JMenuBar createMenuBar() {
 	// MenuBar
-	JMenuBar menuBar = new JMenuBar();
+	final JMenuBar menuBar = new JMenuBar();
 	menuBar.getAccessibleContext().setAccessibleName("Swing menus");
 
 	JMenuItem mi;
 
 	// File Menu
-	JMenu file = menuBar.add(new JMenu("File"));
+	final JMenu file = menuBar.add(new JMenu("File"));
         file.setMnemonic('F');
 	file.getAccessibleContext().setAccessibleDescription("The standard 'File' application menu");
         mi = file.add(new JMenuItem("About"));
         mi.setMnemonic('t');
 	mi.getAccessibleContext().setAccessibleDescription("Find out about the SwingSet application");
 	mi.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		// tabbedPane.setSelectedIndex(0);
                 if(aboutBox == null) {
                     aboutBox = new JDialog(SwingSet.sharedInstance().getFrame(), "About Swing!", false);
-                    JPanel groupPanel = new JPanel(new BorderLayout());
-		    ImageIcon groupPicture = loadImageIcon("images/Copyright.gif",
+                    final JPanel groupPanel = new JPanel(new BorderLayout());
+		    final ImageIcon groupPicture = loadImageIcon("images/Copyright.gif",
                       "SwingSet demo is Copyright (c) 1997 Sun Microsystems, Inc.  All Rights Reserved.");
                     aboutBox.getContentPane().add(groupPanel, BorderLayout.CENTER);
-		    JLabel groupLabel = new JLabel(groupPicture);
+		    final JLabel groupLabel = new JLabel(groupPicture);
 		    groupLabel.getAccessibleContext().setAccessibleName("SwingSet demo Copyright");
 		    groupLabel.getAccessibleContext().setAccessibleDescription("The JFC Swing Toolkit is a cooperative effort between JavaSoft and Netscape.  The SwingSet demo is Copyright 1997 Sun Microsystems, Inc.  All Rights Reserved.");
                     groupPanel.add(groupLabel, BorderLayout.CENTER);
-                    JPanel buttonPanel = new JPanel(true);
+                    final JPanel buttonPanel = new JPanel(true);
                     groupPanel.add(buttonPanel, BorderLayout.SOUTH);
-                    JButton button = (JButton) buttonPanel.add(new JButton("OK"));
+                    final JButton button = (JButton) buttonPanel.add(new JButton("OK"));
                     button.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
+                        public void actionPerformed(final ActionEvent e) {
                             aboutBox.setVisible(false);
                         }
                     });
@@ -522,20 +522,20 @@ public class SwingSet extends JPanel
         mi.setMnemonic('x');
 	mi.getAccessibleContext().setAccessibleDescription("Exit the SwingSet application");
 	mi.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		System.exit(0);
 	    }
 	}
 	);
 
 	// Options Menu
-	JMenu options = menuBar.add(new JMenu("Options"));
+	final JMenu options = menuBar.add(new JMenu("Options"));
         options.setMnemonic('p');
 	options.getAccessibleContext().setAccessibleDescription("Look and Feel options: select one of several different Look and Feels for the SwingSet application");
 
         // Look and Feel Radio control
-	ButtonGroup group = new ButtonGroup();
-	ToggleUIListener toggleUIListener = new ToggleUIListener();
+	final ButtonGroup group = new ButtonGroup();
+	final ToggleUIListener toggleUIListener = new ToggleUIListener();
 
         metalMenuItem = (JRadioButtonMenuItem) options.add(new JRadioButtonMenuItem("Java Look and Feel"));
 	metalMenuItem.setSelected(UIManager.getLookAndFeel().getName().equals("Metal"));
@@ -625,8 +625,8 @@ public class SwingSet extends JPanel
 	cb.setSelected(true);
 
 	cb.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		JCheckBoxMenuItem cb = (JCheckBoxMenuItem)e.getSource();
+	    public void actionPerformed(final ActionEvent e) {
+		final JCheckBoxMenuItem cb = (JCheckBoxMenuItem)e.getSource();
 		if(cb.isSelected()) {
                     ToolTipManager.sharedInstance().setEnabled(true);
 		} else {
@@ -635,8 +635,8 @@ public class SwingSet extends JPanel
 	    }
 	});
 
-	ActionListener easterListener = new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	final ActionListener easterListener = new ActionListener() {
+	    public void actionPerformed(final ActionEvent e) {
 		tabbedPane.setSelectedIndex(toolTipIndex);
 		((ToolTipPanel)toolTipPanel).itsEaster(true);
 		swing.invalidate();
@@ -646,7 +646,7 @@ public class SwingSet extends JPanel
 	};
 
 	// Contributors Menu
-	JMenu people = menuBar.add(new JMenu("The Swing Team"));
+	final JMenu people = menuBar.add(new JMenu("The Swing Team"));
         people.setMnemonic('A');
 	people.getAccessibleContext().setAccessibleDescription(
 	        "Listing of all of the individual contributors to Swing");
@@ -681,7 +681,7 @@ public class SwingSet extends JPanel
 	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addMouseListener(new AccessibilityEasterListener(mi, "Wrote Java Accessibility API,Wrote AccessX,Designed RAP prototol,Contributor to UltraSonix"));
 	mi.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		tabbedPane.setSelectedIndex(toolTipIndex);
 		((ToolTipPanel)toolTipPanel).itsEaster(false);
 		swing.invalidate();
@@ -749,14 +749,14 @@ public class SwingSet extends JPanel
 	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
 	// Chooser Menu
-	JMenu choosers = menuBar.add(new JMenu("Choosers"));
+	final JMenu choosers = menuBar.add(new JMenu("Choosers"));
 	choosers.setMnemonic('H');
 	choosers.getAccessibleContext().setAccessibleDescription("Invoke one of the Swing Choosers");
 	mi = choosers.add(new JMenuItem("Color Chooser"));
-	ActionListener startColorChooser = new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	final ActionListener startColorChooser = new ActionListener() {
+	    public void actionPerformed(final ActionEvent e) {
 		tabbedPane.setSelectedIndex(toolTipIndex);
-		Color color = JColorChooser.showDialog(SwingSet.this, "Color Chooser", toolTipPanel.getBackground());
+		final Color color = JColorChooser.showDialog(SwingSet.this, "Color Chooser", toolTipPanel.getBackground());
 		toolTipPanel.setBackground(color); 
 		toolTipPanel.repaint();
 		
@@ -766,13 +766,13 @@ public class SwingSet extends JPanel
 	
 	if(!isApplet()) {
 	    mi = choosers.add(new JMenuItem("File Chooser"));
-	    ActionListener startFileChooser = new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		    JFileChooser chooser = new JFileChooser();
-		    ExampleFileFilter filter = new ExampleFileFilter(
+	    final ActionListener startFileChooser = new ActionListener() {
+		public void actionPerformed(final ActionEvent e) {
+		    final JFileChooser chooser = new JFileChooser();
+		    final ExampleFileFilter filter = new ExampleFileFilter(
 			new String[] {"jpg", "gif"}, "JPEG and GIF Image Files"
 		    );
-		    ExampleFileView fileView = new ExampleFileView();
+		    final ExampleFileView fileView = new ExampleFileView();
 		    fileView.putIcon("jpg", jpgIcon);
 		    fileView.putIcon("gif", gifIcon);
 		    chooser.setFileView(fileView);
@@ -780,15 +780,15 @@ public class SwingSet extends JPanel
 		    chooser.setFileFilter(filter);
 		    chooser.setAccessory(new FilePreviewer(chooser));
 
-		    File swingFile = new File("images/swing-64.gif");
+		    final File swingFile = new File("images/swing-64.gif");
 		    if(swingFile.exists()) {
 			chooser.setCurrentDirectory(swingFile);
 			chooser.setSelectedFile(swingFile);
 		    } 
 
-		    int retval = chooser.showOpenDialog(SwingSet.this);
+		    final int retval = chooser.showOpenDialog(SwingSet.this);
 		    if(retval == 0) {
-			File theFile = chooser.getSelectedFile();
+			final File theFile = chooser.getSelectedFile();
 			if(theFile != null) {
 			    JOptionPane.showMessageDialog(SwingSet.this, "You chose this file: " +
 							  chooser.getSelectedFile().getAbsolutePath());
@@ -811,7 +811,7 @@ public class SwingSet extends JPanel
     JMenuBar menuBar;
 
     JPanel createMenus() {
-	JPanel p = createVerticalPanel(true);
+	final JPanel p = createVerticalPanel(true);
 	p.setBorder(emptyBorder10);
 
 	// ********************
@@ -832,34 +832,34 @@ public class SwingSet extends JPanel
 	l.setDisplayedMnemonic('m');
 
 	// File
-	JMenu file = menuBar.add(new JMenu("File"));
+	final JMenu file = menuBar.add(new JMenu("File"));
 	file.setMnemonic('i');
-	JMenuItem newItem =
+	final JMenuItem newItem =
 	file.add(new JMenuItem("New", loadImageIcon("images/new.gif","New")));
 	newItem.setHorizontalTextPosition(SwingConstants.RIGHT);
 	newItem.setMnemonic('N');
-	JMenuItem open = file.add(new JMenuItem("Open", loadImageIcon("images/open.gif","Open")));
+	final JMenuItem open = file.add(new JMenuItem("Open", loadImageIcon("images/open.gif","Open")));
 	open.setHorizontalTextPosition(SwingConstants.RIGHT);
 	open.setMnemonic('O');
-	JMenuItem save = file.add(new JMenuItem("Save", loadImageIcon("images/save.gif","Save")));
+	final JMenuItem save = file.add(new JMenuItem("Save", loadImageIcon("images/save.gif","Save")));
 	save.setHorizontalTextPosition(SwingConstants.RIGHT);
 	save.setMnemonic('S');
 
 	// Edit
-	JMenu edit = menuBar.add(new JMenu("Edit"));
+	final JMenu edit = menuBar.add(new JMenu("Edit"));
 	edit.setMnemonic('E');
-	JMenuItem cut = edit.add(new JMenuItem("Cut", loadImageIcon("images/cut.gif","Cut")));
+	final JMenuItem cut = edit.add(new JMenuItem("Cut", loadImageIcon("images/cut.gif","Cut")));
 	cut.setHorizontalTextPosition(SwingConstants.RIGHT);
 	cut.setMnemonic('t');
-	JMenuItem copy = edit.add(new JMenuItem("Copy", loadImageIcon("images/copy.gif","Copy")));
+	final JMenuItem copy = edit.add(new JMenuItem("Copy", loadImageIcon("images/copy.gif","Copy")));
 	copy.setHorizontalTextPosition(SwingConstants.RIGHT);
 	copy.setMnemonic('C');
-	JMenuItem paste = edit.add(new JMenuItem("Paste", loadImageIcon("images/paste.gif","Paste")));
+	final JMenuItem paste = edit.add(new JMenuItem("Paste", loadImageIcon("images/paste.gif","Paste")));
 	paste.setHorizontalTextPosition(SwingConstants.RIGHT);
 	paste.setMnemonic('P');
 
 	// Letters
-	JMenu letters = menuBar.add(new JMenu("Letters "));
+	final JMenu letters = menuBar.add(new JMenu("Letters "));
 	letters.setMnemonic('t');
 
 	JMenu letterMenu;
@@ -942,59 +942,59 @@ public class SwingSet extends JPanel
 
 
 	// Colors
-	JMenu colors = menuBar.add(new JMenu("Colors"));
+	final JMenu colors = menuBar.add(new JMenu("Colors"));
 	colors.setMnemonic('C');
 	colors.setHorizontalTextPosition(SwingConstants.RIGHT);
 	colors.setIcon(new ColoredSquare(Color.orange));
 	menuBar.validate();
 
-        JMenuItem red = colors.add(new JMenuItem("Red"));
+        final JMenuItem red = colors.add(new JMenuItem("Red"));
 	red.setHorizontalTextPosition(SwingConstants.RIGHT);
 	red.setIcon(new ColoredSquare(Color.red));
 
-        JMenuItem blue = colors.add(new JMenuItem("Blue"));
+        final JMenuItem blue = colors.add(new JMenuItem("Blue"));
 	blue.setHorizontalTextPosition(SwingConstants.RIGHT);
 	blue.setIcon(new ColoredSquare(Color.blue));
 
-        JMenuItem green = colors.add(new JMenuItem("Green"));
+        final JMenuItem green = colors.add(new JMenuItem("Green"));
 	green.setHorizontalTextPosition(SwingConstants.RIGHT);
 	green.setIcon(new ColoredSquare(Color.green));
 
-        JMenuItem yellow = colors.add(new JMenuItem("Yellow"));
+        final JMenuItem yellow = colors.add(new JMenuItem("Yellow"));
 	yellow.setHorizontalTextPosition(SwingConstants.RIGHT);
 	yellow.setIcon(new ColoredSquare(Color.yellow));
 
 	// Numbers
-	JMenu numbers = menuBar.add(new JMenu("Numbers"));
+	final JMenu numbers = menuBar.add(new JMenu("Numbers"));
 	numbers.setMnemonic('u');
         numbers.add(new JMenuItem("1234"));
         numbers.add(new JMenuItem("1005"));
         numbers.add(new JMenuItem("2222"));
 
-	JMenu drinks = menuBar.add(new JMenu("Drinks"));
+	final JMenu drinks = menuBar.add(new JMenu("Drinks"));
 	drinks.setMnemonic('D');
         drinks.add(new JMenuItem("Thai Iced Tea"));
         drinks.add(new JMenuItem("Root Beer"));
         drinks.add(new JMenuItem("Green Tea"));
         drinks.add(new JMenuItem("Apple Juice"));
 	drinks.addSeparator();
-	ImageIcon softdrink = 
+	final ImageIcon softdrink = 
              loadImageIcon("images/ImageClub/food/softdrink.gif","soft drink");
         drinks.add(new JMenuItem("Softdrink", softdrink));
 
-	JMenu music = menuBar.add(new JMenu("Music"));
+	final JMenu music = menuBar.add(new JMenu("Music"));
 	music.setMnemonic('s');
         music.add(new JMenuItem("Rock"));
         music.add(new JMenuItem("Country"));
         music.add(new JMenuItem("Classical"));
         music.add(new JMenuItem("Jazz"));
 
-	JMenu food = menuBar.add(new JMenu("Junk Food"));
+	final JMenu food = menuBar.add(new JMenu("Junk Food"));
 	food.setMnemonic('J');
-	ImageIcon burger = loadImageIcon("images/ImageClub/food/burger.gif","burger");
-	ImageIcon fries  = loadImageIcon("images/ImageClub/food/fries.gif","fries");
-	ImageIcon hotdog = loadImageIcon("images/ImageClub/food/hotdog.gif","hot dog");
-	ImageIcon pizza  = loadImageIcon("images/ImageClub/food/pizza.gif","pizza");
+	final ImageIcon burger = loadImageIcon("images/ImageClub/food/burger.gif","burger");
+	final ImageIcon fries  = loadImageIcon("images/ImageClub/food/fries.gif","fries");
+	final ImageIcon hotdog = loadImageIcon("images/ImageClub/food/hotdog.gif","hot dog");
+	final ImageIcon pizza  = loadImageIcon("images/ImageClub/food/pizza.gif","pizza");
 
         addMenuItem(food, "Burger", burger);
 	addMenuItem(food, "Fries", fries);
@@ -1011,12 +1011,12 @@ public class SwingSet extends JPanel
 	p.add(l);
 	p.add(Box.createRigidArea(vpad10));
 
-	JPanel p1 = (JPanel)p.add(new JPanel());
+	final JPanel p1 = (JPanel)p.add(new JPanel());
 	p1.setAlignmentX(LEFT_ALIGNMENT);
 	p1.setAlignmentY(TOP_ALIGNMENT);
 
 	p1.setLayout(new BorderLayout());
-	JToolBar toolBar = new JToolBar();
+	final JToolBar toolBar = new JToolBar();
 	addTool(toolBar, "new");
 	toolBar.addSeparator( new Dimension(3,3) );
 	addTool(toolBar, "open");
@@ -1036,16 +1036,16 @@ public class SwingSet extends JPanel
 
 	p1.add(toolBar, BorderLayout.NORTH);
 
-	JPanel textWrapper = new JPanel(new BorderLayout());
+	final JPanel textWrapper = new JPanel(new BorderLayout());
 	textWrapper.setAlignmentX(LEFT_ALIGNMENT);
  	textWrapper.setBorder(SwingSet.loweredBorder);
 	
 	p1.add(textWrapper, BorderLayout.CENTER);
 
-	String text = SwingSet.contentsOfFile("ToolBar.txt");
-	JTextArea textArea = new JTextArea(text);
+	final String text = SwingSet.contentsOfFile("ToolBar.txt");
+	final JTextArea textArea = new JTextArea(text);
 	textArea.getAccessibleContext().setAccessibleName("ToolBar information");
-	JScrollPane scroller = new JScrollPane() {
+	final JScrollPane scroller = new JScrollPane() {
 	    private static final long serialVersionUID = -7297474276246934851L;
 
 	    public Dimension getPreferredSize() {
@@ -1063,13 +1063,13 @@ public class SwingSet extends JPanel
 	return p;
     }
 
-    void createOptionsMenu(JMenuBar menuBar) {
-	JMenu optionMenu = menuBar.add(new JMenu("Dialogs"));
+    void createOptionsMenu(final JMenuBar menuBar) {
+	final JMenu optionMenu = menuBar.add(new JMenu("Dialogs"));
         optionMenu.setMnemonic('D');
 	JMenuItem item;
 	item = new JMenuItem("Message Dialog");
 	item.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		JOptionPane.showMessageDialog(SwingSet.this, "Plain message");
 	    }
 	});
@@ -1077,7 +1077,7 @@ public class SwingSet extends JPanel
 
 	item = new JMenuItem("Warning Dialog");
 	item.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		JOptionPane.showMessageDialog(SwingSet.this, "Example Warning",
 				    "Warning", JOptionPane.WARNING_MESSAGE);
 	    }
@@ -1086,7 +1086,7 @@ public class SwingSet extends JPanel
 
 	item = new JMenuItem("Confirmation Dialog");
 	item.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		int        result;
 		result = JOptionPane.showConfirmDialog(SwingSet.this, "Is SWING cool?");
 		if(result == JOptionPane.YES_OPTION) {
@@ -1100,12 +1100,12 @@ public class SwingSet extends JPanel
 
 	item = new JMenuItem("Input Dialog");
 	item.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		String          result;
 
 		result = JOptionPane.showInputDialog(SwingSet.this, "Please enter your name:");
 		if(result != null) {
-		    Object[] message = new Object[2];
+		    final Object[] message = new Object[2];
 		    message[0] = "Thank you for using SWING ";
 		    message[1] = result;
 		    JOptionPane.showMessageDialog(SwingSet.this, message);
@@ -1116,9 +1116,9 @@ public class SwingSet extends JPanel
 
 	item = new JMenuItem("Component Dialog");
 	item.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		Object[]      message = new Object[4];
-                JComboBox cb = new JComboBox();
+	    public void actionPerformed(final ActionEvent e) {
+		final Object[]      message = new Object[4];
+                final JComboBox cb = new JComboBox();
                 cb.addItem("One");
                 cb.addItem("Two");
                 cb.addItem("Three");
@@ -1128,7 +1128,7 @@ public class SwingSet extends JPanel
                 message[3] = cb;
                 
 
-		String[]      options = { "Option 1", "Option 2", "Option 3",
+		final String[]      options = { "Option 1", "Option 2", "Option 3",
 					  "Option 4" };
 		JOptionPane.showOptionDialog(SwingSet.this, message, "Example", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[1]);
 	    }
@@ -1137,15 +1137,15 @@ public class SwingSet extends JPanel
     }
 	
 
-    static void addMenuItem(JMenu menu, String text, Icon g) {
-	JMenuItem mi = menu.add(new JMenuItem(text, g));
+    static void addMenuItem(final JMenu menu, final String text, final Icon g) {
+	final JMenuItem mi = menu.add(new JMenuItem(text, g));
 	mi.setHorizontalTextPosition(SwingConstants.CENTER);
 	mi.setHorizontalAlignment(SwingConstants.LEFT);
 	mi.setVerticalTextPosition(SwingConstants.BOTTOM);
     }
 
-    public void addTool(JToolBar toolBar, String name) {
-	JButton b = 
+    public void addTool(final JToolBar toolBar, final String name) {
+	final JButton b = 
            (JButton) toolBar.add(
                new JButton(loadImageIcon("images/" + name + ".gif",name)));
 	b.setToolTipText(name);
@@ -1165,12 +1165,12 @@ public class SwingSet extends JPanel
      */
     void createTabListener() {
 	// add listener to know when we've been shown
-        ChangeListener changeListener = new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                JTabbedPane tab = (JTabbedPane) e.getSource();
-                int index = tab.getSelectedIndex();
-                Component currentPage = tab.getComponentAt(index);
-		RepaintManager repaintManager = 
+        final ChangeListener changeListener = new ChangeListener() {
+            public void stateChanged(final ChangeEvent e) {
+                final JTabbedPane tab = (JTabbedPane) e.getSource();
+                final int index = tab.getSelectedIndex();
+                final Component currentPage = tab.getComponentAt(index);
+		final RepaintManager repaintManager = 
                     RepaintManager.currentManager(instance);
 
 		if(!repaintManager.isDoubleBufferingEnabled()) {
@@ -1210,7 +1210,7 @@ public class SwingSet extends JPanel
      *
      */
     static JPanel createControllButtons() {
-	JPanel p = new JPanel();
+	final JPanel p = new JPanel();
 	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 	p.setBorder(emptyBorder5);
 
@@ -1221,10 +1221,10 @@ public class SwingSet extends JPanel
      * create Logo
      */
     JPanel createLogo() {
-	JPanel p = new JPanel();
+	final JPanel p = new JPanel();
 	p.setLayout(new BorderLayout());
-	ImageIcon logo = loadImageIcon("images/AboutSwing.jpg","Swing!");
-	JLabel logoLabel = new JLabel(logo);
+	final ImageIcon logo = loadImageIcon("images/AboutSwing.jpg","Swing!");
+	final JLabel logoLabel = new JLabel(logo);
 	logoLabel.getAccessibleContext().setAccessibleName("Swing!");
 	p.add(logoLabel, BorderLayout.CENTER);
 	p.setBorder(new MatteBorder(6,6,6,6, 
@@ -1237,8 +1237,8 @@ public class SwingSet extends JPanel
     }
 
 
-    public static void main(String[] args) {
-        String vers = System.getProperty("java.version");
+    public static void main(final String[] args) {
+        final String vers = System.getProperty("java.version");
         if (vers.compareTo("1.1.2") < 0) {
             System.out.println("!!!WARNING: Swing must be run with a " +
                                "1.1.2 or higher version VM!!!");
@@ -1250,12 +1250,12 @@ public class SwingSet extends JPanel
 	    // If you want the System L&F instead, comment out the above line and
 	    // uncomment the following:
 	    // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-	} catch (Exception exc) {
+	} catch (final Exception exc) {
 	    System.out.println("Error loading L&F: " + exc);
 	}
 
-	WindowListener l = new WindowAdapter() {
-	    public void windowClosing(WindowEvent e) {System.exit(0);}
+	final WindowListener l = new WindowAdapter() {
+	    public void windowClosing(final WindowEvent e) {System.exit(0);}
 	};
 
 	frame = new JFrame("SwingSet");
@@ -1264,7 +1264,7 @@ public class SwingSet extends JPanel
 
 	JOptionPane.setRootFrame(frame);
 
-	JPanel progressPanel = new JPanel() {
+	final JPanel progressPanel = new JPanel() {
 	    private static final long serialVersionUID = -5819560143474236812L;
 
 	    public Insets getInsets() {
@@ -1274,7 +1274,7 @@ public class SwingSet extends JPanel
 	progressPanel.setLayout(new BoxLayout(progressPanel, BoxLayout.Y_AXIS));
 	frame.getContentPane().add(progressPanel, BorderLayout.CENTER);
 
-	Dimension d = new Dimension(400, 20);
+	final Dimension d = new Dimension(400, 20);
 	SwingSet.progressLabel = new JLabel("Loading, please wait...");
 	SwingSet.progressLabel.setAlignmentX(CENTER_ALIGNMENT);
 	SwingSet.progressLabel.setMaximumSize(d);
@@ -1291,14 +1291,14 @@ public class SwingSet extends JPanel
 
 	// show the frame
 	frame.setSize(INITIAL_WIDTH, INITIAL_HEIGHT);
-	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	frame.setLocation(screenSize.width/2 - INITIAL_WIDTH/2,
 			  screenSize.height/2 - INITIAL_HEIGHT/2);
 	frame.show();
 
         frame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-	SwingSet sw = new SwingSet();
+	final SwingSet sw = new SwingSet();
 	frame.getContentPane().removeAll();
 	frame.getContentPane().setLayout(new BorderLayout());
 	frame.getContentPane().add(sw, BorderLayout.CENTER);
@@ -1318,10 +1318,10 @@ public class SwingSet extends JPanel
      * Switch the between the Windows, Motif, Mac, and the Java Look and Feel
      */
     class ToggleUIListener implements ItemListener {
-	public void itemStateChanged(ItemEvent e) {
-	    Component root = SwingSet.sharedInstance().getRootComponent();
+	public void itemStateChanged(final ItemEvent e) {
+	    final Component root = SwingSet.sharedInstance().getRootComponent();
 	    root.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-	    JRadioButtonMenuItem rb = (JRadioButtonMenuItem) e.getSource();
+	    final JRadioButtonMenuItem rb = (JRadioButtonMenuItem) e.getSource();
             try {
 	       if(rb.isSelected() && rb.getText().equals("Windows Style Look and Feel")) {
 		   currentUI = "Windows";
@@ -1373,7 +1373,7 @@ public class SwingSet extends JPanel
 	    	   SwingUtilities.updateComponentTreeUI(getRootComponent());
 	       }
                */
-            } catch (UnsupportedLookAndFeelException exc) {
+            } catch (final UnsupportedLookAndFeelException exc) {
 		// Error - unsupported L&F
 		rb.setEnabled(false);
                 System.err.println("Unsupported LookAndFeel: " + rb.getText());
@@ -1385,12 +1385,12 @@ public class SwingSet extends JPanel
 		    UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		    tabPlacement.setEnabled(true);
 		    SwingUtilities.updateComponentTreeUI(getRootComponent());
-		} catch (Exception exc2) {
+		} catch (final Exception exc2) {
 		  exc2.printStackTrace();
 		    System.err.println("Could not load LookAndFeel: " + exc2);
 		    exc2.printStackTrace();
 		}
-            } catch (Exception exc) {
+            } catch (final Exception exc) {
                 rb.setEnabled(false);
 		  exc.printStackTrace();
                 System.err.println("Could not load LookAndFeel: " + rb.getText());
@@ -1411,7 +1411,7 @@ public class SwingSet extends JPanel
        public TabPlacementChanger() {
            super("Tab Placement");
 
-           ButtonGroup tabGroup = new ButtonGroup();
+           final ButtonGroup tabGroup = new ButtonGroup();
 
            topRb = (JRadioButtonMenuItem)add(new JRadioButtonMenuItem("Top"));
 	   topRb.getAccessibleContext().setAccessibleDescription("Position the TabbedPane on the top of the window");
@@ -1435,10 +1435,10 @@ public class SwingSet extends JPanel
            tabGroup.add(rightRb);
         }
 
-	public void itemStateChanged(ItemEvent e) {
-	    JRadioButtonMenuItem rb = (JRadioButtonMenuItem) e.getSource();
+	public void itemStateChanged(final ItemEvent e) {
+	    final JRadioButtonMenuItem rb = (JRadioButtonMenuItem) e.getSource();
             if (rb.isSelected()) {
-                String selected = rb.getText();
+                final String selected = rb.getText();
                 int placement;
                 if (selected.equals("Top")) {
                     placement = SwingConstants.TOP;
@@ -1453,12 +1453,12 @@ public class SwingSet extends JPanel
                 tabbedPane.validate();
             }
         }
-        public void setEnabled(boolean enabled) {
+        public void setEnabled(final boolean enabled) {
             super.setEnabled(enabled);
             if (!enabled) {
                 topRb.setSelected(true);
             } else {
-                int placement = tabbedPane.getTabPlacement();
+                final int placement = tabbedPane.getTabPlacement();
                 switch(placement) {
                   case SwingConstants.TOP:
                       topRb.setSelected(true);
@@ -1486,10 +1486,10 @@ public class SwingSet extends JPanel
     ItemListener buttonPadListener = new ItemListener() {
 	AbstractButton b;
 
-	public void itemStateChanged(ItemEvent e) {
+	public void itemStateChanged(final ItemEvent e) {
 	    // *** pad = 0
 	    int pad = -1;
-	    JRadioButton rb = (JRadioButton) e.getSource();
+	    final JRadioButton rb = (JRadioButton) e.getSource();
 	    if(rb.getText().equals("0") && rb.isSelected()) {
 		pad = 0;
 	    } else if(rb.getText().equals("10") && rb.isSelected()) {
@@ -1506,8 +1506,8 @@ public class SwingSet extends JPanel
 		    b.setMargin(insets10);
 		}
 	    }
-	    int index = tabbedPane.getSelectedIndex();
-	    Component currentPage = tabbedPane.getComponentAt(index);
+	    final int index = tabbedPane.getSelectedIndex();
+	    final Component currentPage = tabbedPane.getComponentAt(index);
 	    currentPage.invalidate();
 	    currentPage.validate();
 	    currentPage.repaint();
@@ -1518,8 +1518,8 @@ public class SwingSet extends JPanel
 	Component c;
 	AbstractButton b;
 
-	public void itemStateChanged(ItemEvent e) {
-	    JCheckBox cb = (JCheckBox) e.getSource();
+	public void itemStateChanged(final ItemEvent e) {
+	    final JCheckBox cb = (JCheckBox) e.getSource();
 	    if(cb.getText().equals("Enabled")) {
 		for(int i = 0; i < currentControls.size(); i++) {
 		    c = (Component) currentControls.elementAt(i);
@@ -1554,8 +1554,8 @@ public class SwingSet extends JPanel
 		    }
 		}
 	    }
-	    int index = tabbedPane.getSelectedIndex();
-	    Component currentPage = tabbedPane.getComponentAt(index);
+	    final int index = tabbedPane.getSelectedIndex();
+	    final Component currentPage = tabbedPane.getComponentAt(index);
 	    currentPage.invalidate();
 	    currentPage.validate();
 	    currentPage.repaint();
@@ -1564,8 +1564,8 @@ public class SwingSet extends JPanel
 
     // Title Pane tile position
     ActionListener borderedPaneListener = new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-	    JRadioButton b = (JRadioButton) e.getSource();
+	public void actionPerformed(final ActionEvent e) {
+	    final JRadioButton b = (JRadioButton) e.getSource();
 	    if(b.getText().equals("Above Top")) {((TitledBorder)borderedPane.getBorder()).setTitlePosition(TitledBorder.ABOVE_TOP);}
 	    if(b.getText().equals("Top")) {((TitledBorder)borderedPane.getBorder()).setTitlePosition(TitledBorder.TOP);}
 	    if(b.getText().equals("Below Top")) {((TitledBorder)borderedPane.getBorder()).setTitlePosition(TitledBorder.BELOW_TOP);}
@@ -1584,8 +1584,8 @@ public class SwingSet extends JPanel
 	}
     };
 
-    public static JPanel createHorizontalPanel(boolean threeD) {
-	JPanel p = new JPanel();
+    public static JPanel createHorizontalPanel(final boolean threeD) {
+	final JPanel p = new JPanel();
 	p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 	if(threeD) {
 	    p.setBorder(loweredBorder);
@@ -1593,8 +1593,8 @@ public class SwingSet extends JPanel
 	return p;
     }
 
-    public static JPanel createVerticalPanel(boolean threeD) {
-	JPanel p = new JPanel();
+    public static JPanel createVerticalPanel(final boolean threeD) {
+	final JPanel p = new JPanel();
 	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 	if(threeD) {
 	    p.setBorder(loweredBorder);
@@ -1602,13 +1602,13 @@ public class SwingSet extends JPanel
 	return p;
     }
 
-    public static String contentsOfFile(String filename) {
+    public static String contentsOfFile(final String filename) {
 	String s = new String();
 	File f;
-	char[] buff = new char[50000];
+	final char[] buff = new char[50000];
 	InputStream is;
 	InputStreamReader reader;
-	boolean fromApplet = SwingSet.sharedInstance().isApplet();
+	final boolean fromApplet = SwingSet.sharedInstance().isApplet();
 	URL url;
 
 	try {
@@ -1624,7 +1624,7 @@ public class SwingSet extends JPanel
 	  while ((nch = reader.read(buff, 0, buff.length)) != -1) {
 	    s = s + new String(buff, 0, nch);
 	  }
-	} catch (java.io.IOException ex) {
+	} catch (final java.io.IOException ex) {
 	    s = "Could not load file: " + filename;
 	}
 
@@ -1633,12 +1633,12 @@ public class SwingSet extends JPanel
 
     class ColoredSquare implements Icon {
 	Color color;
-	public ColoredSquare(Color c) {
+	public ColoredSquare(final Color c) {
 	    color = c;
 	}
 
-	public void paintIcon(Component c, Graphics g, int x, int y) {
-	    Color oldColor = g.getColor();
+	public void paintIcon(final Component c, final Graphics g, final int x, final int y) {
+	    final Color oldColor = g.getColor();
 	    g.setColor(color);
 	    g.fill3DRect(x,y,getIconWidth(), getIconHeight(), true);
 	    g.setColor(oldColor);
@@ -1648,7 +1648,7 @@ public class SwingSet extends JPanel
 
     }
 
-  public ImageIcon loadImageIcon(String filename, String description) {
+  public ImageIcon loadImageIcon(final String filename, final String description) {
     if(applet == null) {
       return new ImageIcon(filename, description);
     }
@@ -1656,7 +1656,7 @@ public class SwingSet extends JPanel
 	URL url;
 	try {
 	    url = new URL(applet.getCodeBase(), filename);
-	} catch (MalformedURLException e) {
+	} catch (final MalformedURLException e) {
 	    System.err.println("Error trying to load image " + filename);
 	    return null;
 	}
@@ -1698,14 +1698,14 @@ public class SwingSet extends JPanel
       ImageIcon thumbnail = null;
       File f = null;
       
-      public FilePreviewer(JFileChooser fc) {
+      public FilePreviewer(final JFileChooser fc) {
 	  setPreferredSize(new Dimension(100, 50));
 	  fc.addPropertyChangeListener(this);
       }
       
       public void loadImage() {
 	  if(f != null) {
-	      ImageIcon tmpIcon = new ImageIcon(f.getPath());
+	      final ImageIcon tmpIcon = new ImageIcon(f.getPath());
 	      if(tmpIcon.getIconWidth() > 90) {
 		  thumbnail = new ImageIcon(
 		      tmpIcon.getImage().getScaledInstance(90, -1, Image.SCALE_DEFAULT));
@@ -1715,9 +1715,9 @@ public class SwingSet extends JPanel
 	  }
       }
       
-      public void propertyChange(PropertyChangeEvent e) {
-	  String prop = e.getPropertyName();
-	  if(prop == JFileChooser.SELECTED_FILE_CHANGED_PROPERTY) {
+      public void propertyChange(final PropertyChangeEvent e) {
+	  final String prop = e.getPropertyName();
+	  if(prop.equals(JFileChooser.SELECTED_FILE_CHANGED_PROPERTY)) {
 	      f = (File) e.getNewValue();
 	      if(isShowing()) {
 		  loadImage();
@@ -1726,7 +1726,7 @@ public class SwingSet extends JPanel
 	  }
       }
       
-      public void paint(Graphics g) {
+      public void paint(final Graphics g) {
 	  if(thumbnail == null) {
 	      loadImage();
 	  }

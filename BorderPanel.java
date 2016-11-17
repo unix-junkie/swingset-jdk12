@@ -18,16 +18,13 @@ import javax.swing.border.*;
  * @version 1.8 11/29/01
  * @author Dave Kloba
  */
-public class BorderPanel extends JPanel      {
+public final class BorderPanel extends JPanel      {
     private static final long serialVersionUID = -6293894212491834255L;
 
     public BorderPanel()    {
-        JPanel tp;
-	GridLayout g;
-
         setLayout(new BorderLayout());
-        tp = new JPanel();
-	g = new GridLayout(0, 2);
+        final JPanel tp = new JPanel();
+	final GridLayout g = new GridLayout(0, 2);
 	g.setHgap(3);
 	g.setVgap(1);
         tp.setLayout(g);
@@ -78,10 +75,10 @@ public class BorderPanel extends JPanel      {
     }
 }
 
-class BorderLabel extends JLabel {
+final class BorderLabel extends JLabel {
     private static final long serialVersionUID = 9136088785354592021L;
 
-    public BorderLabel(String text, Border b) {
+    BorderLabel(final String text, final Border b) {
         super(text);
         setBorder(b);
         setHorizontalAlignment(SwingConstants.CENTER);

@@ -30,7 +30,7 @@ public class ComboBoxPanel extends JPanel {
 
     DefaultListModel model = new DefaultListModel();
 
-    public ComboBoxPanel(SwingSet swing) {
+    public ComboBoxPanel(final SwingSet swing) {
       JPanel tp;
       this.swing = swing;
       setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -140,9 +140,9 @@ public class ComboBoxPanel extends JPanel {
       tp.add(custom);
       tp.add(Box.createRigidArea(new Dimension(5,1)));
 
-      DefaultMutableTreeNode swingNode = new DefaultMutableTreeNode("Swing");
-      DefaultMutableTreeNode spec  = new DefaultMutableTreeNode("spec");
-      DefaultMutableTreeNode api   = new DefaultMutableTreeNode("api");
+      final DefaultMutableTreeNode swingNode = new DefaultMutableTreeNode("Swing");
+      final DefaultMutableTreeNode spec  = new DefaultMutableTreeNode("spec");
+      final DefaultMutableTreeNode api   = new DefaultMutableTreeNode("api");
 
       swingNode.add(spec);
       swingNode.add(api);
@@ -167,14 +167,14 @@ public class ComboBoxPanel extends JPanel {
       panel.add(tp);
     }
 
-    class CustomComboBoxModel extends AbstractListModel implements ComboBoxModel {
+    final class CustomComboBoxModel extends AbstractListModel implements ComboBoxModel {
 	private static final long serialVersionUID = 4539491195253836912L;
     Object currentValue;
       ImageIcon images[];
       ImageIcon images_down[];      
       Hashtable cache[];
 
-      public CustomComboBoxModel() {
+      CustomComboBoxModel() {
 	images = new ImageIcon[5];
 	images_down = new ImageIcon[5];
 	images[0] = SwingSet.sharedInstance().loadImageIcon("images/list/a1.gif","blue profile of robot");
@@ -190,7 +190,7 @@ public class ComboBoxPanel extends JPanel {
 	cache = new Hashtable[getSize()];
       }
 
-      public void setSelectedItem(Object anObject) {
+      public void setSelectedItem(final Object anObject) {
 	currentValue = anObject;
 	fireContentsChanged(this,-1,-1);
       }
@@ -203,12 +203,12 @@ public class ComboBoxPanel extends JPanel {
 	return 25;
       }
 
-      public Object getElementAt(int index) {
+      public Object getElementAt(final int index) {
 	if(cache[index] != null) {
 	    return cache[index];
 	}
 
-	    Hashtable result = new Hashtable();
+	    final Hashtable result = new Hashtable();
 	    if (index != 24) {
 		result.put("title", "Hello I'm the choice " + index);
 		result.put("image", images[index % 5]);
@@ -223,24 +223,24 @@ public class ComboBoxPanel extends JPanel {
         }
     }
 
-    class TestCellRenderer extends JLabel implements ListCellRenderer   {
+    final class TestCellRenderer extends JLabel implements ListCellRenderer   {
 	private static final long serialVersionUID = -6636016340137735102L;
 	JComboBox combobox;
 
 
-      public TestCellRenderer(JComboBox x) {
+	TestCellRenderer(final JComboBox x) {
         combobox = x;
         setOpaque(true);
       }
 
       public Component getListCellRendererComponent(
-          JList listbox, 
-          Object value, 
-          int index, 
-          boolean isSelected, 
-          boolean cellHasFocus) 
+          final JList listbox, 
+          final Object value, 
+          final int index, 
+          final boolean isSelected, 
+          final boolean cellHasFocus) 
       {
-	Hashtable h = (Hashtable) value;
+	final Hashtable h = (Hashtable) value;
         if(UIManager.getLookAndFeel().getName().equals("CDE/Motif")) {
             if(index == -1 ) {
 		setOpaque(false);

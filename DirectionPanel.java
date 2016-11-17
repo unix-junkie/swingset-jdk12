@@ -18,19 +18,19 @@ import java.util.*;
  * @author Brian Beck
  */ 
 
-public class DirectionPanel extends JPanel {
+public final class DirectionPanel extends JPanel {
     private static final long serialVersionUID = 1595976362847354739L;
 
-    private ButtonGroup group;
+    private final ButtonGroup group;
 
-    public DirectionPanel(boolean enable, String selection, ActionListener l) {
+    public DirectionPanel(final boolean enable, String selection, final ActionListener l) {
 	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	setAlignmentY(TOP_ALIGNMENT);
 	setAlignmentX(LEFT_ALIGNMENT);
 
-	Box firstThree = Box.createHorizontalBox();
-	Box secondThree = Box.createHorizontalBox();
-	Box thirdThree = Box.createHorizontalBox();
+	final Box firstThree = Box.createHorizontalBox();
+	final Box secondThree = Box.createHorizontalBox();
+	final Box thirdThree = Box.createHorizontalBox();
 
 	if(!enable) {
 	    selection = "None";
@@ -66,10 +66,10 @@ public class DirectionPanel extends JPanel {
         return group.getSelection().getActionCommand();
     }
 
-    public void setSelection( String selection  ) {
-        Enumeration e = group.getElements();
+    public void setSelection( final String selection  ) {
+        final Enumeration e = group.getElements();
         while( e.hasMoreElements() ) {
-            JRadioButton b = (JRadioButton)e.nextElement();
+            final JRadioButton b = (JRadioButton)e.nextElement();
             if( b.getActionCommand().equals(selection) ) {
                b.setSelected(true);
             }
@@ -102,9 +102,9 @@ public class DirectionPanel extends JPanel {
         /**
          * A layout direction button
          */
-        public DirectionButton(Icon icon, Icon downIcon, String direction,
-                               String description, ActionListener l, 
-                               ButtonGroup group, boolean selected)
+        public DirectionButton(final Icon icon, final Icon downIcon, final String direction,
+                               final String description, final ActionListener l, 
+                               final ButtonGroup group, final boolean selected)
         {
             addActionListener(l);
             setFocusPainted(false);
@@ -122,7 +122,7 @@ public class DirectionPanel extends JPanel {
             return false;
         }
 
-        public void setBorder(Border b) {
+        public void setBorder(final Border b) {
         }
     }
 }

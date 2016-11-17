@@ -64,11 +64,11 @@ public class SplitPanePanel extends JPanel
      * Creates controls to alter the JSplitPane.
      */
     protected void createInformationControls() {
-        JPanel                wrapper = new JPanel();
-        ButtonGroup           group = new ButtonGroup();
+        final JPanel                wrapper = new JPanel();
+        final ButtonGroup           group = new ButtonGroup();
         JRadioButton          button;
 
-        Box                   buttonWrapper = new Box(BoxLayout.X_AXIS);
+        final Box                   buttonWrapper = new Box(BoxLayout.X_AXIS);
 
         wrapper.setLayout(new GridLayout(0, 1));
 
@@ -76,7 +76,7 @@ public class SplitPanePanel extends JPanel
         button = new JRadioButton("Vertically split");
         button.setMnemonic('V');
         button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
             }
         });
@@ -88,7 +88,7 @@ public class SplitPanePanel extends JPanel
         button.setMnemonic('r');
         button.setSelected(true);
         button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                 splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
             }
         });
@@ -102,7 +102,7 @@ public class SplitPanePanel extends JPanel
         checkBox.setSelected(true);
 
         checkBox.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
+            public void stateChanged(final ChangeEvent e) {
                 splitPane.setContinuousLayout(
                                 ((JCheckBox)e.getSource()).isSelected());
             }
@@ -116,7 +116,7 @@ public class SplitPanePanel extends JPanel
         checkBox.setSelected(false);
 
         checkBox.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
+            public void stateChanged(final ChangeEvent e) {
                 splitPane.setOneTouchExpandable(
                                 ((JCheckBox) e.getSource()).isSelected());
             }
@@ -130,17 +130,17 @@ public class SplitPanePanel extends JPanel
         JLabel                   label;
 
         tf = new JTextField();
-        tf.setText(new Integer(splitPane.getDividerSize()).toString());
+        tf.setText(Integer.toString(splitPane.getDividerSize()));
         tf.setColumns(5);
         tf.getAccessibleContext().setAccessibleName("Divider Size");
         tf.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String           value = ((JTextField)e.getSource()).getText();
+            public void actionPerformed(final ActionEvent e) {
+                final String           value = ((JTextField)e.getSource()).getText();
                 int              newSize;
 
                 try {
                     newSize = Integer.parseInt(value);
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     newSize = -1;
                 }
                 if(newSize > 0) {
@@ -168,13 +168,13 @@ public class SplitPanePanel extends JPanel
         tf.getAccessibleContext().setAccessibleName(
                                         "First Component minimum size");
         tf.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String           value = ((JTextField)e.getSource()).getText();
+            public void actionPerformed(final ActionEvent e) {
+                final String           value = ((JTextField)e.getSource()).getText();
                 int              newSize;
 
                 try {
                     newSize = Integer.parseInt(value);
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     newSize = -1;
                 }
                 if(newSize > 10) {
@@ -204,13 +204,13 @@ public class SplitPanePanel extends JPanel
         tf.getAccessibleContext().setAccessibleName(
                                         "Second Component minimum size");
         tf.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String           value = ((JTextField)e.getSource()).getText();
+            public void actionPerformed(final ActionEvent e) {
+                final String           value = ((JTextField)e.getSource()).getText();
                 int              newSize;
 
                 try {
                     newSize = Integer.parseInt(value);
-                } catch (Exception ex) {
+                } catch (final Exception ex) {
                     newSize = -1;
                 }
                 if(newSize > 10) {
@@ -249,7 +249,7 @@ class GridComponent extends Component
     /** Preferred size. */
     protected int            preferredSize;
 
-    public GridComponent(int gridCount) {
+    public GridComponent(final int gridCount) {
         this.gridCount = gridCount;
         gridSize = 10;
         currentColor = Color.lightGray;
@@ -258,7 +258,7 @@ class GridComponent extends Component
     /**
      * Sets the preferred size to value.
      */
-    public void setPreferredSize(int value) {
+    public void setPreferredSize(final int value) {
         preferredSize = value;
     }
 
@@ -284,8 +284,8 @@ class GridComponent extends Component
     /**
      * Resets the <code>currentColor</code> and messages super.
      */
-    public void setBounds(int x, int y, int width, int height) {
-        int          minSize = Math.min(width, height);
+    public void setBounds(final int x, final int y, final int width, final int height) {
+        final int          minSize = Math.min(width, height);
 
         if(minSize < 100) {
 	    currentColor = Color.red;
@@ -305,8 +305,8 @@ class GridComponent extends Component
     /**
      * Paints the grid.
      */
-    public void paint(Graphics g) {
-        Rectangle        paintBounds = g.getClipBounds();
+    public void paint(final Graphics g) {
+        final Rectangle        paintBounds = g.getClipBounds();
 
         // g.setColor(Color.lightGray);
         // g.fillRect(paintBounds.x, paintBounds.y, paintBounds.width,
@@ -314,12 +314,12 @@ class GridComponent extends Component
         if(gridSize > 0) {
             g.setColor(currentColor);
 
-            int              maxY = paintBounds.y + paintBounds.height;
-            int              maxX = paintBounds.x + paintBounds.width;
-            int              drawMinY = paintBounds.y / gridSize * gridSize;
-            int              drawMaxY = maxY / gridSize * gridSize;
-            int              drawMinX = paintBounds.x / gridSize * gridSize;
-            int              drawMaxX = maxX / gridSize * gridSize;
+            final int              maxY = paintBounds.y + paintBounds.height;
+            final int              maxX = paintBounds.x + paintBounds.width;
+            final int              drawMinY = paintBounds.y / gridSize * gridSize;
+            final int              drawMaxY = maxY / gridSize * gridSize;
+            final int              drawMinX = paintBounds.x / gridSize * gridSize;
+            final int              drawMaxX = maxX / gridSize * gridSize;
             int              counter;
 
             for(counter = drawMinX; counter <= drawMaxX; counter += gridSize) {

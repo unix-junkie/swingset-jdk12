@@ -17,11 +17,11 @@ import java.awt.*;
  * @version 1.9 08/26/98
  * @author Jeff Dinkins
  */
-public class ToggleButtonPanel extends JPanel 
+public final class ToggleButtonPanel extends JPanel 
 {
     private static final long serialVersionUID = 2543908409709286781L;
 
-    public ToggleButtonPanel(SwingSet swing) {
+    public ToggleButtonPanel(final SwingSet swing) {
 	ButtonGroup group;
 
 	setBorder(SwingSet.emptyBorder5);
@@ -29,18 +29,18 @@ public class ToggleButtonPanel extends JPanel
 
 	// *************** duke ****************
         ImageIcon dukeAnim;
-        ImageIcon duke = SwingSet.sharedInstance().loadImageIcon("images/swing.small.gif","Duke waving from a swing");
-        ImageIcon dukeWave = SwingSet.sharedInstance().loadImageIcon("images/dukeWave.gif","Duke waving");
+        final ImageIcon duke = SwingSet.sharedInstance().loadImageIcon("images/swing.small.gif","Duke waving from a swing");
+        final ImageIcon dukeWave = SwingSet.sharedInstance().loadImageIcon("images/dukeWave.gif","Duke waving");
 
 	// *************** toggle buttons ****************
 	// text buttons
-	JPanel textButtons = SwingSet.createHorizontalPanel(false);
+	final JPanel textButtons = SwingSet.createHorizontalPanel(false);
 	textButtons.setAlignmentX(LEFT_ALIGNMENT);
 	Border buttonBorder = new TitledBorder(null, "Text ToggleButton", 
 					       TitledBorder.LEFT, TitledBorder.TOP,
 					       swing.boldFont);
 
-	Border emptyBorder = new EmptyBorder(5,5,5,5);
+	final Border emptyBorder = new EmptyBorder(5,5,5,5);
 	Border compoundBorder = new CompoundBorder( buttonBorder, emptyBorder);
 
 	textButtons.setBorder(compoundBorder);
@@ -74,7 +74,7 @@ public class ToggleButtonPanel extends JPanel
 	// image buttons
 	group = new ButtonGroup();
 
-	JPanel imageButtons = SwingSet.createHorizontalPanel(false);
+	final JPanel imageButtons = SwingSet.createHorizontalPanel(false);
 	imageButtons.setAlignmentX(LEFT_ALIGNMENT);
 	buttonBorder = new TitledBorder(null, "Image ToggleButtons", 
 					       TitledBorder.LEFT, TitledBorder.TOP,
@@ -122,7 +122,7 @@ public class ToggleButtonPanel extends JPanel
 	imageButtons.add(button);
 
 	// Add button panels to buttonPanel
-	JPanel buttonPanel = SwingSet.createVerticalPanel(true);
+	final JPanel buttonPanel = SwingSet.createVerticalPanel(true);
 	buttonPanel.setAlignmentX(LEFT_ALIGNMENT);
 	buttonPanel.setAlignmentY(TOP_ALIGNMENT);
 
@@ -135,7 +135,7 @@ public class ToggleButtonPanel extends JPanel
 
 
 	// *************** Create the button controls ****************
-	JPanel controls = new JPanel() {
+	final JPanel controls = new JPanel() {
 	    private static final long serialVersionUID = 5409634582720833182L;
 
 	    public Dimension getMaximumSize() {
@@ -146,15 +146,15 @@ public class ToggleButtonPanel extends JPanel
 	controls.setAlignmentY(TOP_ALIGNMENT);
 	controls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel buttonControls = SwingSet.createHorizontalPanel(true);
+	final JPanel buttonControls = SwingSet.createHorizontalPanel(true);
 	buttonControls.setAlignmentY(TOP_ALIGNMENT);
 	buttonControls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel leftColumn = SwingSet.createVerticalPanel(false);
+	final JPanel leftColumn = SwingSet.createVerticalPanel(false);
 	leftColumn.setAlignmentX(LEFT_ALIGNMENT);
 	leftColumn.setAlignmentY(TOP_ALIGNMENT);
 
-	JPanel rightColumn = new LayoutControlPanel(swing, swing.toggleButtons);
+	final JPanel rightColumn = new LayoutControlPanel(swing, swing.toggleButtons);
 
 	buttonControls.add(leftColumn);
 	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
@@ -168,21 +168,21 @@ public class ToggleButtonPanel extends JPanel
 	leftColumn.add(l);
 	l.setFont(swing.boldFont);
 
- 	JCheckBox bordered = new JCheckBox("Paint Border");
+ 	final JCheckBox bordered = new JCheckBox("Paint Border");
 	bordered.setToolTipText("Click here to turn border painting on or off.");
         bordered.setMnemonic('b');
 	bordered.setSelected(true);
  	bordered.addItemListener(swing.buttonDisplayListener);
  	leftColumn.add(bordered);
  
- 	JCheckBox focused = new JCheckBox("Paint Focus");
+ 	final JCheckBox focused = new JCheckBox("Paint Focus");
 	focused.setToolTipText("Click here to turn focus painting on or off.");
         focused.setMnemonic('f');
  	focused.setSelected(true);
  	focused.addItemListener(swing.buttonDisplayListener);
  	leftColumn.add(focused);
 
-	JCheckBox enabled = new JCheckBox("Enabled");
+	final JCheckBox enabled = new JCheckBox("Enabled");
 	enabled.setSelected(true);
 	enabled.setToolTipText("Click here to enable or disable the toggle buttons.");
         enabled.setMnemonic('e');
@@ -198,7 +198,7 @@ public class ToggleButtonPanel extends JPanel
 	l.setFont(swing.boldFont);
 	
 	group = new ButtonGroup();
-	JRadioButton defaultPad = new JRadioButton("Default");
+	final JRadioButton defaultPad = new JRadioButton("Default");
         defaultPad.setMnemonic('d');
 	defaultPad.setToolTipText("Uses the default padding between the border and label.");
 	group.add(defaultPad);
@@ -206,14 +206,14 @@ public class ToggleButtonPanel extends JPanel
  	defaultPad.addItemListener(swing.buttonPadListener);
 	leftColumn.add(defaultPad);
 
-	JRadioButton zeroPad = new JRadioButton("0");
+	final JRadioButton zeroPad = new JRadioButton("0");
         zeroPad.setMnemonic('0');
 	group.add(zeroPad);
 	zeroPad.setToolTipText("Uses no padding between the border and label.");
  	zeroPad.addItemListener(swing.buttonPadListener);
 	leftColumn.add(zeroPad);
 
-	JRadioButton tenPad = new JRadioButton("10");
+	final JRadioButton tenPad = new JRadioButton("10");
         tenPad.setMnemonic('1');
 	tenPad.setToolTipText("Uses a 10 pixel pad between the border and label.");
 	group.add(tenPad);

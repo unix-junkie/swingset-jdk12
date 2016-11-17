@@ -15,7 +15,7 @@ import java.awt.event.*;
  * @author Jeff Dinkins
  * @author Peter Korn (accessibility support)
  */
-public class ToolTipPanel extends JPanel {
+public final class ToolTipPanel extends JPanel {
     private static final long serialVersionUID = 7939334168039722721L;
 
     public ToolTipPanel() {
@@ -26,7 +26,7 @@ public class ToolTipPanel extends JPanel {
         setBackground(Color.white);
 	setBorder(SwingSet.etchedBorder10);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-	Cow cow = new Cow();
+	final Cow cow = new Cow();
 	cow.setToolTipText("Cow.");
 	cow.getAccessibleContext().setAccessibleName("Cow image");
 	add(Box.createRigidArea(new Dimension(1, 40)));
@@ -59,7 +59,7 @@ public class ToolTipPanel extends JPanel {
 	boolean moo = false;
 	boolean milk = false;
 	boolean tail = false;
-	public boolean contains(int x, int y) {
+	public boolean contains(final int x, final int y) {
 	    if(x > 30 && x < 60 && y > 60 && y < 85) {
 	        if(!moo) {
 	           setToolTipText("<html><center><font color=blue size=+3>Mooooo</font></center></html>");
@@ -91,7 +91,7 @@ public class ToolTipPanel extends JPanel {
 	}
     }
 
-    public void itsEaster(boolean b) {
+    public void itsEaster(final boolean b) {
 	if(!b) {
 	   removeAll();
 	   loadCow();
@@ -99,7 +99,7 @@ public class ToolTipPanel extends JPanel {
 	   removeAll();
 	   setBackground(Color.black);
 	   setLayout(new BorderLayout());
-	   Easter easter = new Easter();
+	   final Easter easter = new Easter();
 	   add(easter, BorderLayout.CENTER);
 	   invalidate();
 	   validate();
@@ -112,18 +112,18 @@ public class ToolTipPanel extends JPanel {
 
 	Timer animator;
 
-	private ImageIcon amy     = SwingSet.sharedInstance().loadImageIcon("images/people/amy.gif", "Amy Fowler");
-	private ImageIcon jag     = SwingSet.sharedInstance().loadImageIcon("images/people/jag.gif", "James Gosling");
-	private ImageIcon jeff    = SwingSet.sharedInstance().loadImageIcon("images/people/jeff.gif", "Jeff Dinkins");
-	private ImageIcon tim     = SwingSet.sharedInstance().loadImageIcon("images/people/tim.gif", "Tim Prinzing");
-	private ImageIcon tom     = SwingSet.sharedInstance().loadImageIcon("images/people/tom.gif", "Tom Ball");
-        private ImageIcon rick    = SwingSet.sharedInstance().loadImageIcon("images/people/rick.gif", "Rick Levenson");
-        private ImageIcon hans1   = SwingSet.sharedInstance().loadImageIcon("images/people/mathew.gif", "Mathew Muller");
-        private ImageIcon hans2   = SwingSet.sharedInstance().loadImageIcon("images/people/pl.gif", "Project Lead");
-        private ImageIcon ges     = SwingSet.sharedInstance().loadImageIcon("images/people/ges.gif", "Georges Saab");
-        private ImageIcon phil    = SwingSet.sharedInstance().loadImageIcon("images/people/phil.gif", "Phillip Milne");
-        private ImageIcon arnaud  = SwingSet.sharedInstance().loadImageIcon("images/people/nathan.gif", "Arnaud Webber");        
-        private ImageIcon rich    = SwingSet.sharedInstance().loadImageIcon("images/people/rich.gif", "Rich Schiavi");
+	private final ImageIcon amy     = SwingSet.sharedInstance().loadImageIcon("images/people/amy.gif", "Amy Fowler");
+	private final ImageIcon jag     = SwingSet.sharedInstance().loadImageIcon("images/people/jag.gif", "James Gosling");
+	private final ImageIcon jeff    = SwingSet.sharedInstance().loadImageIcon("images/people/jeff.gif", "Jeff Dinkins");
+	private final ImageIcon tim     = SwingSet.sharedInstance().loadImageIcon("images/people/tim.gif", "Tim Prinzing");
+	private final ImageIcon tom     = SwingSet.sharedInstance().loadImageIcon("images/people/tom.gif", "Tom Ball");
+        private final ImageIcon rick    = SwingSet.sharedInstance().loadImageIcon("images/people/rick.gif", "Rick Levenson");
+        private final ImageIcon hans1   = SwingSet.sharedInstance().loadImageIcon("images/people/mathew.gif", "Mathew Muller");
+        private final ImageIcon hans2   = SwingSet.sharedInstance().loadImageIcon("images/people/pl.gif", "Project Lead");
+        private final ImageIcon ges     = SwingSet.sharedInstance().loadImageIcon("images/people/ges.gif", "Georges Saab");
+        private final ImageIcon phil    = SwingSet.sharedInstance().loadImageIcon("images/people/phil.gif", "Phillip Milne");
+        private final ImageIcon arnaud  = SwingSet.sharedInstance().loadImageIcon("images/people/nathan.gif", "Arnaud Webber");        
+        private final ImageIcon rich    = SwingSet.sharedInstance().loadImageIcon("images/people/rich.gif", "Rich Schiavi");
 
 	int tmpScale;
 	
@@ -165,27 +165,27 @@ public class ToolTipPanel extends JPanel {
 	    animator.start();
 	}
 
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 	    // The code may be goofy, but the code be havin' some fun.
 	    g.setColor(getParent().getBackground());
 	    g.fillRect(0, 0, getWidth(), getHeight());
 
 	    // Unless your name is Jeff Dinkins, don't muck with this. (-:
-	    tmpScale = (int) (Math.abs(Math.sin(x1+00)) * 10); double jeffScale   = (double) tmpScale / 10;
-	    tmpScale = (int) (Math.abs(Math.sin(x1+10)) * 10); double timScale    = (double) tmpScale / 10;
-	    tmpScale = (int) (Math.abs(Math.sin(x1+20)) * 10); double tomScale    = (double) tmpScale / 10;
-	    tmpScale = (int) (Math.abs(Math.sin(x1+30)) * 10); double jagScale    = (double) tmpScale / 10;
-	    tmpScale = (int) (Math.abs(Math.sin(x1+40)) * 11); double amyScale    = (double) tmpScale / 10;
-	    tmpScale = (int) (Math.abs(Math.sin(x1+50)) * 11); double rickScale   = (double) tmpScale / 10;
-	    tmpScale = (int) (Math.abs(Math.sin(x2+60)) * 11); double hansScale   = (double) tmpScale / 10;
-	    tmpScale = (int) (Math.abs(Math.sin(x2+70)) * 10); double gesScale    = (double) tmpScale / 10;
-	    tmpScale = (int) (Math.abs(Math.sin(x1+10)) * 10); double philScale   = (double) tmpScale / 10;
-	    tmpScale = (int) (Math.abs(Math.sin(x1+90)) * 10); double arnaudScale = (double) tmpScale / 10;
-            tmpScale = (int) (Math.abs(Math.sin(x1+80)) * 10); double richScale   = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x1+00)) * 10); final double jeffScale   = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x1+10)) * 10); final double timScale    = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x1+20)) * 10); final double tomScale    = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x1+30)) * 10); final double jagScale    = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x1+40)) * 11); final double amyScale    = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x1+50)) * 11); final double rickScale   = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x2+60)) * 11); final double hansScale   = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x2+70)) * 10); final double gesScale    = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x1+10)) * 10); final double philScale   = (double) tmpScale / 10;
+	    tmpScale = (int) (Math.abs(Math.sin(x1+90)) * 10); final double arnaudScale = (double) tmpScale / 10;
+            tmpScale = (int) (Math.abs(Math.sin(x1+80)) * 10); final double richScale   = (double) tmpScale / 10;
 	    
 	    x1 +=.1;
 	    x2 +=.065;
-	    int nudgeX = (int) ((double) getWidth()/2 * .8);
+	    final int nudgeX = (int) ((double) getWidth()/2 * .8);
 	    xTom       = (int) (Math.sin(x1+00) * nudgeX) + nudgeX;
             xAmy       = (int) (Math.sin(x1+10) * nudgeX) + nudgeX;
 	    xGes       = (int) (Math.sin(x2+20) * nudgeX) + nudgeX;
@@ -200,9 +200,9 @@ public class ToolTipPanel extends JPanel {
 	    
 	    y1 +=.1;
 	    y2 +=.05;
-	    int nudgeY    = (int) ((double) getHeight()/2 * .60);
-	    int nudgeMe   = (int) ((double) getHeight()/2 * .45);
-	    int nudgePhil = (int) ((double) getHeight()/2 * .20);
+	    final int nudgeY    = (int) ((double) getHeight()/2 * .60);
+	    final int nudgeMe   = (int) ((double) getHeight()/2 * .45);
+	    final int nudgePhil = (int) ((double) getHeight()/2 * .20);
 	    yTom          = (int) (Math.sin(y1+00) * nudgeY)    + nudgeY;
 	    yTim          = (int) (Math.sin(y1+10) * nudgeY)    + nudgeY;
 	    yRich         = (int) (Math.sin(y1+15) * nudgeY)    + nudgeY;
@@ -254,7 +254,7 @@ public class ToolTipPanel extends JPanel {
 
 	}
 
-	public void squish(Graphics g, ImageIcon icon, int x, int y, double scale) {
+	public void squish(final Graphics g, final ImageIcon icon, final int x, final int y, final double scale) {
 	    if(isVisible()) {
 		g.drawImage(icon.getImage(),
 			    x, y,
@@ -264,7 +264,7 @@ public class ToolTipPanel extends JPanel {
 	    }
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 	    if(isVisible()) {
 		repaint();
 	    } else {

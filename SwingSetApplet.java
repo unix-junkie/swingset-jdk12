@@ -11,14 +11,14 @@ import java.awt.*;
 import java.applet.*;
 import SwingSet;
 
-public class SwingSetApplet extends JApplet {
+public final class SwingSetApplet extends JApplet {
     private static final long serialVersionUID = -224546757455147774L;
 
     JPanel panel;
     
     public void init() {
 
-        String vers = System.getProperty("java.version");
+        final String vers = System.getProperty("java.version");
         final Applet thisApplet = this;
 
         if (vers.compareTo("1.1.2") < 0) {
@@ -32,7 +32,7 @@ public class SwingSetApplet extends JApplet {
 	    // If you want the System L&F instead, comment out the above line and
 	    // uncomment the following:
 	    // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-	} catch (Exception exc) {
+	} catch (final Exception exc) {
 	    System.err.println("Error loading L&F: " + exc);
 	}
 
@@ -40,14 +40,14 @@ public class SwingSetApplet extends JApplet {
         getContentPane().add(panel,BorderLayout.CENTER);
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
-        JPanel progressPanel = SwingSet.createVerticalPanel(false);
+        final JPanel progressPanel = SwingSet.createVerticalPanel(false);
         panel.add(Box.createGlue());
         panel.add(progressPanel);
         panel.add(Box.createGlue());
 
         progressPanel.add(Box.createGlue());
 
-        Dimension d = new Dimension(400, 20);
+        final Dimension d = new Dimension(400, 20);
         SwingSet.progressLabel = new JLabel("Loading, please wait...");
         SwingSet.progressLabel.setMaximumSize(d);
         progressPanel.add(SwingSet.progressLabel);
@@ -63,13 +63,13 @@ public class SwingSetApplet extends JApplet {
         progressPanel.add(Box.createGlue());
 
         // show the panel
-        Rectangle ab = getContentPane().getBounds();
+        final Rectangle ab = getContentPane().getBounds();
         panel.setPreferredSize(new Dimension(ab.width,ab.height));
         getContentPane().add(panel,BorderLayout.CENTER);
         validate();
         setVisible(true);
 
-        SwingSet sw = new SwingSet(thisApplet);
+        final SwingSet sw = new SwingSet(thisApplet);
         getContentPane().remove(panel);
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(sw, BorderLayout.CENTER);

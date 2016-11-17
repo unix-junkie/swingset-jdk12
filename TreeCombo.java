@@ -11,17 +11,17 @@ import java.util.Vector;
 import java.awt.*;
 import javax.swing.tree.*;
 
-public class TreeCombo extends JComboBox {
+public final class TreeCombo extends JComboBox {
     private static final long serialVersionUID = -6971947508222867819L;
 
     static final int OFFSET = 16;
 
-    public TreeCombo(TreeModel aTreeModel) {
+    public TreeCombo(final TreeModel aTreeModel) {
         setModel(new TreeToListModel(aTreeModel));
         setRenderer(new ListEntryRenderer());
     }
 
-    class TreeToListModel extends AbstractListModel implements ComboBoxModel,TreeModelListener {
+    final class TreeToListModel extends AbstractListModel implements ComboBoxModel,TreeModelListener {
 	private static final long serialVersionUID = -4999586587124338968L;
 
         TreeModel source;
@@ -29,13 +29,13 @@ public class TreeCombo extends JComboBox {
         Object currentValue;
         Vector cache = new Vector();
 
-        public TreeToListModel(TreeModel aTreeModel) {
+        public TreeToListModel(final TreeModel aTreeModel) {
             source = aTreeModel;
             aTreeModel.addTreeModelListener(this);
             setRenderer(new ListEntryRenderer());
         }
 
-        public void setSelectedItem(Object anObject) {
+        public void setSelectedItem(final Object anObject) {
             currentValue = anObject;
             fireContentsChanged(this, -1, -1);
         }
@@ -49,23 +49,23 @@ public class TreeCombo extends JComboBox {
             return cache.size();
         }
 
-        public Object getElementAt(int index) {
+        public Object getElementAt(final int index) {
             return cache.elementAt(index);
         }
 
-        public void treeNodesChanged(TreeModelEvent e) {
+        public void treeNodesChanged(final TreeModelEvent e) {
             invalid = true;
         }
 
-        public void treeNodesInserted(TreeModelEvent e) {
+        public void treeNodesInserted(final TreeModelEvent e) {
             invalid = true;
         }
 
-        public void treeNodesRemoved(TreeModelEvent e) {
+        public void treeNodesRemoved(final TreeModelEvent e) {
             invalid = true;
         }
 
-        public void treeStructureChanged(TreeModelEvent e) {
+        public void treeStructureChanged(final TreeModelEvent e) {
             invalid = true;
         }
 
@@ -81,11 +81,11 @@ public class TreeCombo extends JComboBox {
             }
         }
 
-        void cacheTree(Object anObject,int level) {
+        void cacheTree(final Object anObject,int level) {
             if(source.isLeaf(anObject)) {
 		addListEntry(anObject,level,false);
 	    } else {
-                int c = source.getChildCount(anObject);
+                final int c = source.getChildCount(anObject);
                 int i;
                 Object child;
 
@@ -101,7 +101,7 @@ public class TreeCombo extends JComboBox {
             }
         }
 
-        void addListEntry(Object anObject,int level,boolean isNode) {
+        void addListEntry(final Object anObject,final int level,final boolean isNode) {
             cache.addElement(new ListEntry(anObject,level,isNode));
         }
     }
@@ -111,7 +111,7 @@ public class TreeCombo extends JComboBox {
         int    level;
         boolean isNode;
 
-        public ListEntry(Object anObject,int aLevel,boolean isNode) {
+        public ListEntry(final Object anObject,final int aLevel,final boolean isNode) {
             object = anObject;
             level = aLevel;
             this.isNode = isNode;
@@ -143,13 +143,13 @@ public class TreeCombo extends JComboBox {
         }
 
         public Component getListCellRendererComponent(
-            JList listbox, 
-	    Object value, 
-	    int index,
-	    boolean isSelected,
-	    boolean cellHasFocus)
+            final JList listbox, 
+	    final Object value, 
+	    final int index,
+	    final boolean isSelected,
+	    final boolean cellHasFocus)
 	{
-            ListEntry listEntry = (ListEntry)value;
+            final ListEntry listEntry = (ListEntry)value;
             if(listEntry != null) {
                 Border border;
                 setText(listEntry.object().toString());

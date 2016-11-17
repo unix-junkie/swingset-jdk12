@@ -17,13 +17,13 @@ import java.awt.event.*;
  * @version 1.7 11/29/01
  * @author Jeff Dinkins
  */
-public class BorderedPanePanel extends JPanel
+public final class BorderedPanePanel extends JPanel
 {
     private static final long serialVersionUID = -5884904294639012406L;
 
-    JPanel borderedPane;
+    final JPanel borderedPane;
 
-    public BorderedPanePanel(SwingSet swing) {
+    public BorderedPanePanel(final SwingSet swing) {
 	// setBorderStyle(LOWERED);
 	setBorder(SwingSet.emptyBorder10);
 	setLayout(new BorderLayout());
@@ -34,7 +34,7 @@ public class BorderedPanePanel extends JPanel
 
 
 	// Create title position controls
-	JPanel controls = new JPanel();
+	final JPanel controls = new JPanel();
 	controls.setBorder(SwingSet.emptyBorder20);
 	controls.setLayout(new BoxLayout(controls, BoxLayout.Y_AXIS));
 
@@ -97,10 +97,10 @@ public class BorderedPanePanel extends JPanel
     }
 
     // Title Pane tile position
-    ActionListener borderedPaneListener = new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            JRadioButton b = (JRadioButton) e.getSource();
-	    TitledBorder border = (TitledBorder) borderedPane.getBorder();
+    final ActionListener borderedPaneListener = new ActionListener() {
+        public void actionPerformed(final ActionEvent e) {
+            final JRadioButton b = (JRadioButton) e.getSource();
+	    final TitledBorder border = (TitledBorder) borderedPane.getBorder();
 
             if(b.getText().equals("Above Top")) {
 		border.setTitlePosition(TitledBorder.ABOVE_TOP);

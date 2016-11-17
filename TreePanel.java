@@ -17,14 +17,14 @@ import javax.swing.tree.*;
  * @version 1.8 01/11/29
  * @author Jeff Dinkins
  */
-public class TreePanel extends JPanel 
+public final class TreePanel extends JPanel 
 {
     private static final long serialVersionUID = 3042947998150507167L;
 
     public TreePanel() {
 	setLayout(new BorderLayout());
 
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Music");
+        final DefaultMutableTreeNode top = new DefaultMutableTreeNode("Music");
         DefaultMutableTreeNode catagory;
 	DefaultMutableTreeNode composer;
 	DefaultMutableTreeNode style;
@@ -634,7 +634,7 @@ public class TreePanel extends JPanel
 	album.add(new DefaultMutableTreeNode("Evil"));
 	album.add(new DefaultMutableTreeNode("Something To Believe In"));
 
-	JTree tree = new JTree(top);
+	final JTree tree = new JTree(top);
 	add(new JScrollPane(tree), BorderLayout.CENTER);
     }
 

@@ -48,9 +48,9 @@ public class TablePanel extends JPanel {
     public TablePanel() {
 	setLayout(new BorderLayout());
 	controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-	JPanel column1 = new JPanel (new ColumnLayout() );
-	JPanel column2 = new JPanel (new ColumnLayout() );
-	JPanel column3 = new JPanel (new ColumnLayout() );
+	final JPanel column1 = new JPanel (new ColumnLayout() );
+	final JPanel column2 = new JPanel (new ColumnLayout() );
+	final JPanel column3 = new JPanel (new ColumnLayout() );
 
 	add(controlPanel, BorderLayout.NORTH);
 
@@ -59,8 +59,8 @@ public class TablePanel extends JPanel {
     	isColumnReorderingAllowedCheckBox = new JCheckBox("Reordering allowed", true);
         column1.add(isColumnReorderingAllowedCheckBox);
         isColumnReorderingAllowedCheckBox.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
+	    public void actionPerformed(final ActionEvent e) {
+	        final boolean flag = ((JCheckBox)e.getSource()).isSelected();
                 tableView.getTableHeader().setReorderingAllowed(flag);
                 tableView.repaint();
 	    }
@@ -70,8 +70,8 @@ public class TablePanel extends JPanel {
     	showHorizontalLinesCheckBox = new JCheckBox("Horiz. Lines", true);
         column1.add(showHorizontalLinesCheckBox);
         showHorizontalLinesCheckBox.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
+	    public void actionPerformed(final ActionEvent e) {
+	        final boolean flag = ((JCheckBox)e.getSource()).isSelected();
                 tableView.setShowHorizontalLines(flag);
                 tableView.repaint();
 	    }
@@ -80,8 +80,8 @@ public class TablePanel extends JPanel {
     	showVerticalLinesCheckBox = new JCheckBox("Vert. Lines", true);
         column1.add(showVerticalLinesCheckBox);
         showVerticalLinesCheckBox.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
+	    public void actionPerformed(final ActionEvent e) {
+	        final boolean flag = ((JCheckBox)e.getSource()).isSelected();
                 tableView.setShowVerticalLines(flag);
                 tableView.repaint();
 	    }
@@ -95,8 +95,8 @@ public class TablePanel extends JPanel {
 	interCellSpacingLabel.setLabelFor(interCellSpacingSlider);
         column1.add(interCellSpacingSlider);
         interCellSpacingSlider.addChangeListener(new ChangeListener() {
-	    public void stateChanged(ChangeEvent e) {
-	        int spacing = ((JSlider)e.getSource()).getValue();
+	    public void stateChanged(final ChangeEvent e) {
+	        final int spacing = ((JSlider)e.getSource()).getValue();
                 tableView.setIntercellSpacing(new Dimension(spacing, spacing));
                 tableView.repaint();
 	    }
@@ -109,8 +109,8 @@ public class TablePanel extends JPanel {
  	isColumnSelectionAllowedCheckBox = new JCheckBox("Column selection", false);
         column2.add(isColumnSelectionAllowedCheckBox);
         isColumnSelectionAllowedCheckBox.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
+	    public void actionPerformed(final ActionEvent e) {
+	        final boolean flag = ((JCheckBox)e.getSource()).isSelected();
                 tableView.setColumnSelectionAllowed(flag);
                 tableView.repaint();
 	    }
@@ -119,8 +119,8 @@ public class TablePanel extends JPanel {
     	isRowSelectionAllowedCheckBox = new JCheckBox("Row selection", true);
         column2.add(isRowSelectionAllowedCheckBox);
         isRowSelectionAllowedCheckBox.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
+	    public void actionPerformed(final ActionEvent e) {
+	        final boolean flag = ((JCheckBox)e.getSource()).isSelected();
                 tableView.setRowSelectionAllowed(flag);
                 tableView.repaint();
 	    }
@@ -129,8 +129,8 @@ public class TablePanel extends JPanel {
     	isRowAndColumnSelectionAllowedCheckBox = new JCheckBox("Cell selection", false);
         column2.add(isRowAndColumnSelectionAllowedCheckBox);
         isRowAndColumnSelectionAllowedCheckBox.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
+	    public void actionPerformed(final ActionEvent e) {
+	        final boolean flag = ((JCheckBox)e.getSource()).isSelected();
                 tableView.setCellSelectionEnabled(flag);
                 tableView.repaint();
 	    }
@@ -144,8 +144,8 @@ public class TablePanel extends JPanel {
 	rowHeightLabel.setLabelFor(rowHeightSlider);
         column2.add(rowHeightSlider);
         rowHeightSlider.addChangeListener(new ChangeListener() {
-	    public void stateChanged(ChangeEvent e) {
-	        int height = ((JSlider)e.getSource()).getValue();
+	    public void stateChanged(final ChangeEvent e) {
+	        final int height = ((JSlider)e.getSource()).getValue();
                 tableView.setRowHeight(height);
                 tableView.repaint();
 	    }
@@ -160,19 +160,19 @@ public class TablePanel extends JPanel {
 
 
         // ComboBox for selection modes.
-	JPanel selectMode = new JPanel();
+	final JPanel selectMode = new JPanel();
         column3.setLayout(new ColumnLayout());
       	selectMode.setBorder(new TitledBorder("Selection mode"));
 
 
-        JComboBox selectionModeComboBox = new JComboBox();
+        final JComboBox selectionModeComboBox = new JComboBox();
         selectionModeComboBox.addItem("Single");
         selectionModeComboBox.addItem("One range");
         selectionModeComboBox.addItem("Multiple ranges");
         selectionModeComboBox.setSelectedIndex(tableView.getSelectionModel().getSelectionMode());
         selectionModeComboBox.addItemListener(new ItemListener() {
-	    public void itemStateChanged(ItemEvent e) {
-	        JComboBox source = (JComboBox)e.getSource();
+	    public void itemStateChanged(final ItemEvent e) {
+	        final JComboBox source = (JComboBox)e.getSource();
                 tableView.setSelectionMode(source.getSelectedIndex());
 	    }
         });
@@ -182,12 +182,12 @@ public class TablePanel extends JPanel {
 
         // Combo box for table resize mode.
 
-	JPanel resizeMode = new JPanel();
+	final JPanel resizeMode = new JPanel();
 
 	resizeMode.setBorder(new TitledBorder("Autoresize mode"));
 
 
-        JComboBox resizeModeComboBox = new JComboBox();
+        final JComboBox resizeModeComboBox = new JComboBox();
         resizeModeComboBox.addItem("Off");
         resizeModeComboBox.addItem("Column boundries");
         resizeModeComboBox.addItem("Subsequent columns");
@@ -195,8 +195,8 @@ public class TablePanel extends JPanel {
         resizeModeComboBox.addItem("All columns");
         resizeModeComboBox.setSelectedIndex(tableView.getAutoResizeMode());
         resizeModeComboBox.addItemListener(new ItemListener() {
-	    public void itemStateChanged(ItemEvent e) {
-	        JComboBox source = (JComboBox)e.getSource();
+	    public void itemStateChanged(final ItemEvent e) {
+	        final JComboBox source = (JComboBox)e.getSource();
                 tableView.setAutoResizeMode(source.getSelectedIndex());
 	    }
         });
@@ -208,8 +208,8 @@ public class TablePanel extends JPanel {
     }
 
 
-    private static ImageIcon loadIcon(String name, String description) {
-	String path = "images/ImageClub/food/" + name;
+    private static ImageIcon loadIcon(final String name, final String description) {
+	final String path = "images/ImageClub/food/" + name;
 	return SwingSet.sharedInstance().loadImageIcon(path, description);
     }
 
@@ -219,24 +219,24 @@ public class TablePanel extends JPanel {
         final String[] names = {"First Name", "Last Name", "Favorite Color",
                                 "Favorite Sport", "Favorite Number", "Favorite Food"};
 
-	ImageIcon burger = loadIcon("burger.gif","burger");
-	ImageIcon fries = loadIcon("fries.gif","fries");
-	ImageIcon softdrink = loadIcon("softdrink.gif","soft drink");
-	ImageIcon pizza = loadIcon("pizza.gif","pizza");
-	ImageIcon pie = loadIcon("pie.gif","pie");
-	ImageIcon cake = loadIcon("cake.gif","cake");
-	ImageIcon donut = loadIcon("donut.gif","donut");
-	ImageIcon treat = loadIcon("treat.gif","treat");
-	ImageIcon grapes = loadIcon("grapes.gif","grapes");
-	ImageIcon banana = loadIcon("banana.gif","banana");
-	ImageIcon watermelon = loadIcon("watermelon.gif","watermelon");
-	ImageIcon cantaloupe = loadIcon("cantaloupe.gif","cantaloupe");
-	ImageIcon peach = loadIcon("peach.gif","peach");
-	ImageIcon broccoli = loadIcon("broccoli.gif","broccoli");
-	ImageIcon carrot = loadIcon("carrot.gif","carrot");
-	ImageIcon peas = loadIcon("peas.gif","peas");
-	ImageIcon corn = loadIcon("corn.gif","corn");
-	ImageIcon radish = loadIcon("radish.gif","radish");
+	final ImageIcon burger = loadIcon("burger.gif","burger");
+	final ImageIcon fries = loadIcon("fries.gif","fries");
+	final ImageIcon softdrink = loadIcon("softdrink.gif","soft drink");
+	final ImageIcon pizza = loadIcon("pizza.gif","pizza");
+	final ImageIcon pie = loadIcon("pie.gif","pie");
+	final ImageIcon cake = loadIcon("cake.gif","cake");
+	final ImageIcon donut = loadIcon("donut.gif","donut");
+	final ImageIcon treat = loadIcon("treat.gif","treat");
+	final ImageIcon grapes = loadIcon("grapes.gif","grapes");
+	final ImageIcon banana = loadIcon("banana.gif","banana");
+	final ImageIcon watermelon = loadIcon("watermelon.gif","watermelon");
+	final ImageIcon cantaloupe = loadIcon("cantaloupe.gif","cantaloupe");
+	final ImageIcon peach = loadIcon("peach.gif","peach");
+	final ImageIcon broccoli = loadIcon("broccoli.gif","broccoli");
+	final ImageIcon carrot = loadIcon("carrot.gif","carrot");
+	final ImageIcon peas = loadIcon("peas.gif","peas");
+	final ImageIcon corn = loadIcon("corn.gif","corn");
+	final ImageIcon radish = loadIcon("radish.gif","radish");
 
 
         // Create the dummy data (a few rows of names)
@@ -276,16 +276,16 @@ public class TablePanel extends JPanel {
         };
 
         // Create a model of the data.
-        TableModel dataModel = new AbstractTableModel() {
+        final TableModel dataModel = new AbstractTableModel() {
 	    private static final long serialVersionUID = -7680101787056290764L;
 
 	    public int getColumnCount() { return names.length; }
             public int getRowCount() { return data.length;}
-            public Object getValueAt(int row, int col) {return data[row][col];}
-            public String getColumnName(int column) {return names[column];}
-            public Class getColumnClass(int c) {return getValueAt(0, c).getClass();}
-            public boolean isCellEditable(int row, int col) {return getColumnClass(col) == String.class;}
-            public void setValueAt(Object aValue, int row, int column) { data[row][column] = aValue; }
+            public Object getValueAt(final int row, final int col) {return data[row][col];}
+            public String getColumnName(final int column) {return names[column];}
+            public Class getColumnClass(final int c) {return getValueAt(0, c).getClass();}
+            public boolean isCellEditable(final int row, final int col) {return getColumnClass(col) == String.class;}
+            public void setValueAt(final Object aValue, final int row, final int column) { data[row][column] = aValue; }
          };
 
 
@@ -293,12 +293,12 @@ public class TablePanel extends JPanel {
         tableView = new JTable(dataModel);
 
         // Show colors by rendering them in their own color.
-        DefaultTableCellRenderer colorRenderer = new DefaultTableCellRenderer() {
+        final DefaultTableCellRenderer colorRenderer = new DefaultTableCellRenderer() {
 	    private static final long serialVersionUID = 4569015156668235636L;
 
-	    public void setValue(Object value) {
+	    public void setValue(final Object value) {
 	        if (value instanceof Color) {
-	            Color c = (Color)value;
+	            final Color c = (Color)value;
 	            setForeground(c);
 	            setText(c.getRed() + ", " + c.getGreen() + ", " + c.getBlue());
 	        }
@@ -322,13 +322,13 @@ class ColumnLayout implements LayoutManager {
   int yInset = 5;
   int yGap = 2;
 
-  public void addLayoutComponent(String s, Component c) {}
+  public void addLayoutComponent(final String s, final Component c) {}
 
-  public void layoutContainer(Container c) {
-      Insets insets = c.getInsets();
+  public void layoutContainer(final Container c) {
+      final Insets insets = c.getInsets();
       int height = yInset + insets.top;
 
-      Component[] children = c.getComponents();
+      final Component[] children = c.getComponents();
       Dimension compSize = null;
       for (int i = 0; i < children.length; i++) {
 	  compSize = children[i].getPreferredSize();
@@ -339,12 +339,12 @@ class ColumnLayout implements LayoutManager {
 
   }
 
-  public Dimension minimumLayoutSize(Container c) {
-      Insets insets = c.getInsets();
+  public Dimension minimumLayoutSize(final Container c) {
+      final Insets insets = c.getInsets();
       int height = yInset + insets.top;
       int width = 0 + insets.left + insets.right;
 
-      Component[] children = c.getComponents();
+      final Component[] children = c.getComponents();
       Dimension compSize = null;
       for (int i = 0; i < children.length; i++) {
 	  compSize = children[i].getPreferredSize();
@@ -355,10 +355,10 @@ class ColumnLayout implements LayoutManager {
       return new Dimension( width, height);
   }
 
-  public Dimension preferredLayoutSize(Container c) {
+  public Dimension preferredLayoutSize(final Container c) {
       return minimumLayoutSize(c);
   }
 
-  public void removeLayoutComponent(Component c) {}
+  public void removeLayoutComponent(final Component c) {}
 
 }

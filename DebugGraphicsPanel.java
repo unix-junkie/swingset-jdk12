@@ -19,7 +19,7 @@ import java.awt.event.*;
  * @author Jeff Dinkins
  * @author Peter Korn (accessibility support)
  */
-public class DebugGraphicsPanel extends JPanel 
+public final class DebugGraphicsPanel extends JPanel 
 {
     private static final long serialVersionUID = 232884007200482960L;
 
@@ -41,10 +41,10 @@ public class DebugGraphicsPanel extends JPanel
     DebugGraphicsListener debugGraphicsListener = new DebugGraphicsListener();
     ChangeListener sliderListener;
 
-    public DebugGraphicsPanel(SwingSet swing) {
+    public DebugGraphicsPanel(final SwingSet swing) {
 	sliderListener = new ChangeListener() {
-	    public void stateChanged(ChangeEvent e) {
-		JSlider s = (JSlider)e.getSource();
+	    public void stateChanged(final ChangeEvent e) {
+		final JSlider s = (JSlider)e.getSource();
 		DebugGraphics.setFlashTime(s.getValue());
 	    }
 	};
@@ -65,7 +65,7 @@ public class DebugGraphicsPanel extends JPanel
         check.setSelected(true);
 	
 	// Add buttons to buttonPanel
-	JPanel buttonPanel = SwingSet.createHorizontalPanel(false);
+	final JPanel buttonPanel = SwingSet.createHorizontalPanel(false);
 	buttonPanel.setBorder(SwingSet.etchedBorder10);
 	buttonPanel.setAlignmentX(LEFT_ALIGNMENT);
 	buttonPanel.setAlignmentY(TOP_ALIGNMENT);
@@ -89,7 +89,7 @@ public class DebugGraphicsPanel extends JPanel
 	slider.setMajorTickSpacing(40);
 	slider.getAccessibleContext().setAccessibleName("Sample slider");
 
-	JPanel sliderPanel = new JPanel() {
+	final JPanel sliderPanel = new JPanel() {
 	    private static final long serialVersionUID = -5788757002076409424L;
 
 	    public Dimension getMaximumSize() {
@@ -112,7 +112,7 @@ public class DebugGraphicsPanel extends JPanel
         scrollbar.setEnabled(false);
 	scrollbar.getAccessibleContext().setAccessibleName("Sample scrollbarlider");
 
-	JPanel scrollbarPanel = new JPanel() {
+	final JPanel scrollbarPanel = new JPanel() {
 	    private static final long serialVersionUID = -5166243690704239038L;
 
 	    public Dimension getMaximumSize() {
@@ -124,7 +124,7 @@ public class DebugGraphicsPanel extends JPanel
 	scrollbarPanel.setAlignmentX(LEFT_ALIGNMENT);
 	scrollbarPanel.setAlignmentY(TOP_ALIGNMENT);
 
-	JPanel box = SwingSet.createHorizontalPanel(false);
+	final JPanel box = SwingSet.createHorizontalPanel(false);
 	box.add(Box.createRigidArea(SwingSet.hpad5));
 	box.add(scrollbar);
 	box.add(Box.createRigidArea(SwingSet.hpad5));
@@ -147,7 +147,7 @@ public class DebugGraphicsPanel extends JPanel
 	components.add(Box.createGlue());
 
 	// *************** Create the debug graphics controls ****************
-	JPanel controls = new JPanel() {
+	final JPanel controls = new JPanel() {
 	    private static final long serialVersionUID = 4148890003104794455L;
 
 	    public Dimension getMaximumSize() {
@@ -156,11 +156,11 @@ public class DebugGraphicsPanel extends JPanel
 	};
 	controls.setLayout(new BoxLayout(controls, BoxLayout.Y_AXIS));
 
-	JPanel debugControls = SwingSet.createHorizontalPanel(true);
+	final JPanel debugControls = SwingSet.createHorizontalPanel(true);
 	debugControls.setAlignmentY(TOP_ALIGNMENT);
 	debugControls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel leftColumn = SwingSet.createVerticalPanel(false);
+	final JPanel leftColumn = SwingSet.createVerticalPanel(false);
 	leftColumn.setAlignmentX(LEFT_ALIGNMENT);
 	leftColumn.setAlignmentY(TOP_ALIGNMENT);
 
@@ -210,7 +210,7 @@ public class DebugGraphicsPanel extends JPanel
 
 	// repaint button
 	leftColumn.add(Box.createRigidArea(SwingSet.vpad40));
- 	JButton repaintButton = new JButton("Repaint");
+ 	final JButton repaintButton = new JButton("Repaint");
 	repaintButton.setToolTipText("Causes the selected components to be repainted using DebugGraphics.");
  	repaintButton.addActionListener(debugGraphicsListener);
  	leftColumn.add(repaintButton);
@@ -237,7 +237,7 @@ public class DebugGraphicsPanel extends JPanel
 	    boolean repaintSlider = false;
 	    boolean repaintScrollBar = false;
 
-	    public void actionPerformed(ActionEvent e) {
+	    public void actionPerformed(final ActionEvent e) {
 		if(e.getSource() instanceof JButton) {
 		    if(repaintButton) {
 			button.repaint();
@@ -257,9 +257,9 @@ public class DebugGraphicsPanel extends JPanel
 		}
 	    }
 
-	    public void itemStateChanged(ItemEvent e) {
-		AbstractButton b = (AbstractButton) e.getSource();
-		String label = b.getText();
+	    public void itemStateChanged(final ItemEvent e) {
+		final AbstractButton b = (AbstractButton) e.getSource();
+		final String label = b.getText();
 		if(label.equals("Button")) {
 		    if(b.isSelected()) {
 			button.setDebugGraphicsOptions(DebugGraphics.FLASH_OPTION);

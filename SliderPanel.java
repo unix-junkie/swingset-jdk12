@@ -12,14 +12,14 @@ import javax.swing.border.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
-class SliderListener implements ChangeListener {
+final class SliderListener implements ChangeListener {
 	JLabel tf;
-	public SliderListener(JLabel f) {
+	SliderListener(final JLabel f) {
 	    tf = f;
 	}
 	
-	public void stateChanged(ChangeEvent e) {
-	    JSlider s1 = (JSlider)e.getSource();
+	public void stateChanged(final ChangeEvent e) {
+	    final JSlider s1 = (JSlider)e.getSource();
 		tf.setText("Slider Value: " + s1.getValue());
 	}
 }
@@ -29,7 +29,7 @@ class SliderListener implements ChangeListener {
  * @author Dave Kloba
  * @author Peter Korn (accessibility support)
  */
-public class SliderPanel extends JPanel      {
+public final class SliderPanel extends JPanel      {
     private static final long serialVersionUID = 8594783010501894343L;
 
     public SliderPanel()    {
@@ -138,7 +138,7 @@ public class SliderPanel extends JPanel      {
 	p = new JPanel();
 	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 	p.setBorder(new TitledBorder("Disabled"));
-	BoundedRangeModel brm = new DefaultBoundedRangeModel(80, 0, 0, 100);
+	final BoundedRangeModel brm = new DefaultBoundedRangeModel(80, 0, 0, 100);
 	  // s = new JSlider(JSlider.HORIZONTAL, 0, 100, 80);
 	s = new JSlider(brm);
 	s.setPaintTicks(true);

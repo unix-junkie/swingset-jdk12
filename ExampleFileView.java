@@ -34,17 +34,17 @@ import java.util.Hashtable;
  * @version 1.8 11/29/01
  * @author Jeff Dinkins
  */
-public class ExampleFileView extends FileView {
-    private Hashtable icons = new Hashtable(5);
-    private Hashtable fileNames = new Hashtable(5);
-    private Hashtable fileDescriptions = new Hashtable(5);
-    private Hashtable typeDescriptions = new Hashtable(5);
+public final class ExampleFileView extends FileView {
+    private final Hashtable icons = new Hashtable(5);
+    private final Hashtable fileNames = new Hashtable(5);
+    private final Hashtable fileDescriptions = new Hashtable(5);
+    private final Hashtable typeDescriptions = new Hashtable(5);
 
     /**
      * The name of the file.
      * @see #getName
      */
-    public void setName(File f, String fileName) {
+    public void setName(final File f, final String fileName) {
 	fileNames.put(fileName, f);
     }
 
@@ -53,14 +53,14 @@ public class ExampleFileView extends FileView {
      * @see #setName
      * @see FileView#getName
      */
-    public String getName(File f) {
+    public String getName(final File f) {
 	return (String) fileNames.get(f);
     }
 
     /**
      * Adds a human readable description of the file.
      */
-    public void putDescription(File f, String fileDescription) {
+    public void putDescription(final File f, final String fileDescription) {
 	fileDescriptions.put(fileDescription, f);
     }
 
@@ -69,7 +69,7 @@ public class ExampleFileView extends FileView {
      *
      * @see FileView#getDescription
      */
-    public String getDescription(File f) {
+    public String getDescription(final File f) {
 	return (String) fileDescriptions.get(f);
     }
 
@@ -77,7 +77,7 @@ public class ExampleFileView extends FileView {
      * Adds a human readable type description for files. Based on "dot"
      * extension strings, e.g: ".gif". Case is ignored.
      */
-    public void putTypeDescription(String extension, String typeDescription) {
+    public void putTypeDescription(final String extension, final String typeDescription) {
 	typeDescriptions.put(typeDescription, extension);
     }
 
@@ -86,7 +86,7 @@ public class ExampleFileView extends FileView {
      * the passed in file. Based on "dot" extension strings, e.g: ".gif".
      * Case is ignored.
      */
-    public void putTypeDescription(File f, String typeDescription) {
+    public void putTypeDescription(final File f, final String typeDescription) {
 	putTypeDescription(getExtension(f), typeDescription);
     }
 
@@ -95,7 +95,7 @@ public class ExampleFileView extends FileView {
      *
      * @see FileView#getTypeDescription
      */
-    public String getTypeDescription(File f) {
+    public String getTypeDescription(final File f) {
 	return (String) typeDescriptions.get(getExtension(f));
     }
 
@@ -103,10 +103,10 @@ public class ExampleFileView extends FileView {
      * Conveinience method that returnsa the "dot" extension for the
      * given file.
      */
-    public static String getExtension(File f) {
-	String name = f.getName();
+    public static String getExtension(final File f) {
+	final String name = f.getName();
 	if(name != null) {
-	    int extensionIndex = name.lastIndexOf('.');
+	    final int extensionIndex = name.lastIndexOf('.');
 	    if(extensionIndex < 0) {
 		return null;
 	    }
@@ -119,7 +119,7 @@ public class ExampleFileView extends FileView {
      * Adds an icon based on the file type "dot" extension
      * string, e.g: ".gif". Case is ignored.
      */
-    public void putIcon(String extension, Icon icon) {
+    public void putIcon(final String extension, final Icon icon) {
 	icons.put(extension, icon);
     }
 
@@ -130,9 +130,9 @@ public class ExampleFileView extends FileView {
      *
      * @see FileView#getIcon
      */
-    public Icon getIcon(File f) {
+    public Icon getIcon(final File f) {
 	Icon icon = null;
-	String extension = getExtension(f);
+	final String extension = getExtension(f);
 	if(extension != null) {
 	    icon = (Icon) icons.get(extension);
 	}
@@ -145,8 +145,8 @@ public class ExampleFileView extends FileView {
      *
      * @see FileView#isHidden
      */
-    public static Boolean isHidden(File f) {
-	String name = f.getName();
+    public static Boolean isHidden(final File f) {
+	final String name = f.getName();
 	return name != null && name.length() != 0 && name.charAt(0) == '.'
 		? Boolean.TRUE
 		: Boolean.FALSE;
@@ -164,7 +164,7 @@ public class ExampleFileView extends FileView {
      *
      * @see FileView#isTraversable
      */
-    public Boolean isTraversable(File f) {
+    public Boolean isTraversable(final File f) {
 	return f.isDirectory() ? Boolean.TRUE : Boolean.FALSE;
     }
 

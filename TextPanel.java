@@ -17,37 +17,37 @@ import java.awt.*;
  * @author Jeff Dinkins
  * @author Peter Korn (accessibility support)
  */
-public class TextPanel extends JPanel 
+public final class TextPanel extends JPanel 
 {
     private static final long serialVersionUID = 7026108966345055573L;
 
-    public TextPanel(SwingSet swing) {
+    public TextPanel(final SwingSet swing) {
 	super(true);
 	setBorder(new CompoundBorder(SwingSet.loweredBorder, SwingSet.emptyBorder10));
 
-	JPanel textFields = SwingSet.createVerticalPanel(false);
+	final JPanel textFields = SwingSet.createVerticalPanel(false);
 
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-	JTextField field1 = new FixedTextField("George Washington", 15);
+	final JTextField field1 = new FixedTextField("George Washington", 15);
 	field1.getAccessibleContext().setAccessibleName("First text field");
 
-	JTextField field2 = new FixedTextField("Thomas Jefferson", 15);
+	final JTextField field2 = new FixedTextField("Thomas Jefferson", 15);
 	field2.setForeground(Color.red);
 	field2.getAccessibleContext().setAccessibleName("Second text field");
 
-	JTextField field3 = new FixedTextField("Benjamin Franklin", 15);
+	final JTextField field3 = new FixedTextField("Benjamin Franklin", 15);
 	field3.setBackground(new Color(200, 200, 255)); // cornflower blue
 	field3.getAccessibleContext().setAccessibleName("Third text field");
 
 	// JTextField field4 = new FixedTextField("Thomas Payne", 15); 
         // Thanks to Chris Paine for pointing out that I misspelled "Paine"). (-:
-	JTextField field4 = new FixedTextField("Thomas Paine", 15); 
+	final JTextField field4 = new FixedTextField("Thomas Paine", 15); 
 	field4.setForeground(Color.yellow);
 	field4.setBackground(new Color(200, 140, 80)); // pumpkin
 	field4.getAccessibleContext().setAccessibleName("Fourth text field");
 
-	JTextField field5 = new FixedTextField("Abraham Lincoln", 15);
+	final JTextField field5 = new FixedTextField("Abraham Lincoln", 15);
 	field5.setForeground(Color.green.brighter());
 	field5.setBackground(Color.black);
 	field5.getAccessibleContext().setAccessibleName("Fifth text field");
@@ -67,21 +67,21 @@ public class TextPanel extends JPanel
 	textFields.add(field5);
 	textFields.add(Box.createHorizontalStrut(5));
 
-	String text = LoadFile("Constitution.txt");
+	final String text = LoadFile("Constitution.txt");
 
-	JPanel textAreaPanel = SwingSet.createVerticalPanel(false);
+	final JPanel textAreaPanel = SwingSet.createVerticalPanel(false);
 	label = (JLabel) textAreaPanel.add(new JLabel("Text Area:"));
 	label.setFont(swing.boldFont);
 	textAreaPanel.add(Box.createRigidArea(SwingSet.vpad10));
 
-	JPanel textWrapper = new JPanel(new BorderLayout());
+	final JPanel textWrapper = new JPanel(new BorderLayout());
 	textWrapper.setAlignmentX(LEFT_ALIGNMENT);
  	textWrapper.setBorder(SwingSet.loweredBorder);
 
 	textAreaPanel.add(textWrapper);
 
-	JTextArea textArea = new JTextArea(text);
-	JScrollPane scroller = new JScrollPane() {
+	final JTextArea textArea = new JTextArea(text);
+	final JScrollPane scroller = new JScrollPane() {
 	    private static final long serialVersionUID = 6676002774584295905L;
 
             public Dimension getPreferredSize() {
@@ -104,10 +104,10 @@ public class TextPanel extends JPanel
     }
 
 
-    class FixedTextField extends JTextField {
+    final class FixedTextField extends JTextField {
 	private static final long serialVersionUID = 3378275961150981343L;
 
-	public FixedTextField(String text, int columns) {
+	FixedTextField(final String text, final int columns) {
 	    super(text, columns);
 	}
 	public Dimension getMaximumSize() {
@@ -118,7 +118,7 @@ public class TextPanel extends JPanel
 	}
     }
 
-    public static String LoadFile(String filename) {
+    public static String LoadFile(final String filename) {
       return SwingSet.contentsOfFile(filename);
     }
     

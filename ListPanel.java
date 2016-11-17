@@ -79,7 +79,7 @@ public class ListPanel extends JPanel
     JCheckBox fruitCheckbox;
     JCheckBox fastfoodCheckbox;
 
-    public ListPanel(SwingSet swing) {
+    public ListPanel(final SwingSet swing) {
 	setBorder(SwingSet.emptyBorder5);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
@@ -98,7 +98,7 @@ public class ListPanel extends JPanel
         listBox.setCellRenderer(new TestCellRenderer());
 
 	// Create the controls
-	JPanel controlPanel = new JPanel() {
+	final JPanel controlPanel = new JPanel() {
 	    private static final long serialVersionUID = 4603620280712805256L;
 
 	    public Dimension getMaximumSize() {
@@ -111,7 +111,7 @@ public class ListPanel extends JPanel
 
 	// List operations
 
-	JPanel pricePanel = SwingSet.createHorizontalPanel(false);
+	final JPanel pricePanel = SwingSet.createHorizontalPanel(false);
 	pricePanel.setAlignmentY(TOP_ALIGNMENT);
 	pricePanel.setAlignmentX(LEFT_ALIGNMENT);
 	controlPanel.add(pricePanel);
@@ -127,7 +127,7 @@ public class ListPanel extends JPanel
 	JLabel l = new JLabel("Jump To:");
 	l.setFont(swing.boldFont);
 	controlPanel.add(l);
-	ButtonGroup group = new ButtonGroup();
+	final ButtonGroup group = new ButtonGroup();
 
 	fastfoodRadioButton = new JRadioButton("Fast Food");
 	fastfoodRadioButton.setToolTipText("Calls list.ensureVisible() to jump to the items.");
@@ -186,15 +186,15 @@ public class ListPanel extends JPanel
 	add(Box.createRigidArea(SwingSet.hpad10));
 	add(controlPanel);
 
-	ActionListener purchaseListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-		int first = listBox.getMinSelectionIndex();
-                int last = listBox.getMaxSelectionIndex();
+	final ActionListener purchaseListener = new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+		final int first = listBox.getMinSelectionIndex();
+                final int last = listBox.getMaxSelectionIndex();
 		if(first < 0) {
 		    return;
 		}
 		for(int i = first; i <= last; i++) {
-		    Integer item = (Integer) model.getElementAt(i);
+		    final Integer item = (Integer) model.getElementAt(i);
 		    listPrice += price[item.intValue()];
 		}
 		priceLabel.setText("Total: $" + listPrice / 100.0);
@@ -203,10 +203,10 @@ public class ListPanel extends JPanel
 	};
 	purchase.addActionListener(purchaseListener);
 
-	ActionListener showListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-		JCheckBox cb = (JCheckBox) e.getSource();
-		String label = cb.getText();
+	final ActionListener showListener = new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+		final JCheckBox cb = (JCheckBox) e.getSource();
+		final String label = cb.getText();
 		if(!cb.isSelected()) {
 
 		    if(label.equals("Fast Food")) {
@@ -292,11 +292,11 @@ public class ListPanel extends JPanel
 	dessertCheckbox.addActionListener(showListener);
 	fastfoodCheckbox.addActionListener(showListener);
 
-	ActionListener jumpListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-		JRadioButton rb = (JRadioButton) e.getSource();
+	final ActionListener jumpListener = new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+		final JRadioButton rb = (JRadioButton) e.getSource();
 		if(rb.isSelected()) {
-		    String label = rb.getText();
+		    final String label = rb.getText();
 		    if(label.equals("Fruits")) {
 			listBox.ensureIndexIsVisible(fruitIndex+5);
 			listBox.ensureIndexIsVisible(fruitIndex);
@@ -318,8 +318,8 @@ public class ListPanel extends JPanel
 	dessertRadioButton.addActionListener(jumpListener);
 	fastfoodRadioButton.addActionListener(jumpListener);
 
-	ActionListener resetListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+	final ActionListener resetListener = new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
 		resetAll();
             }
 	};
@@ -409,13 +409,13 @@ public class ListPanel extends JPanel
 
 
 	public Component getListCellRendererComponent(
-            JList list,
-            Object value,
-            int modelIndex,
-            boolean isSelected,
-            boolean cellHasFocus)
+            final JList list,
+            final Object value,
+            final int modelIndex,
+            final boolean isSelected,
+            final boolean cellHasFocus)
         {
-	    int index = ((Integer)value).intValue();
+	    final int index = ((Integer)value).intValue();
 	    String text;
 	    if(isSelected) {
 		text = "  " + desc[index] + "    $" + price[index] / 100.0;

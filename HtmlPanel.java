@@ -20,7 +20,7 @@ import java.io.IOException;
  * @author Tim Prinzing
  * @author Peter Korn (accessibility support)
  */
-public class HtmlPanel extends JPanel implements HyperlinkListener {
+public final class HtmlPanel extends JPanel implements HyperlinkListener {
     private static final long serialVersionUID = 3364508275690286949L;
 
     JEditorPane html;
@@ -33,12 +33,12 @@ public class HtmlPanel extends JPanel implements HyperlinkListener {
 	
 	try {
            URL url = null;
-            String prefix = "file:" +
+            final String prefix = "file:" +
                    System.getProperty("user.dir") +
                    System.getProperty("file.separator");
             try {
                 url = new URL(prefix + "example.html");
-            } catch (java.net.MalformedURLException exc) {
+            } catch (final java.net.MalformedURLException exc) {
                    System.err.println("Attempted to open example.html "
                                       + "with a bad URL: " + url);
             }
@@ -47,16 +47,16 @@ public class HtmlPanel extends JPanel implements HyperlinkListener {
                 html = new JEditorPane(url);
                 html.setEditable(false);
                 html.addHyperlinkListener(this);
-                JScrollPane scroller = new JScrollPane();
+                final JScrollPane scroller = new JScrollPane();
                 scroller.setBorder(SwingSet.loweredBorder);
-                JViewport vp = scroller.getViewport();
+                final JViewport vp = scroller.getViewport();
                 vp.add(html);
                 vp.setBackingStoreEnabled(true);
                 add(scroller, BorderLayout.CENTER);
             }
-	} catch (MalformedURLException e) {
+	} catch (final MalformedURLException e) {
 	    System.out.println("Malformed URL: " + e);
-	} catch (IOException e) {
+	} catch (final IOException e) {
 	    System.out.println("IOException: " + e);
 	}
     }
@@ -65,7 +65,7 @@ public class HtmlPanel extends JPanel implements HyperlinkListener {
      * Notification of a change relative to a 
      * hyperlink.
      */
-    public void hyperlinkUpdate(HyperlinkEvent e) {
+    public void hyperlinkUpdate(final HyperlinkEvent e) {
 	if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
 	    linkActivated(e.getURL());
 	}
@@ -83,9 +83,9 @@ public class HtmlPanel extends JPanel implements HyperlinkListener {
      *
      * @param u the URL to follow
      */
-    protected void linkActivated(URL u) {
-	Cursor c = html.getCursor();
-	Cursor waitCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
+    protected void linkActivated(final URL u) {
+	final Cursor c = html.getCursor();
+	final Cursor waitCursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
 	html.setCursor(waitCursor);
 	SwingUtilities.invokeLater(new PageLoader(u, c));
     }
@@ -95,9 +95,9 @@ public class HtmlPanel extends JPanel implements HyperlinkListener {
      * later than the request so that a cursor change
      * can be done).
      */
-    class PageLoader implements Runnable {
+    final class PageLoader implements Runnable {
 	
-	PageLoader(URL u, Cursor c) {
+	PageLoader(final URL u, final Cursor c) {
 	    url = u;
 	    cursor = c;
 	}
@@ -109,13 +109,13 @@ public class HtmlPanel extends JPanel implements HyperlinkListener {
 
 		// PENDING(prinz) remove this hack when 
 		// automatic validation is activated.
-		Container parent = html.getParent();
+		final Container parent = html.getParent();
 		parent.repaint();
 	    } else {
-		Document doc = html.getDocument();
+		final Document doc = html.getDocument();
 		try {
 		    html.setPage(url);
-		} catch (IOException ioe) {
+		} catch (final IOException ioe) {
 		    html.setDocument(doc);
 		    getToolkit().beep();
 		} finally {

@@ -19,7 +19,7 @@ import java.util.*;
 public class LayoutControlPanel extends JPanel implements SwingConstants {
     private static final long serialVersionUID = -6386113896431384792L;
 
-    LayoutControlPanel(SwingSet swing, Vector controls) {
+    LayoutControlPanel(final SwingSet swing, final Vector controls) {
         this.swing = swing;
         this.controls = controls;
         
@@ -37,16 +37,16 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
             add(l);
             l.setFont(swing.boldFont);
 	
-            ButtonGroup group = new ButtonGroup();
-            PositioningListener positioningListener = new PositioningListener();
-            JRadioButton absolutePos = new JRadioButton("Absolute");
+            final ButtonGroup group = new ButtonGroup();
+            final PositioningListener positioningListener = new PositioningListener();
+            final JRadioButton absolutePos = new JRadioButton("Absolute");
             absolutePos.setMnemonic('a');
             absolutePos.setToolTipText("Text/Content positioning is independant of line direction");
             group.add(absolutePos);
             absolutePos.addItemListener(positioningListener);
             add(absolutePos);
 
-            JRadioButton relativePos = new JRadioButton("Relative");
+            final JRadioButton relativePos = new JRadioButton("Relative");
             relativePos.setMnemonic('r');
             relativePos.setToolTipText("Text/Content positioning depends on line direction.");
             group.add(relativePos);
@@ -69,7 +69,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
         // Make sure the controls' text position and label alignment match
         // the initial value of the associated direction panel.
         for(int i = 0; i < controls.size(); i++) {
-            Component c = (Component) controls.elementAt(i);
+            final Component c = (Component) controls.elementAt(i);
             setPosition(c, RIGHT, CENTER);
             setAlignment(c,CENTER,CENTER);
         }
@@ -91,7 +91,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
 
 
     class OrientationChangeListener implements ActionListener {
-        public void actionPerformed( ActionEvent e ) {
+        public void actionPerformed( final ActionEvent e ) {
             if( !e.getActionCommand().equals("OrientationChanged") ){
                 return;
             }
@@ -99,7 +99,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
                 return;
             }
             
-            String currentTextPosition = textPosition.getSelection();
+            final String currentTextPosition = textPosition.getSelection();
             if( currentTextPosition.equals("NW") ) {
 		textPosition.setSelection("NE");
 	    } else if( currentTextPosition.equals("NE") ) {
@@ -114,7 +114,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
 		textPosition.setSelection("SE");
 	    }
 
-            String currentLabelAlignment = labelAlignment.getSelection();
+            final String currentLabelAlignment = labelAlignment.getSelection();
             if( currentLabelAlignment.equals("NW") ) {
 		labelAlignment.setSelection("NE");
 	    } else if( currentLabelAlignment.equals("NE") ) {
@@ -133,8 +133,8 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
 
     class PositioningListener implements ItemListener {
 
-	public void itemStateChanged(ItemEvent e) {
-	    JRadioButton rb = (JRadioButton) e.getSource();
+	public void itemStateChanged(final ItemEvent e) {
+	    final JRadioButton rb = (JRadioButton) e.getSource();
 	    if(rb.getText().equals("Absolute") && rb.isSelected()) {
 		absolutePositions = true;
 	    } else if(rb.getText().equals("Relative") && rb.isSelected()) {
@@ -142,7 +142,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
 	    } 
             
 	    for(int i = 0; i < controls.size(); i++) {
-		Component c = (Component)controls.elementAt(i);
+		final Component c = (Component)controls.elementAt(i);
                 int hPos, vPos, hAlign, vAlign;
                 if( c instanceof AbstractButton ) {
                    hPos = ((AbstractButton)c).getHorizontalTextPosition();
@@ -161,8 +161,8 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
                 setAlignment(c, hAlign, vAlign);
 	    }
             
-	    int index = swing.tabbedPane.getSelectedIndex();
-	    Component currentPage = swing.tabbedPane.getComponentAt(index);
+	    final int index = swing.tabbedPane.getSelectedIndex();
+	    final Component currentPage = swing.tabbedPane.getComponentAt(index);
 	    currentPage.invalidate();
 	    currentPage.validate();
 	    currentPage.repaint();            
@@ -172,12 +172,12 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
 
     // Text Position Listener
     class TextPositionListener implements ActionListener {
-	public void actionPerformed(ActionEvent e) {
-	    JRadioButton rb = (JRadioButton) e.getSource();
+	public void actionPerformed(final ActionEvent e) {
+	    final JRadioButton rb = (JRadioButton) e.getSource();
 	    if(!rb.isSelected()) {
                 return;
             }
-            String cmd = rb.getActionCommand();
+            final String cmd = rb.getActionCommand();
             int hPos, vPos;
             if(cmd.equals("NW")) {
                     hPos = LEFT; vPos = TOP;
@@ -199,11 +199,11 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
                     hPos = RIGHT; vPos = BOTTOM;
             }
             for(int i = 0; i < controls.size(); i++) {
-                Component c = (Component) controls.elementAt(i);
+                final Component c = (Component) controls.elementAt(i);
                 setPosition(c, hPos, vPos);
             }
-            int index = swing.tabbedPane.getSelectedIndex();
-            Component currentPage = swing.tabbedPane.getComponentAt(index);
+            final int index = swing.tabbedPane.getSelectedIndex();
+            final Component currentPage = swing.tabbedPane.getComponentAt(index);
             currentPage.invalidate();
             currentPage.validate();
             currentPage.repaint();
@@ -213,12 +213,12 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
 
     // Label Alignment Listener
     class LabelAlignmentListener implements  ActionListener {
-	public void actionPerformed(ActionEvent e) {
-	    JRadioButton rb = (JRadioButton) e.getSource();
+	public void actionPerformed(final ActionEvent e) {
+	    final JRadioButton rb = (JRadioButton) e.getSource();
 	    if(!rb.isSelected()) {
                 return;
             }
-            String cmd = rb.getActionCommand();
+            final String cmd = rb.getActionCommand();
             int hPos, vPos;
             if(cmd.equals("NW")) {
                     hPos = LEFT; vPos = TOP;
@@ -240,12 +240,12 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
                     hPos = RIGHT; vPos = BOTTOM;
             }
             for(int i = 0; i < controls.size(); i++) {
-                Component c = (Component) controls.elementAt(i);
+                final Component c = (Component) controls.elementAt(i);
                 setAlignment(c,hPos,vPos);
                 c.invalidate();
             }
-            int index = swing.tabbedPane.getSelectedIndex();
-            Component currentPage = swing.tabbedPane.getComponentAt(index);
+            final int index = swing.tabbedPane.getSelectedIndex();
+            final Component currentPage = swing.tabbedPane.getComponentAt(index);
             currentPage.invalidate();
             currentPage.validate();
             currentPage.repaint();
@@ -253,7 +253,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
     }
 
     // Position
-    void setPosition(Component c, int hPos, int vPos) {
+    void setPosition(final Component c, int hPos, final int vPos) {
         boolean ltr = true;
         
         ltr = c.getComponentOrientation().isLeftToRight();
@@ -272,17 +272,17 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
             }
         }
         if(c instanceof AbstractButton) {
-            AbstractButton x = (AbstractButton) c;
+            final AbstractButton x = (AbstractButton) c;
             x.setHorizontalTextPosition(hPos);
             x.setVerticalTextPosition(vPos);
         } else if(c instanceof JLabel) {
-            JLabel x = (JLabel) c;
+            final JLabel x = (JLabel) c;
             x.setHorizontalTextPosition(hPos);
             x.setVerticalTextPosition(vPos);
         }
     }
 
-    void setAlignment(Component c, int hPos, int vPos) {
+    void setAlignment(final Component c, int hPos, final int vPos) {
         boolean ltr = true;
         
         ltr = c.getComponentOrientation().isLeftToRight();
@@ -301,11 +301,11 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
             }
         }
         if(c instanceof AbstractButton) {
-            AbstractButton x = (AbstractButton) c;
+            final AbstractButton x = (AbstractButton) c;
             x.setHorizontalAlignment(hPos);
             x.setVerticalAlignment(vPos);
         } else if(c instanceof JLabel) {
-            JLabel x = (JLabel) c;
+            final JLabel x = (JLabel) c;
             x.setHorizontalAlignment(hPos);
             x.setVerticalAlignment(vPos);
         }
