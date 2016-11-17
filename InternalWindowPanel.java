@@ -46,6 +46,7 @@ public class InternalWindowPanel extends JPanel implements ActionListener     {
         lc = new JDesktopPane();
 	lc.setOpaque(false);
         maker = createMakerFrame();
+	maker.setVisible(true);
         lc.add(maker, JLayeredPane.PALETTE_LAYER);  
         
         add("Center", lc);
@@ -143,6 +144,7 @@ public class InternalWindowPanel extends JPanel implements ActionListener     {
             w.setBounds(20*(makeCount%10), 20*(makeCount%10), 225, 150);
             w.setContentPane(new MyScrollPane(layer, makeCount));
                 
+	    w.setVisible(true);
             lc.add(w, new Integer(layer));  
             try { w.setSelected(true); } catch (java.beans.PropertyVetoException e2) {}
         }

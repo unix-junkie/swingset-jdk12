@@ -423,9 +423,10 @@ public class ListPanel extends JPanel
 	    else {
 		text = "  " + desc[index];
 	    }
-	    setIcon(images[index]);
 
-	    return super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
+	    final Component listCellRendererComponent = super.getListCellRendererComponent(list, text, index, isSelected, cellHasFocus);
+	    ((JLabel) listCellRendererComponent).setIcon(images[index]);
+	    return listCellRendererComponent;
 	}
     }
 }
