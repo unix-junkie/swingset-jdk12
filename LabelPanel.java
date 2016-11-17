@@ -6,11 +6,7 @@
  */
 
 import javax.swing.*;
-import javax.swing.text.*;
-
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 
 
 /**
@@ -21,12 +17,10 @@ import java.util.*;
  */
 public class LabelPanel extends JPanel 
 {
-    SwingSet swing;
+    private static final long serialVersionUID = -4110003342622117824L;
 
     public LabelPanel(SwingSet swing) {
-	this.swing = swing;
-
-	setBorder(swing.emptyBorder5);
+	setBorder(SwingSet.emptyBorder5);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 	setOpaque(false);
 
@@ -43,18 +37,18 @@ public class LabelPanel extends JPanel
  
         label = new BorderedSwingSetLabel("Label 1");
 	label.setToolTipText("Duke says \"Howdy!\"");
-        label.setHorizontalAlignment(label.CENTER);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setIcon(swing.dukeWave);
-        label.setVerticalTextPosition(label.BOTTOM);
-        label.setHorizontalTextPosition(label.CENTER);
+        label.setVerticalTextPosition(SwingConstants.BOTTOM);
+        label.setHorizontalTextPosition(SwingConstants.CENTER);
         row1.add(label);
         swing.labels.addElement(label);
  
         label = new BorderedSwingSetLabel("Label2");
 	label.setToolTipText("Yep! You can even have a ToolTip over a Label!.");
-        label.setHorizontalAlignment(label.CENTER);
-        label.setVerticalTextPosition(label.BOTTOM);
-        label.setHorizontalTextPosition(label.CENTER);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalTextPosition(SwingConstants.BOTTOM);
+        label.setHorizontalTextPosition(SwingConstants.CENTER);
         label.setFont(swing.boldFont);
         label.setForeground(Color.red);
         row1.add(label);
@@ -62,9 +56,9 @@ public class LabelPanel extends JPanel
  
         label = new BorderedSwingSetLabel("Label3");
 	label.setToolTipText("Yep! You can even have a ToolTip over a Label!.");
-        label.setVerticalTextPosition(label.BOTTOM);
-        label.setHorizontalAlignment(label.CENTER);
-        label.setHorizontalTextPosition(label.CENTER);
+        label.setVerticalTextPosition(SwingConstants.BOTTOM);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setHorizontalTextPosition(SwingConstants.CENTER);
         row2.add(label);
         label.setFont(swing.bigFont);
         swing.labels.addElement(label);
@@ -72,9 +66,9 @@ public class LabelPanel extends JPanel
 
         label = new BorderedSwingSetLabel("Label4");
 	label.setToolTipText("Yep! You can even have a ToolTip over a Label!.");
-        label.setVerticalTextPosition(label.BOTTOM);
-        label.setHorizontalAlignment(label.CENTER);
-        label.setHorizontalTextPosition(label.CENTER);
+        label.setVerticalTextPosition(SwingConstants.BOTTOM);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setHorizontalTextPosition(SwingConstants.CENTER);
         label.setIcon(swing.dukeMagnify);
         row2.add(label);
         label.setFont(swing.bigBoldFont);
@@ -82,9 +76,9 @@ public class LabelPanel extends JPanel
  
         label = new BorderedSwingSetLabel("Label 5");
 	label.setToolTipText("Shhhh.... Duke is taking a little nap.");
-        label.setVerticalTextPosition(label.BOTTOM);
-        label.setHorizontalAlignment(label.CENTER);
-        label.setHorizontalTextPosition(label.CENTER);
+        label.setVerticalTextPosition(SwingConstants.BOTTOM);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setHorizontalTextPosition(SwingConstants.CENTER);
         row3.add(label);
         label.setForeground(Color.blue);
         label.setIcon(swing.dukeSnooze);
@@ -93,38 +87,38 @@ public class LabelPanel extends JPanel
  
         label = new BorderedSwingSetLabel("Label 6");
 	label.setToolTipText("Yep! You can even have a ToolTip over a Label!.");
-        label.setVerticalTextPosition(label.BOTTOM);
-        label.setHorizontalAlignment(label.CENTER);
-        label.setHorizontalTextPosition(label.CENTER);
+        label.setVerticalTextPosition(SwingConstants.BOTTOM);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setHorizontalTextPosition(SwingConstants.CENTER);
         row3.add(label);
         label.setFont(swing.reallyBigBoldFont);
         label.setForeground(Color.green);
         swing.labels.addElement(label);
 
         label = new JLabel("Type Here: ");
-        label.setHorizontalTextPosition(label.RIGHT);
+        label.setHorizontalTextPosition(SwingConstants.RIGHT);
 	label.setDisplayedMnemonic('T');
 	label.setToolTipText("The labelFor and displayedMnemonic properties work!");
 	JTextField tf = new JTextField("");
 	label.setLabelFor(tf);
-	row4.setBorder(swing.emptyBorder15);
+	row4.setBorder(SwingSet.emptyBorder15);
         row4.add(label);
         row4.add(tf);
         swing.labels.addElement(label);
 
         label = new JLabel("And Here: ");
-        label.setHorizontalTextPosition(label.RIGHT);
+        label.setHorizontalTextPosition(SwingConstants.RIGHT);
 	label.setDisplayedMnemonic('r');
 	label.setToolTipText("The labelFor and displayedMnemonic properties work!");
 	tf = new JTextField("");
 	label.setLabelFor(tf);
-	row5.setBorder(swing.emptyBorder15);
+	row5.setBorder(SwingSet.emptyBorder15);
         row5.add(label);
         row5.add(tf);
         swing.labels.addElement(label);
 
 	// Add label panels to labelPanel
-	JPanel labelPanel = swing.createVerticalPanel(true);
+	JPanel labelPanel = SwingSet.createVerticalPanel(true);
 	labelPanel.setAlignmentX(LEFT_ALIGNMENT);
 	labelPanel.setAlignmentY(TOP_ALIGNMENT);
 
@@ -139,6 +133,8 @@ public class LabelPanel extends JPanel
 
 	// *************** Create the button controls ****************
 	JPanel controls = new JPanel() {
+	    private static final long serialVersionUID = -3079252719266522268L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(300, super.getMaximumSize().height);
 	    }
@@ -147,20 +143,20 @@ public class LabelPanel extends JPanel
 	controls.setAlignmentY(TOP_ALIGNMENT);
 	controls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel buttonControls = swing.createHorizontalPanel(true);
+	JPanel buttonControls = SwingSet.createHorizontalPanel(true);
 	buttonControls.setAlignmentY(TOP_ALIGNMENT);
 	buttonControls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel leftColumn = swing.createVerticalPanel(false);
+	JPanel leftColumn = SwingSet.createVerticalPanel(false);
 	leftColumn.setAlignmentX(LEFT_ALIGNMENT);
 	leftColumn.setAlignmentY(TOP_ALIGNMENT);
 
 	JPanel rightColumn = new LayoutControlPanel(swing, swing.labels);
 
 	buttonControls.add(leftColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 	buttonControls.add(rightColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 
 	controls.add(buttonControls);
 
@@ -189,7 +185,7 @@ public class LabelPanel extends JPanel
 	leftColumn.add(enabled);
  
 
-	leftColumn.add(Box.createRigidArea(swing.vpad20));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad20));
 
 	l = new JLabel("Pad Amount:");
 	l.setEnabled(false);
@@ -220,12 +216,14 @@ public class LabelPanel extends JPanel
 	leftColumn.add(tenPad);	
 
 	add(labelPanel);
-	add(Box.createRigidArea(swing.hpad10));
+	add(Box.createRigidArea(SwingSet.hpad10));
  	add(controls);
     }
 
 
     class BorderedSwingSetLabel extends JLabel {
+
+	private static final long serialVersionUID = 2466844272753587241L;
 
 	BorderedSwingSetLabel(String text) {
 	    super(text);

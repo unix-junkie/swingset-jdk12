@@ -6,10 +6,7 @@
  */
 
 import javax.swing.*;
-import javax.accessibility.*;
-
 import java.awt.*;
-import java.awt.event.*;
 
 /*
  * @version 1.9 11/29/01
@@ -17,6 +14,7 @@ import java.awt.event.*;
  * @author Peter Korn (accessibility support)
  */
 public class ScrollPanePanel extends JPanel      {
+    private static final long serialVersionUID = 5536516941152775107L;
 
     public ScrollPanePanel()    {
         setLayout(new BorderLayout());
@@ -27,15 +25,15 @@ public class ScrollPanePanel extends JPanel      {
 
 class TigerScrollPane extends JScrollPane {
 
-    private JLabel makeLabel(String name, String description) {
+    private static final long serialVersionUID = -4435614201334106105L;
+
+    private static JLabel makeLabel(String name, String description) {
 	String filename = "images/" + name;
 	ImageIcon image = SwingSet.sharedInstance().loadImageIcon(filename, description);
 	return new JLabel(image);
     }
 
     public TigerScrollPane() {
-	super();
-	
 	JLabel horizontalRule = makeLabel("scrollpane/header.gif", "Horizontal ruler carved out of stone");
 	horizontalRule.getAccessibleContext().setAccessibleName("Horizontal rule");
 	JLabel verticalRule = makeLabel("scrollpane/column.gif", "Vertical ruler carved out of stone");

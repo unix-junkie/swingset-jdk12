@@ -6,11 +6,9 @@
  */
 
 import javax.swing.*;
-import javax.accessibility.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.*;
 
 /*
  * @version 1.20 11/29/01
@@ -18,16 +16,15 @@ import java.lang.*;
  * @author Peter Korn (accessibility support)
  */
 public class ToolTipPanel extends JPanel {
-    SwingSet swing;
+    private static final long serialVersionUID = 7939334168039722721L;
 
-    public ToolTipPanel(SwingSet swing) {
-	this.swing = swing;
+    public ToolTipPanel() {
 	loadCow();
     }
 
     public void loadCow() {
         setBackground(Color.white);
-	setBorder(swing.etchedBorder10);
+	setBorder(SwingSet.etchedBorder10);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	Cow cow = new Cow();
 	cow.setToolTipText("Cow.");
@@ -37,6 +34,8 @@ public class ToolTipPanel extends JPanel {
     }
 
     class Cow extends JLabel {
+	private static final long serialVersionUID = -3528214105181354711L;
+
 	Polygon cowgon = new Polygon();
 
         public Cow() {
@@ -61,21 +60,21 @@ public class ToolTipPanel extends JPanel {
 	boolean milk = false;
 	boolean tail = false;
 	public boolean contains(int x, int y) {
-	    if((x > 30) && (x < 60) && (y > 60) && (y < 85)) {
+	    if(x > 30 && x < 60 && y > 60 && y < 85) {
 	        if(!moo) {
 	           setToolTipText("<html><center><font color=blue size=+3>Mooooo</font></center></html>");
 		   moo = true;
 		   milk = false;
 		   tail = false;
 		}
-	    } else if((x > 150) && (x < 230) && (y > 90) && (y < 145)) {
+	    } else if(x > 150 && x < 230 && y > 90 && y < 145) {
 	        if(!milk) {
 	           setToolTipText("<html><center> Got  <font face=AvantGarde size=+1 color=white>Milk? </font></center></html>");
 		   milk = true;
 		   moo = false;
 		   tail = false;
 		}
-	    } else if((x > 280) && (x < 300) && (y > 20) && (y < 175)) {
+	    } else if(x > 280 && x < 300 && y > 20 && y < 175) {
 	        if(!tail) {
 	           setToolTipText("<html><em><b>Tail.</b></em></html>");
 		   tail = true;
@@ -88,11 +87,7 @@ public class ToolTipPanel extends JPanel {
 		tail = false;
 		milk = false;
 	    }
-	    if(cowgon.contains(new Point(x, y))) {
-		return true;
-	    } else {
-		return false;
-	    }
+	    return cowgon.contains(new Point(x, y));
 	}
     }
 
@@ -113,6 +108,8 @@ public class ToolTipPanel extends JPanel {
     }
 
     class Easter extends JComponent implements ActionListener {
+	private static final long serialVersionUID = -2133394233149379618L;
+
 	Timer animator;
 
 	private ImageIcon amy     = SwingSet.sharedInstance().loadImageIcon("images/people/amy.gif", "Amy Fowler");
@@ -188,7 +185,7 @@ public class ToolTipPanel extends JPanel {
 	    
 	    x1 +=.1;
 	    x2 +=.065;
-	    int nudgeX = (int) (((double) getWidth()/2) * .8);
+	    int nudgeX = (int) ((double) getWidth()/2 * .8);
 	    xTom       = (int) (Math.sin(x1+00) * nudgeX) + nudgeX;
             xAmy       = (int) (Math.sin(x1+10) * nudgeX) + nudgeX;
 	    xGes       = (int) (Math.sin(x2+20) * nudgeX) + nudgeX;
@@ -203,9 +200,9 @@ public class ToolTipPanel extends JPanel {
 	    
 	    y1 +=.1;
 	    y2 +=.05;
-	    int nudgeY    = (int) (((double) getHeight()/2) * .60);
-	    int nudgeMe   = (int) (((double) getHeight()/2) * .45);
-	    int nudgePhil = (int) (((double) getHeight()/2) * .20);
+	    int nudgeY    = (int) ((double) getHeight()/2 * .60);
+	    int nudgeMe   = (int) ((double) getHeight()/2 * .45);
+	    int nudgePhil = (int) ((double) getHeight()/2 * .20);
 	    yTom          = (int) (Math.sin(y1+00) * nudgeY)    + nudgeY;
 	    yTim          = (int) (Math.sin(y1+10) * nudgeY)    + nudgeY;
 	    yRich         = (int) (Math.sin(y1+15) * nudgeY)    + nudgeY;
@@ -219,12 +216,24 @@ public class ToolTipPanel extends JPanel {
 	    yJag          = (int) (Math.sin(y1+90) * nudgeY)    + nudgeY;
 
 	    // Don't modify this - the order matters!
-	    if(x1 > 30) squish(g, arnaud, xArnaud, yArnaud, arnaudScale);
-	    if(x1 > 15) squish(g, phil,   xPhil,   yPhil,   philScale);
-	    if(x1 >  9) squish(g, rick,   xRick,   yRick,   rickScale);
-	    if(x1 > 27) squish(g, tim,    xTim,    yTim,    timScale);
-	    if(x1 > 12) squish(g, tom,    xTom,    yTom,    tomScale);
-            if(x1 > 18) squish(g, rich, xRich, yRich, richScale);
+	    if(x1 > 30) {
+		squish(g, arnaud, xArnaud, yArnaud, arnaudScale);
+	    }
+	    if(x1 > 15) {
+		squish(g, phil,   xPhil,   yPhil,   philScale);
+	    }
+	    if(x1 >  9) {
+		squish(g, rick,   xRick,   yRick,   rickScale);
+	    }
+	    if(x1 > 27) {
+		squish(g, tim,    xTim,    yTim,    timScale);
+	    }
+	    if(x1 > 12) {
+		squish(g, tom,    xTom,    yTom,    tomScale);
+	    }
+            if(x1 > 18) {
+		squish(g, rich, xRich, yRich, richScale);
+	    }
 	    if(x1 > 33) {
 		if(hansScale > .65) {
 		    squish(g, hans1,   xHans,   yHans,   hansScale);
@@ -232,10 +241,16 @@ public class ToolTipPanel extends JPanel {
 		    squish(g, hans2,   xHans,   yHans,   hansScale);
 		}
 	    }
-	    if(x1 > 21) squish(g, amy,    xAmy,    yAmy,    amyScale);
-	    if(x1 > 6) squish(g, jag,    xJag,    yTom,    jagScale);
+	    if(x1 > 21) {
+		squish(g, amy,    xAmy,    yAmy,    amyScale);
+	    }
+	    if(x1 > 6) {
+		squish(g, jag,    xJag,    yJag,    jagScale);
+	    }
 	    squish(g, jeff,   xJeff,   yJeff,   jeffScale);
-	    if(x1 > 3) squish(g, ges,    xGes,    yGes,    gesScale);
+	    if(x1 > 3) {
+		squish(g, ges,    xGes,    yGes,    gesScale);
+	    }
 
 	}
 

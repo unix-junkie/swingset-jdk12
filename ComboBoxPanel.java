@@ -6,17 +6,9 @@
  */
 
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.text.*;
-import javax.swing.border.*;
-import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
-import javax.swing.plaf.*;
 import javax.swing.tree.*;
-import javax.swing.plaf.basic.BasicLookAndFeel;
-import javax.accessibility.*;
 
 /**
  * SwingSet panel for JComboBox
@@ -26,6 +18,7 @@ import javax.accessibility.*;
  * @author Peter Korn (accessibility support)
  */
 public class ComboBoxPanel extends JPanel {
+    private static final long serialVersionUID = -7440313318670869957L;
     // The Frame
     SwingSet swing;
     JComboBox  months;
@@ -40,8 +33,8 @@ public class ComboBoxPanel extends JPanel {
     public ComboBoxPanel(SwingSet swing) {
       JPanel tp;
       this.swing = swing;
-      this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-      setBorder(swing.emptyBorder5);
+      setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+      setBorder(SwingSet.emptyBorder5);
       
       this.add(Box.createRigidArea(new Dimension(1,50)));
       JPanel panel = new JPanel(false);
@@ -175,7 +168,8 @@ public class ComboBoxPanel extends JPanel {
     }
 
     class CustomComboBoxModel extends AbstractListModel implements ComboBoxModel {
-      Object currentValue;
+	private static final long serialVersionUID = 4539491195253836912L;
+    Object currentValue;
       ImageIcon images[];
       ImageIcon images_down[];      
       Hashtable cache[];
@@ -210,31 +204,32 @@ public class ComboBoxPanel extends JPanel {
       }
 
       public Object getElementAt(int index) {
-	if(cache[index] != null)
-	  return cache[index];
-	else {
-	  Hashtable result = new Hashtable();
-	    if(index != 24) {
-	      result.put("title","Hello I'm the choice " + index);
-	      result.put("image",images[index % 5]);
-	      result.put("Himage",images_down[index % 5]);
-	    } else {
-	      result.put("title","Hello I'm Duke");
-	      result.put("image",swing.dukeSnooze);
-	      result.put("Himage",swing.dukeWave);
-	    }
-	  cache[index] = result;
-	  return result;
+	if(cache[index] != null) {
+	    return cache[index];
 	}
-      }
+
+	    Hashtable result = new Hashtable();
+	    if (index != 24) {
+		result.put("title", "Hello I'm the choice " + index);
+		result.put("image", images[index % 5]);
+		result.put("Himage", images_down[index % 5]);
+	    } else {
+		result.put("title", "Hello I'm Duke");
+		result.put("image", swing.dukeSnooze);
+		result.put("Himage", swing.dukeWave);
+	    }
+	    cache[index] = result;
+	    return result;
+        }
     }
 
     class TestCellRenderer extends JLabel implements ListCellRenderer   {
+	private static final long serialVersionUID = -6636016340137735102L;
 	JComboBox combobox;
 
 
       public TestCellRenderer(JComboBox x) {
-        this.combobox = x;
+        combobox = x;
         setOpaque(true);
       }
 
@@ -247,12 +242,14 @@ public class ComboBoxPanel extends JPanel {
       {
 	Hashtable h = (Hashtable) value;
         if(UIManager.getLookAndFeel().getName().equals("CDE/Motif")) {
-            if(index == -1 )
-                setOpaque(false);
-            else
-                setOpaque(true);
-        } else 
-            setOpaque(true);
+            if(index == -1 ) {
+		setOpaque(false);
+	    } else {
+		setOpaque(true);
+	    }
+        } else {
+	    setOpaque(true);
+	}
 
         if(value == null) {
 	  setText("");

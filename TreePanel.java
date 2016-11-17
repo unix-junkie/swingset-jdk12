@@ -6,11 +6,8 @@
  */
 
 import javax.swing.*;
-import javax.swing.text.*;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 import javax.swing.tree.*;
 
 
@@ -22,10 +19,9 @@ import javax.swing.tree.*;
  */
 public class TreePanel extends JPanel 
 {
-    SwingSet swing;
+    private static final long serialVersionUID = 3042947998150507167L;
 
-    public TreePanel(SwingSet swing) {
-	this.swing = swing;
+    public TreePanel() {
 	setLayout(new BorderLayout());
 
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("Music");

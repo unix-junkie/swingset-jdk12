@@ -6,12 +6,9 @@
  */
 
 import javax.swing.*;
-import javax.swing.text.*;
 import javax.swing.border.*;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 
 
 /**
@@ -22,15 +19,12 @@ import java.util.*;
  */
 public class ToggleButtonPanel extends JPanel 
 {
-    // The Frame
-    SwingSet swing;
-
+    private static final long serialVersionUID = 2543908409709286781L;
 
     public ToggleButtonPanel(SwingSet swing) {
-	this.swing = swing;
 	ButtonGroup group;
 
-	setBorder(swing.emptyBorder5);
+	setBorder(SwingSet.emptyBorder5);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 	// *************** duke ****************
@@ -59,7 +53,7 @@ public class ToggleButtonPanel extends JPanel
         button.setMnemonic('o');
 	swing.toggleButtons.addElement(button);
 	textButtons.add(button);
-	textButtons.add(Box.createRigidArea(swing.hpad10));
+	textButtons.add(Box.createRigidArea(SwingSet.hpad10));
 	
 	button = new JToggleButton("Two");
 	group.add(button);
@@ -67,7 +61,7 @@ public class ToggleButtonPanel extends JPanel
 	button.setToolTipText("This is a ToggleButton with Text");
 	swing.toggleButtons.addElement(button);
 	textButtons.add(button);
-	textButtons.add(Box.createRigidArea(swing.hpad10));
+	textButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	button = new JToggleButton("Three");
 	group.add(button);
@@ -100,7 +94,7 @@ public class ToggleButtonPanel extends JPanel
 	button.getAccessibleContext().setAccessibleName("Swinging Duke toggle button");
 	swing.toggleButtons.addElement(button);
 	imageButtons.add(button);
-	imageButtons.add(Box.createRigidArea(swing.hpad10));
+	imageButtons.add(Box.createRigidArea(SwingSet.hpad10));
 	
 	// 2 images
         dukeAnim = SwingSet.sharedInstance().loadImageIcon("images/swing-64.gif","Animated image of Duke swinging on a swing");
@@ -113,7 +107,7 @@ public class ToggleButtonPanel extends JPanel
 	button.setToolTipText("This is a ToggleButton with a Icon");
 	button.getAccessibleContext().setAccessibleName("Swinging Duke toggle button");
 	imageButtons.add(button);
-	imageButtons.add(Box.createRigidArea(swing.hpad10));
+	imageButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	// 3 images
         dukeAnim = SwingSet.sharedInstance().loadImageIcon("images/swing-64.gif","Animated image of Duke swinging on a swing");
@@ -142,6 +136,8 @@ public class ToggleButtonPanel extends JPanel
 
 	// *************** Create the button controls ****************
 	JPanel controls = new JPanel() {
+	    private static final long serialVersionUID = 5409634582720833182L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(300, super.getMaximumSize().height);
 	    }
@@ -161,9 +157,9 @@ public class ToggleButtonPanel extends JPanel
 	JPanel rightColumn = new LayoutControlPanel(swing, swing.toggleButtons);
 
 	buttonControls.add(leftColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 	buttonControls.add(rightColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 
 	controls.add(buttonControls);
 
@@ -194,7 +190,7 @@ public class ToggleButtonPanel extends JPanel
 	leftColumn.add(enabled);
  
 
-	leftColumn.add(Box.createRigidArea(swing.vpad20));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad20));
 
 	
 	l = new JLabel("Pad Amount:");
@@ -224,10 +220,10 @@ public class ToggleButtonPanel extends JPanel
  	tenPad.addItemListener(swing.buttonPadListener);
 	leftColumn.add(tenPad);
 	
-	leftColumn.add(Box.createRigidArea(swing.vpad20));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad20));
 
 	add(buttonPanel);
-	add(Box.createRigidArea(swing.hpad10));
+	add(Box.createRigidArea(SwingSet.hpad10));
  	add(controls);
     }
 

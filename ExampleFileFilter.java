@@ -9,7 +9,6 @@
 import java.io.File;
 import java.util.Hashtable;
 import java.util.Enumeration;
-import javax.swing.*;
 import javax.swing.filechooser.*;
 
 /**
@@ -32,9 +31,6 @@ import javax.swing.filechooser.*;
  * @author Jeff Dinkins
  */
 public class ExampleFileFilter extends FileFilter {
-
-    private static String TYPE_UNKNOWN = "Type Unknown";
-    private static String HIDDEN_FILE = "Hidden File";
 
     private Hashtable filters = null;
     private String description = null;
@@ -121,7 +117,7 @@ public class ExampleFileFilter extends FileFilter {
 	    String extension = getExtension(f);
 	    if(extension != null && filters.get(getExtension(f)) != null) {
 		return true;
-	    };
+	    }
 	}
 	return false;
     }
@@ -132,13 +128,13 @@ public class ExampleFileFilter extends FileFilter {
      * @see #getExtension
      * @see FileFilter#accept
      */
-     public String getExtension(File f) {
+     public static String getExtension(File f) {
 	if(f != null) {
 	    String filename = f.getName();
 	    int i = filename.lastIndexOf('.');
 	    if(i>0 && i<filename.length()-1) {
 		return filename.substring(i+1).toLowerCase();
-	    };
+	    }
 	}
 	return null;
     }

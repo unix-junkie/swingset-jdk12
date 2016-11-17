@@ -7,14 +7,8 @@
 
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.text.*;
-import javax.accessibility.*;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.io.*;
-
 
 /**
  * Text!
@@ -25,13 +19,11 @@ import java.io.*;
  */
 public class TextPanel extends JPanel 
 {
-    // The Frame
-    SwingSet swing;
+    private static final long serialVersionUID = 7026108966345055573L;
 
     public TextPanel(SwingSet swing) {
 	super(true);
-	this.swing = swing;
-	setBorder(new CompoundBorder(swing.loweredBorder, swing.emptyBorder10));
+	setBorder(new CompoundBorder(SwingSet.loweredBorder, SwingSet.emptyBorder10));
 
 	JPanel textFields = SwingSet.createVerticalPanel(false);
 
@@ -63,15 +55,15 @@ public class TextPanel extends JPanel
 	JLabel label = (JLabel) textFields.add(new JLabel("Text Fields:"));
 	label.setFont(swing.boldFont);
 	label.setLabelFor(field1);
-	textFields.add(Box.createRigidArea(swing.vpad10));
+	textFields.add(Box.createRigidArea(SwingSet.vpad10));
 	textFields.add(field1);
-	textFields.add(Box.createRigidArea(swing.vpad5));
+	textFields.add(Box.createRigidArea(SwingSet.vpad5));
 	textFields.add(field2);
-	textFields.add(Box.createRigidArea(swing.vpad5));
+	textFields.add(Box.createRigidArea(SwingSet.vpad5));
 	textFields.add(field3);
-	textFields.add(Box.createRigidArea(swing.vpad5));
+	textFields.add(Box.createRigidArea(SwingSet.vpad5));
 	textFields.add(field4);
-	textFields.add(Box.createRigidArea(swing.vpad5));
+	textFields.add(Box.createRigidArea(SwingSet.vpad5));
 	textFields.add(field5);
 	textFields.add(Box.createHorizontalStrut(5));
 
@@ -80,16 +72,18 @@ public class TextPanel extends JPanel
 	JPanel textAreaPanel = SwingSet.createVerticalPanel(false);
 	label = (JLabel) textAreaPanel.add(new JLabel("Text Area:"));
 	label.setFont(swing.boldFont);
-	textAreaPanel.add(Box.createRigidArea(swing.vpad10));
+	textAreaPanel.add(Box.createRigidArea(SwingSet.vpad10));
 
 	JPanel textWrapper = new JPanel(new BorderLayout());
 	textWrapper.setAlignmentX(LEFT_ALIGNMENT);
- 	textWrapper.setBorder(swing.loweredBorder);
+ 	textWrapper.setBorder(SwingSet.loweredBorder);
 
 	textAreaPanel.add(textWrapper);
 
 	JTextArea textArea = new JTextArea(text);
 	JScrollPane scroller = new JScrollPane() {
+	    private static final long serialVersionUID = 6676002774584295905L;
+
             public Dimension getPreferredSize() {
 		return new Dimension(300,100);
 	    }
@@ -103,14 +97,16 @@ public class TextPanel extends JPanel
 	label.setLabelFor(textArea);
 	textWrapper.add(scroller, BorderLayout.CENTER);
 
-	add(Box.createRigidArea(swing.hpad10));
+	add(Box.createRigidArea(SwingSet.hpad10));
 	add(textFields);
-	add(Box.createRigidArea(swing.hpad10));
+	add(Box.createRigidArea(SwingSet.hpad10));
 	add(textAreaPanel);
     }
 
 
     class FixedTextField extends JTextField {
+	private static final long serialVersionUID = 3378275961150981343L;
+
 	public FixedTextField(String text, int columns) {
 	    super(text, columns);
 	}
@@ -122,7 +118,7 @@ public class TextPanel extends JPanel
 	}
     }
 
-    public String LoadFile(String filename) {
+    public static String LoadFile(String filename) {
       return SwingSet.contentsOfFile(filename);
     }
     

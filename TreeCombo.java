@@ -7,22 +7,23 @@
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
-import javax.swing.plaf.basic.*;
 import java.util.Vector;
 import java.awt.*;
-import javax.swing.plaf.*;
 import javax.swing.tree.*;
 
 public class TreeCombo extends JComboBox {
+    private static final long serialVersionUID = -6971947508222867819L;
+
     static final int OFFSET = 16;
 
     public TreeCombo(TreeModel aTreeModel) {
-        super();
         setModel(new TreeToListModel(aTreeModel));
         setRenderer(new ListEntryRenderer());
     }
 
     class TreeToListModel extends AbstractListModel implements ComboBoxModel,TreeModelListener {
+	private static final long serialVersionUID = -4999586587124338968L;
+
         TreeModel source;
         boolean invalid = true;
         Object currentValue;
@@ -72,17 +73,18 @@ public class TreeCombo extends JComboBox {
             if(invalid) {
                 cache = new Vector();
                 cacheTree(source.getRoot(),0);
-                if(cache.size() > 0)
-                    currentValue = cache.elementAt(0);
+                if(cache.size() > 0) {
+		    currentValue = cache.elementAt(0);
+		}
                 invalid = false;             
                 fireContentsChanged(this, 0, 0);
             }
         }
 
         void cacheTree(Object anObject,int level) {
-            if(source.isLeaf(anObject))
-                addListEntry(anObject,level,false);
-            else {
+            if(source.isLeaf(anObject)) {
+		addListEntry(anObject,level,false);
+	    } else {
                 int c = source.getChildCount(anObject);
                 int i;
                 Object child;
@@ -131,6 +133,8 @@ public class TreeCombo extends JComboBox {
     static Border emptyBorder = new EmptyBorder(0,0,0,0);
 
     class ListEntryRenderer extends JLabel implements ListCellRenderer  {
+	private static final long serialVersionUID = -3455618828471133284L;
+
         ImageIcon leafIcon = SwingSet.sharedInstance().loadImageIcon("images/document.gif","Document");
         ImageIcon nodeIcon = SwingSet.sharedInstance().loadImageIcon("images/folder.gif","Folder");
 
@@ -150,18 +154,13 @@ public class TreeCombo extends JComboBox {
                 Border border;
                 setText(listEntry.object().toString());
 		setIcon( listEntry.isNode() ? nodeIcon : leafIcon );
-                if(index != -1)
-                    border = new EmptyBorder(0, OFFSET * listEntry.level(), 0, 0);
-                else 
-                    border = emptyBorder;
+                if(index != -1) {
+		    border = new EmptyBorder(0, OFFSET * listEntry.level(), 0, 0);
+		} else {
+		    border = emptyBorder;
+		}
 
-                if(UIManager.getLookAndFeel().getName().equals("CDE/Motif")) {
-                    if(index == -1 )
-                        setOpaque(false);
-                    else
-                        setOpaque(true);
-                } else 
-                    setOpaque(true);
+                setOpaque(!UIManager.getLookAndFeel().getName().equals("CDE/Motif") || index != -1);
                 
 		setBorder(border); 
                 if (isSelected) {

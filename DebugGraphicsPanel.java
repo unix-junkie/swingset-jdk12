@@ -7,12 +7,9 @@
 
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.text.*;
-import javax.accessibility.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 
 /**
@@ -24,17 +21,17 @@ import java.util.*;
  */
 public class DebugGraphicsPanel extends JPanel 
 {
-    // The Frame
-    SwingSet swing;
+    private static final long serialVersionUID = 232884007200482960L;
+
     JPanel components;
 
     JButton button = new JButton("Button");
     JRadioButton radio = new JRadioButton("RadioButton");
     JCheckBox check = new JCheckBox("Checkbox");
-    JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
-    JScrollBar scrollbar = new JScrollBar(JScrollBar.HORIZONTAL, 50, 20, 0, 100);
+    JSlider slider = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 50);
+    JScrollBar scrollbar = new JScrollBar(Adjustable.HORIZONTAL, 50, 20, 0, 100);
 
-    JSlider flashSlider = new JSlider(JSlider.HORIZONTAL, 1, 50, 10);
+    JSlider flashSlider = new JSlider(SwingConstants.HORIZONTAL, 1, 50, 10);
     JCheckBox buttonCheckbox = new JCheckBox("Button");
     JCheckBox radioCheckbox = new JCheckBox("RadioButton");
     JCheckBox checkboxCheckbox = new JCheckBox("Checkbox");
@@ -45,7 +42,6 @@ public class DebugGraphicsPanel extends JPanel
     ChangeListener sliderListener;
 
     public DebugGraphicsPanel(SwingSet swing) {
-	this.swing = swing;
 	sliderListener = new ChangeListener() {
 	    public void stateChanged(ChangeEvent e) {
 		JSlider s = (JSlider)e.getSource();
@@ -55,12 +51,12 @@ public class DebugGraphicsPanel extends JPanel
 	flashSlider.addChangeListener(sliderListener);
 	
 
-	setBorder(swing.emptyBorder5);
+	setBorder(SwingSet.emptyBorder5);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 	// *************** buttons ****************
 	components = SwingSet.createVerticalPanel(true);
-	components.setBorder(swing.emptyBorder10);
+	components.setBorder(SwingSet.emptyBorder10);
 
         button.setEnabled(false);
         radio.setEnabled(false);
@@ -69,20 +65,20 @@ public class DebugGraphicsPanel extends JPanel
         check.setSelected(true);
 	
 	// Add buttons to buttonPanel
-	JPanel buttonPanel = swing.createHorizontalPanel(false);
-	buttonPanel.setBorder(swing.etchedBorder10);
+	JPanel buttonPanel = SwingSet.createHorizontalPanel(false);
+	buttonPanel.setBorder(SwingSet.etchedBorder10);
 	buttonPanel.setAlignmentX(LEFT_ALIGNMENT);
 	buttonPanel.setAlignmentY(TOP_ALIGNMENT);
 
 	JLabel l = (JLabel) components.add(new JLabel("Buttons"));
 	l.setFont(swing.boldFont);
 	buttonPanel.add(button);
-	buttonPanel.add(Box.createRigidArea(swing.hpad20));
+	buttonPanel.add(Box.createRigidArea(SwingSet.hpad20));
 	buttonPanel.add(radio);
-	buttonPanel.add(Box.createRigidArea(swing.hpad20));
+	buttonPanel.add(Box.createRigidArea(SwingSet.hpad20));
 	buttonPanel.add(check);
 	components.add(buttonPanel);
-	components.add(Box.createRigidArea(swing.vpad20));
+	components.add(Box.createRigidArea(SwingSet.vpad20));
 
 	// *************** slider ****************
 
@@ -94,12 +90,14 @@ public class DebugGraphicsPanel extends JPanel
 	slider.getAccessibleContext().setAccessibleName("Sample slider");
 
 	JPanel sliderPanel = new JPanel() {
+	    private static final long serialVersionUID = -5788757002076409424L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(super.getMaximumSize().width, 60);
 	    }
 	};
 	sliderPanel.setLayout(new BoxLayout(sliderPanel, BoxLayout.X_AXIS));
-	sliderPanel.setBorder(swing.etchedBorder10);
+	sliderPanel.setBorder(SwingSet.etchedBorder10);
 	sliderPanel.setAlignmentX(LEFT_ALIGNMENT);
 	sliderPanel.setAlignmentY(TOP_ALIGNMENT);
 
@@ -107,7 +105,7 @@ public class DebugGraphicsPanel extends JPanel
 	l.setFont(swing.boldFont);
 	sliderPanel.add(slider);
 	components.add(sliderPanel);
-	components.add(Box.createRigidArea(swing.vpad20));
+	components.add(Box.createRigidArea(SwingSet.vpad20));
 
 	// *************** scrollbar ****************
 
@@ -115,30 +113,32 @@ public class DebugGraphicsPanel extends JPanel
 	scrollbar.getAccessibleContext().setAccessibleName("Sample scrollbarlider");
 
 	JPanel scrollbarPanel = new JPanel() {
+	    private static final long serialVersionUID = -5166243690704239038L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(super.getMaximumSize().width, 60);
 	    }
 	};
 	scrollbarPanel.setLayout(new BoxLayout(scrollbarPanel, BoxLayout.Y_AXIS));
-	scrollbarPanel.setBorder(swing.etchedBorder10);
+	scrollbarPanel.setBorder(SwingSet.etchedBorder10);
 	scrollbarPanel.setAlignmentX(LEFT_ALIGNMENT);
 	scrollbarPanel.setAlignmentY(TOP_ALIGNMENT);
 
-	JPanel box = swing.createHorizontalPanel(false);
-	box.add(Box.createRigidArea(swing.hpad5));
+	JPanel box = SwingSet.createHorizontalPanel(false);
+	box.add(Box.createRigidArea(SwingSet.hpad5));
 	box.add(scrollbar);
-	box.add(Box.createRigidArea(swing.hpad5));
+	box.add(Box.createRigidArea(SwingSet.hpad5));
 
 	l = (JLabel) components.add(new JLabel("ScrollBar"));
 	l.setFont(swing.boldFont);
-	scrollbarPanel.add(Box.createRigidArea(swing.vpad5));
+	scrollbarPanel.add(Box.createRigidArea(SwingSet.vpad5));
 	scrollbarPanel.add(box);
-	scrollbarPanel.add(Box.createRigidArea(swing.vpad5));
+	scrollbarPanel.add(Box.createRigidArea(SwingSet.vpad5));
 	components.add(scrollbarPanel);
-	components.add(Box.createRigidArea(swing.vpad20));
+	components.add(Box.createRigidArea(SwingSet.vpad20));
 
 	l = (JLabel) components.add(new JLabel("Note: the above components are intentionally disabled."));
-	components.add(Box.createRigidArea(swing.vpad5));
+	components.add(Box.createRigidArea(SwingSet.vpad5));
 	l = (JLabel) components.add(new JLabel("Choose a component checkbox at right, then click on"));
 	l = (JLabel) components.add(new JLabel("the \"Repaint\" button to see debug graphics at work."));
 
@@ -148,23 +148,25 @@ public class DebugGraphicsPanel extends JPanel
 
 	// *************** Create the debug graphics controls ****************
 	JPanel controls = new JPanel() {
+	    private static final long serialVersionUID = 4148890003104794455L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(300, super.getMaximumSize().height);
 	    }
 	};
 	controls.setLayout(new BoxLayout(controls, BoxLayout.Y_AXIS));
 
-	JPanel debugControls = swing.createHorizontalPanel(true);
+	JPanel debugControls = SwingSet.createHorizontalPanel(true);
 	debugControls.setAlignmentY(TOP_ALIGNMENT);
 	debugControls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel leftColumn = swing.createVerticalPanel(false);
+	JPanel leftColumn = SwingSet.createVerticalPanel(false);
 	leftColumn.setAlignmentX(LEFT_ALIGNMENT);
 	leftColumn.setAlignmentY(TOP_ALIGNMENT);
 
 	debugControls.add(leftColumn);
-	debugControls.add(Box.createRigidArea(swing.hpad20));
-	debugControls.add(Box.createRigidArea(swing.hpad20));
+	debugControls.add(Box.createRigidArea(SwingSet.hpad20));
+	debugControls.add(Box.createRigidArea(SwingSet.hpad20));
 
 	controls.add(debugControls);
 
@@ -194,7 +196,7 @@ public class DebugGraphicsPanel extends JPanel
  	leftColumn.add(scrollbarCheckbox);
 
 	// debug flashTime
-	leftColumn.add(Box.createRigidArea(swing.vpad40));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad40));
 	l = new JLabel("Debug Flash Interval:");
 	l.setFont(swing.boldFont);
 	leftColumn.add(l);
@@ -207,7 +209,7 @@ public class DebugGraphicsPanel extends JPanel
 	flashSlider.getAccessibleContext().setAccessibleName("Debug Flash Interval");
 
 	// repaint button
-	leftColumn.add(Box.createRigidArea(swing.vpad40));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad40));
  	JButton repaintButton = new JButton("Repaint");
 	repaintButton.setToolTipText("Causes the selected components to be repainted using DebugGraphics.");
  	repaintButton.addActionListener(debugGraphicsListener);
@@ -215,7 +217,7 @@ public class DebugGraphicsPanel extends JPanel
  	leftColumn.add(Box.createGlue());
 
 	add(components);
-	add(Box.createRigidArea(swing.hpad10));
+	add(Box.createRigidArea(SwingSet.hpad10));
  	add(controls);
     }
 

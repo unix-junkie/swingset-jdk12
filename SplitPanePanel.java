@@ -7,7 +7,6 @@
 
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.accessibility.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -26,6 +25,8 @@ import java.awt.event.*;
  */
 public class SplitPanePanel extends JPanel
 {
+    private static final long serialVersionUID = -2299371867962757873L;
+
     /** JSplitPane being shown to the user. */
     protected JSplitPane             splitPane;
     /** Left component being split. */
@@ -35,9 +36,7 @@ public class SplitPanePanel extends JPanel
     /** Grand puba swingset. */
     protected SwingSet               swing;
 
-    public SplitPanePanel(SwingSet swing) {
-        super();
-        this.swing = swing;
+    public SplitPanePanel() {
         setDoubleBuffered(true);
         setLayout(new BorderLayout());
         createSplitPane();
@@ -144,13 +143,14 @@ public class SplitPanePanel extends JPanel
                 } catch (Exception ex) {
                     newSize = -1;
                 }
-                if(newSize > 0)
-                    splitPane.setDividerSize(newSize);
-                else
-                    JOptionPane.showMessageDialog(splitPane,
+                if(newSize > 0) {
+		    splitPane.setDividerSize(newSize);
+		} else {
+		    JOptionPane.showMessageDialog(splitPane,
                                                   "Invalid Divider Size",
                                                   "Error",
                                                   JOptionPane.ERROR_MESSAGE);
+		}
             }
         });
         label = new JLabel("Divider Size");
@@ -177,14 +177,15 @@ public class SplitPanePanel extends JPanel
                 } catch (Exception ex) {
                     newSize = -1;
                 }
-                if(newSize > 10)
-                    leftGrid.setPreferredSize(newSize);
-                else
-                    JOptionPane.showMessageDialog(splitPane,
+                if(newSize > 10) {
+		    leftGrid.setPreferredSize(newSize);
+		} else {
+		    JOptionPane.showMessageDialog(splitPane,
                                                   "Invalid Minimum Size, " +
                                                   "must be greater than 10",
                                                   "Error",
                                                   JOptionPane.ERROR_MESSAGE);
+		}
             }
         });
         label = new JLabel("First Components Minimum Size");
@@ -212,14 +213,15 @@ public class SplitPanePanel extends JPanel
                 } catch (Exception ex) {
                     newSize = -1;
                 }
-                if(newSize > 10)
-                    rightGrid.setPreferredSize(newSize);
-                else
-                    JOptionPane.showMessageDialog(splitPane,
+                if(newSize > 10) {
+		    rightGrid.setPreferredSize(newSize);
+		} else {
+		    JOptionPane.showMessageDialog(splitPane,
                                                   "Invalid Minimum Size, " +
                                                   "must be greater than 10",
                                                   "Error",
                                                   JOptionPane.ERROR_MESSAGE);
+		}
             }
         });
         label = new JLabel("Second Components Minimum Size");
@@ -236,6 +238,8 @@ public class SplitPanePanel extends JPanel
 
 class GridComponent extends Component
 {
+    private static final long serialVersionUID = 7980815052976064841L;
+
     /** Number of grids to show. */
     protected int            gridCount;
     /** Size of each grid. */
@@ -283,14 +287,15 @@ class GridComponent extends Component
     public void setBounds(int x, int y, int width, int height) {
         int          minSize = Math.min(width, height);
 
-        if(minSize < 100)
-            currentColor = Color.red;
-        else if(minSize < 200)
-            currentColor = Color.blue;
-        else if(minSize < 300)
-            currentColor = Color.yellow;
-        else
-            currentColor = Color.white;
+        if(minSize < 100) {
+	    currentColor = Color.red;
+	} else if(minSize < 200) {
+	    currentColor = Color.blue;
+	} else if(minSize < 300) {
+	    currentColor = Color.yellow;
+	} else {
+	    currentColor = Color.white;
+	}
 
         gridSize = Math.max(1, minSize / gridCount);
 
@@ -317,10 +322,12 @@ class GridComponent extends Component
             int              drawMaxX = maxX / gridSize * gridSize;
             int              counter;
 
-            for(counter = drawMinX; counter <= drawMaxX; counter += gridSize)
-                g.drawLine(counter, paintBounds.y, counter, maxY);
-            for(counter = drawMinY; counter <= drawMaxY; counter += gridSize)
-                g.drawLine(paintBounds.x, counter, maxX, counter);
+            for(counter = drawMinX; counter <= drawMaxX; counter += gridSize) {
+		g.drawLine(counter, paintBounds.y, counter, maxY);
+	    }
+            for(counter = drawMinY; counter <= drawMaxY; counter += gridSize) {
+		g.drawLine(paintBounds.x, counter, maxX, counter);
+	    }
         }
     }
 }

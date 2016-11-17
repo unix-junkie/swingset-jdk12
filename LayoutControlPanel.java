@@ -6,9 +6,6 @@
  */
 
 import javax.swing.*;
-import javax.swing.text.*;
-import javax.swing.border.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -20,6 +17,7 @@ import java.util.*;
  */
 
 public class LayoutControlPanel extends JPanel implements SwingConstants {
+    private static final long serialVersionUID = -6386113896431384792L;
 
     LayoutControlPanel(SwingSet swing, Vector controls) {
         this.swing = swing;
@@ -55,7 +53,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
             relativePos.addItemListener(positioningListener);
             add(relativePos);
 
-            add(Box.createRigidArea(swing.vpad20));
+            add(Box.createRigidArea(SwingSet.vpad20));
 
             absolutePositions = false;
             relativePos.setSelected(true);
@@ -81,7 +79,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
         l.setFont(swing.boldFont);
         add(textPosition);
 
-        add(Box.createRigidArea(swing.vpad20));
+        add(Box.createRigidArea(SwingSet.vpad20));
 
         l = new JLabel("Content Alignment:");
         add(l);
@@ -102,32 +100,34 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
             }
             
             String currentTextPosition = textPosition.getSelection();
-            if( currentTextPosition.equals("NW") )
-                textPosition.setSelection("NE");
-            else if( currentTextPosition.equals("NE") )
-                textPosition.setSelection("NW");
-            else if( currentTextPosition.equals("E") )
-                textPosition.setSelection("W");
-            else if( currentTextPosition.equals("W") )
-                textPosition.setSelection("E");
-            else if( currentTextPosition.equals("SE") )
-                textPosition.setSelection("SW");
-            else if( currentTextPosition.equals("SW") )
-                textPosition.setSelection("SE");
+            if( currentTextPosition.equals("NW") ) {
+		textPosition.setSelection("NE");
+	    } else if( currentTextPosition.equals("NE") ) {
+		textPosition.setSelection("NW");
+	    } else if( currentTextPosition.equals("E") ) {
+		textPosition.setSelection("W");
+	    } else if( currentTextPosition.equals("W") ) {
+		textPosition.setSelection("E");
+	    } else if( currentTextPosition.equals("SE") ) {
+		textPosition.setSelection("SW");
+	    } else if( currentTextPosition.equals("SW") ) {
+		textPosition.setSelection("SE");
+	    }
 
             String currentLabelAlignment = labelAlignment.getSelection();
-            if( currentLabelAlignment.equals("NW") )
-                labelAlignment.setSelection("NE");
-            else if( currentLabelAlignment.equals("NE") )
-                labelAlignment.setSelection("NW");
-            else if( currentLabelAlignment.equals("E") )
-                labelAlignment.setSelection("W");
-            else if( currentLabelAlignment.equals("W") )
-                labelAlignment.setSelection("E");
-            else if( currentLabelAlignment.equals("SE") )
-                labelAlignment.setSelection("SW");
-            else if( currentLabelAlignment.equals("SW") )
-                labelAlignment.setSelection("SE");
+            if( currentLabelAlignment.equals("NW") ) {
+		labelAlignment.setSelection("NE");
+	    } else if( currentLabelAlignment.equals("NE") ) {
+		labelAlignment.setSelection("NW");
+	    } else if( currentLabelAlignment.equals("E") ) {
+		labelAlignment.setSelection("W");
+	    } else if( currentLabelAlignment.equals("W") ) {
+		labelAlignment.setSelection("E");
+	    } else if( currentLabelAlignment.equals("SE") ) {
+		labelAlignment.setSelection("SW");
+	    } else if( currentLabelAlignment.equals("SW") ) {
+		labelAlignment.setSelection("SE");
+	    }
         }
     }
 
@@ -167,7 +167,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
 	    currentPage.validate();
 	    currentPage.repaint();            
 	}
-    };
+    }
 
 
     // Text Position Listener
@@ -208,7 +208,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
             currentPage.validate();
             currentPage.repaint();
 	}
-    };
+    }
 
 
     // Label Alignment Listener
@@ -250,7 +250,7 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
             currentPage.validate();
             currentPage.repaint();
 	}
-    };
+    }
 
     // Position
     void setPosition(Component c, int hPos, int vPos) {
@@ -312,9 +312,9 @@ public class LayoutControlPanel extends JPanel implements SwingConstants {
     }
 
 
-    private boolean  absolutePositions;
-    private SwingSet swing;
-    private Vector   controls;
-    private DirectionPanel textPosition;
-    private DirectionPanel labelAlignment;
+    boolean  absolutePositions;
+    SwingSet swing;
+    Vector   controls;
+    DirectionPanel textPosition;
+    DirectionPanel labelAlignment;
 }

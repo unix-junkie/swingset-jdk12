@@ -6,13 +6,10 @@
  */
 
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.border.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-import java.io.*;
 
 /**
  * Borders, borders, everywhere....
@@ -22,15 +19,13 @@ import java.io.*;
  */
 public class BorderedPanePanel extends JPanel
 {
-    SwingSet swing;
+    private static final long serialVersionUID = -5884904294639012406L;
 
     JPanel borderedPane;
 
     public BorderedPanePanel(SwingSet swing) {
-	this.swing = swing;
-
 	// setBorderStyle(LOWERED);
-	setBorder(swing.emptyBorder10);
+	setBorder(SwingSet.emptyBorder10);
 	setLayout(new BorderLayout());
 
 	borderedPane = new JPanel();
@@ -40,10 +35,10 @@ public class BorderedPanePanel extends JPanel
 
 	// Create title position controls
 	JPanel controls = new JPanel();
-	controls.setBorder(swing.emptyBorder20);
+	controls.setBorder(SwingSet.emptyBorder20);
 	controls.setLayout(new BoxLayout(controls, BoxLayout.Y_AXIS));
 
-	controls.add(Box.createRigidArea(swing.vpad10));
+	controls.add(Box.createRigidArea(SwingSet.vpad10));
 
 	JRadioButton b;
 	ButtonGroup group = new ButtonGroup();
@@ -76,7 +71,7 @@ public class BorderedPanePanel extends JPanel
 	b.addActionListener(borderedPaneListener);
 	group.add(b);
 
-	controls.add(Box.createRigidArea(swing.vpad10));
+	controls.add(Box.createRigidArea(SwingSet.vpad10));
 	label = new JLabel("Title Justification:");
 	label.setFont(swing.boldFont);
 	controls.add(label);

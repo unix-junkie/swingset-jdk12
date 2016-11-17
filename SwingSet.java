@@ -8,18 +8,13 @@
 import javax.swing.*;
 import javax.swing.Timer;
 import javax.swing.event.*;
-import javax.swing.text.*;
 import javax.swing.border.*;
-import javax.swing.colorchooser.*;
-import javax.swing.filechooser.*;
-import javax.accessibility.*;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
 import java.util.*;
 import java.io.*;
-import java.applet.*;
 import java.net.*;
 
 /**
@@ -34,6 +29,8 @@ import java.net.*;
  */
 public class SwingSet extends JPanel
 {
+    private static final long serialVersionUID = -9047378944321558696L;
+
     // This
     SwingSet swing;
 
@@ -305,15 +302,16 @@ public class SwingSet extends JPanel
 	tabbedPane.addContainerListener(new ContainerAdapter() {
 	    public void componentRemoved(ContainerEvent e) {
 		Component c = e.getChild();
-		if (c == menuPanel) 
+		if (c == menuPanel) {
 		    menuBar.setSelected(null);
+		}
 	    }
 
 	});
 
 	// ProgressBar
 	progressLabel.setText("Loading ProgressBar Example");
-	progressBarPanel = new ProgressPanel(this);
+	progressBarPanel = new ProgressPanel();
 	tabbedPane.addTab("ProgressBar", null, progressBarPanel);
 	progressBar.setValue(++currentProgressValue);
 
@@ -326,20 +324,20 @@ public class SwingSet extends JPanel
 
 	// Sliders
 	progressLabel.setText("Loading Slider Example");
-	sliderPanel = new SliderPanel(swing);
+	sliderPanel = new SliderPanel();
 	tabbedPane.addTab("Slider", null, sliderPanel);
 	progressBar.setValue(++currentProgressValue);
 
 	// SplitPane
 	progressLabel.setText("Loading SplitPane Example");
-	splitPanePanel = new SplitPanePanel(this);
+	splitPanePanel = new SplitPanePanel();
 	tabbedPane.addTab("SplitPane", null, splitPanePanel);
 	progressBar.setValue(++currentProgressValue);
 
 
 	// Table
 	progressLabel.setText("Loading Table Example");
-	tablePanel = new TablePanel(swing);
+	tablePanel = new TablePanel();
 	tabbedPane.addTab("TableView", null, tablePanel);
 	progressBar.setValue(++currentProgressValue);
 
@@ -353,7 +351,7 @@ public class SwingSet extends JPanel
 	// PENDING(jeff) make this work when we are an applet
 	if(!isApplet()) {
 	    progressLabel.setText("Loading HTML Text Example");
-	    htmlPanel = new HtmlPanel(swing);
+	    htmlPanel = new HtmlPanel();
 	    tabbedPane.addTab("<html><center><font color=yellow>HTML</font> Text</center></html>", null, htmlPanel);
 	    progressBar.setValue(++currentProgressValue);
 	}
@@ -366,14 +364,14 @@ public class SwingSet extends JPanel
 
 	// ToolTips
 	progressLabel.setText("Loading ToolTip Example");
-	toolTipPanel = new ToolTipPanel(swing);
+	toolTipPanel = new ToolTipPanel();
 	tabbedPane.addTab("ToolTips", cow, toolTipPanel);
 	toolTipIndex = currentProgressValue;
 	progressBar.setValue(++currentProgressValue);
 
 	// TreeView
 	progressLabel.setText("Loading TreeView Example");
-	treePanel = new TreePanel(this);
+	treePanel = new TreePanel();
 	tabbedPane.addTab("TreeView", null, treePanel);
 	progressBar.setValue(++currentProgressValue);
 
@@ -383,6 +381,8 @@ public class SwingSet extends JPanel
     }
 
     class ToggleLogging extends AbstractAction {
+	private static final long serialVersionUID = 6026428299399537057L;
+
         public void actionPerformed(ActionEvent e) {
            Timer.setLogTimers(!Timer.getLogTimers());
         }
@@ -448,7 +448,7 @@ public class SwingSet extends JPanel
      protected static boolean isAvailableLookAndFeel(String classname) {
 	 try { // Try to create a L&F given a String
 	     Class lnfClass = Class.forName(classname);
-	     LookAndFeel newLAF = (LookAndFeel)(lnfClass.newInstance());
+	     LookAndFeel newLAF = (LookAndFeel)lnfClass.newInstance();
 	     return newLAF.isSupportedLookAndFeel();
 	 } catch(Exception e) { // If ANYTHING weird happens, return false
 	     return false;
@@ -471,10 +471,10 @@ public class SwingSet extends JPanel
 	JMenuItem mi;
 
 	// File Menu
-	JMenu file = (JMenu) menuBar.add(new JMenu("File"));
+	JMenu file = menuBar.add(new JMenu("File"));
         file.setMnemonic('F');
 	file.getAccessibleContext().setAccessibleDescription("The standard 'File' application menu");
-        mi = (JMenuItem) file.add(new JMenuItem("About"));
+        mi = file.add(new JMenuItem("About"));
         mi.setMnemonic('t');
 	mi.getAccessibleContext().setAccessibleDescription("Find out about the SwingSet application");
 	mi.addActionListener(new ActionListener() {
@@ -486,7 +486,7 @@ public class SwingSet extends JPanel
 		    ImageIcon groupPicture = loadImageIcon("images/Copyright.gif",
                       "SwingSet demo is Copyright (c) 1997 Sun Microsystems, Inc.  All Rights Reserved.");
                     aboutBox.getContentPane().add(groupPanel, BorderLayout.CENTER);
-		    JLabel groupLabel = (new JLabel(groupPicture));
+		    JLabel groupLabel = new JLabel(groupPicture);
 		    groupLabel.getAccessibleContext().setAccessibleName("SwingSet demo Copyright");
 		    groupLabel.getAccessibleContext().setAccessibleDescription("The JFC Swing Toolkit is a cooperative effort between JavaSoft and Netscape.  The SwingSet demo is Copyright 1997 Sun Microsystems, Inc.  All Rights Reserved.");
                     groupPanel.add(groupLabel, BorderLayout.CENTER);
@@ -505,20 +505,20 @@ public class SwingSet extends JPanel
 	});
 
         file.addSeparator();
-        mi = (JMenuItem) file.add(new JMenuItem("Open"));
+        mi = file.add(new JMenuItem("Open"));
         mi.setMnemonic('O');
 	mi.setEnabled(false);
 	mi.getAccessibleContext().setAccessibleDescription("Placeholder sample menu item for opening a file");
-        mi = (JMenuItem) file.add(new JMenuItem("Save"));
+        mi = file.add(new JMenuItem("Save"));
         mi.setMnemonic('S');
 	mi.setEnabled(false);
 	mi.getAccessibleContext().setAccessibleDescription("Placeholder sample menu item for saving a file");
-        mi = (JMenuItem) file.add(new JMenuItem("Save As..."));
+        mi = file.add(new JMenuItem("Save As..."));
         mi.setMnemonic('A');
 	mi.setEnabled(false);
 	mi.getAccessibleContext().setAccessibleDescription("Placeholder sample menu item for saving a file with a new name");
         file.addSeparator();
-        mi = (JMenuItem) file.add(new JMenuItem("Exit"));
+        mi = file.add(new JMenuItem("Exit"));
         mi.setMnemonic('x');
 	mi.getAccessibleContext().setAccessibleDescription("Exit the SwingSet application");
 	mi.addActionListener(new ActionListener() {
@@ -529,7 +529,7 @@ public class SwingSet extends JPanel
 	);
 
 	// Options Menu
-	JMenu options = (JMenu) menuBar.add(new JMenu("Options"));
+	JMenu options = menuBar.add(new JMenu("Options"));
         options.setMnemonic('p');
 	options.getAccessibleContext().setAccessibleDescription("Look and Feel options: select one of several different Look and Feels for the SwingSet application");
 
@@ -646,39 +646,39 @@ public class SwingSet extends JPanel
 	};
 
 	// Contributors Menu
-	JMenu people = (JMenu) menuBar.add(new JMenu("The Swing Team"));
+	JMenu people = menuBar.add(new JMenu("The Swing Team"));
         people.setMnemonic('A');
 	people.getAccessibleContext().setAccessibleDescription(
 	        "Listing of all of the individual contributors to Swing");
 
-        mi = (JMenuItem) people.add(new JMenuItem("Michael Albers", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Michael Albers", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Mark Andrews", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Mark Andrews", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Tom Ball", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Tom Ball", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Jeff Dinkins", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Jeff Dinkins", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Amy Fowler", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Amy Fowler", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("James Gosling", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("James Gosling", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Earl Johnson", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Earl Johnson", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addMouseListener(new AccessibilityEasterListener(mi, "Accessibility Program Manager, Founder of Sun's Accessibility Effort"));
 
-        mi = (JMenuItem) people.add(new JMenuItem("Will Walker", blueDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Will Walker", blueDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addMouseListener(new AccessibilityEasterListener(mi, "Wrote Java Accessibility API,Wrote AccessX,Designed RAP prototol,Contributor to UltraSonix"));
 	mi.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
@@ -690,69 +690,69 @@ public class SwingSet extends JPanel
 	    }
 	});
 
-        mi = (JMenuItem) people.add(new JMenuItem("Peter Korn", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Peter Korn", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addMouseListener(new AccessibilityEasterListener(mi, "Wrote Accessibility API,Wrote outSPOKEN for Windows,Wrote GUIAccess for Windows,Contributed to outSPOKEN for Macintosh,Contributed to inLARGE for Macintosh"));
 
-        mi = (JMenuItem) people.add(new JMenuItem("Rick Levenson", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Rick Levenson", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Philip Milne", redDot));
+        mi = people.add(new JMenuItem("Philip Milne", redDot));
 
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Hans Muller", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Hans Muller", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Tim Prinzing", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Tim Prinzing", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Chris Ryan", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Chris Ryan", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Georges Saab", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Georges Saab", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Tom Santos", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Tom Santos", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Jeff Shapiro", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Jeff Shapiro", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Rich Schiavi", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Rich Schiavi", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Nancy Schorr", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Nancy Schorr", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Harry Vertelney", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Harry Vertelney", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Scott Violet", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Scott Violet", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
 
-        mi = (JMenuItem) people.add(new JMenuItem("Kathy Walrath", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Kathy Walrath", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Arnaud Weber", redDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Arnaud Weber", redDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 	mi.addActionListener(easterListener);
 
-        mi = (JMenuItem) people.add(new JMenuItem("Steve Wilson", invisibleDot));
-	mi.setHorizontalTextPosition(JMenuItem.RIGHT);
+        mi = people.add(new JMenuItem("Steve Wilson", invisibleDot));
+	mi.setHorizontalTextPosition(SwingConstants.RIGHT);
 
 	// Chooser Menu
-	JMenu choosers = (JMenu) menuBar.add(new JMenu("Choosers"));
+	JMenu choosers = menuBar.add(new JMenu("Choosers"));
 	choosers.setMnemonic('H');
 	choosers.getAccessibleContext().setAccessibleDescription("Invoke one of the Swing Choosers");
-	mi = (JMenuItem) choosers.add(new JMenuItem("Color Chooser"));
+	mi = choosers.add(new JMenuItem("Color Chooser"));
 	ActionListener startColorChooser = new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		tabbedPane.setSelectedIndex(toolTipIndex);
@@ -765,7 +765,7 @@ public class SwingSet extends JPanel
 	mi.addActionListener(startColorChooser);
 	
 	if(!isApplet()) {
-	    mi = (JMenuItem) choosers.add(new JMenuItem("File Chooser"));
+	    mi = choosers.add(new JMenuItem("File Chooser"));
 	    ActionListener startFileChooser = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    JFileChooser chooser = new JFileChooser();
@@ -832,39 +832,34 @@ public class SwingSet extends JPanel
 	l.setDisplayedMnemonic('m');
 
 	// File
-	JMenu file = (JMenu) menuBar.add(new JMenu("File"));
+	JMenu file = menuBar.add(new JMenu("File"));
 	file.setMnemonic('i');
 	JMenuItem newItem =
 	file.add(new JMenuItem("New", loadImageIcon("images/new.gif","New")));
-	newItem.setHorizontalTextPosition(JButton.RIGHT);
+	newItem.setHorizontalTextPosition(SwingConstants.RIGHT);
 	newItem.setMnemonic('N');
-	JMenuItem open = (JMenuItem)
-	file.add(new JMenuItem("Open", loadImageIcon("images/open.gif","Open")));
-	open.setHorizontalTextPosition(JButton.RIGHT);
+	JMenuItem open = file.add(new JMenuItem("Open", loadImageIcon("images/open.gif","Open")));
+	open.setHorizontalTextPosition(SwingConstants.RIGHT);
 	open.setMnemonic('O');
-	JMenuItem save = (JMenuItem)
-	file.add(new JMenuItem("Save", loadImageIcon("images/save.gif","Save")));
-	save.setHorizontalTextPosition(JButton.RIGHT);
+	JMenuItem save = file.add(new JMenuItem("Save", loadImageIcon("images/save.gif","Save")));
+	save.setHorizontalTextPosition(SwingConstants.RIGHT);
 	save.setMnemonic('S');
 
 	// Edit
-	JMenu edit = (JMenu) menuBar.add(new JMenu("Edit"));
+	JMenu edit = menuBar.add(new JMenu("Edit"));
 	edit.setMnemonic('E');
-	JMenuItem cut = (JMenuItem)
-	edit.add(new JMenuItem("Cut", loadImageIcon("images/cut.gif","Cut")));
-	cut.setHorizontalTextPosition(JButton.RIGHT);
+	JMenuItem cut = edit.add(new JMenuItem("Cut", loadImageIcon("images/cut.gif","Cut")));
+	cut.setHorizontalTextPosition(SwingConstants.RIGHT);
 	cut.setMnemonic('t');
-	JMenuItem copy = (JMenuItem)
-	edit.add(new JMenuItem("Copy", loadImageIcon("images/copy.gif","Copy")));
-	copy.setHorizontalTextPosition(JButton.RIGHT);
+	JMenuItem copy = edit.add(new JMenuItem("Copy", loadImageIcon("images/copy.gif","Copy")));
+	copy.setHorizontalTextPosition(SwingConstants.RIGHT);
 	copy.setMnemonic('C');
-	JMenuItem paste = (JMenuItem)
-	edit.add(new JMenuItem("Paste", loadImageIcon("images/paste.gif","Paste")));
-	paste.setHorizontalTextPosition(JButton.RIGHT);
+	JMenuItem paste = edit.add(new JMenuItem("Paste", loadImageIcon("images/paste.gif","Paste")));
+	paste.setHorizontalTextPosition(SwingConstants.RIGHT);
 	paste.setMnemonic('P');
 
 	// Letters
-	JMenu letters = (JMenu) menuBar.add(new JMenu("Letters "));
+	JMenu letters = menuBar.add(new JMenu("Letters "));
 	letters.setMnemonic('t');
 
 	JMenu letterMenu;
@@ -872,7 +867,7 @@ public class SwingSet extends JPanel
         JMenu tmpMenu;
 
 	// C
-        letterMenu = (JMenu) letters.add((tmpMenu = new JMenu("A")));
+        letterMenu = (JMenu) letters.add(tmpMenu = new JMenu("A"));
         tmpMenu.setMnemonic('A');
         subMenu = (JMenu) letterMenu.add(new JMenu("A is for Airplane"));
           subMenu.add(new JMenuItem("Cessna 152"));
@@ -891,7 +886,7 @@ public class SwingSet extends JPanel
 	  cb.setSelected(true);
 
 	// B
-        letterMenu = (JMenu) letters.add((tmpMenu = new JMenu("B")));
+        letterMenu = (JMenu) letters.add(tmpMenu = new JMenu("B"));
         tmpMenu.setMnemonic('B');
         subMenu = (JMenu) letterMenu.add(new JMenu("B is for Swing Babies!"));
           cb = (JCheckBoxMenuItem) subMenu.add(new JCheckBoxMenuItem("Ewan"));
@@ -921,7 +916,7 @@ public class SwingSet extends JPanel
           cb = (JCheckBoxMenuItem) subMenu.add(new JCheckBoxMenuItem("Carmine Electra"));
 
 	// C
-        letterMenu = (JMenu) letters.add((tmpMenu = new JMenu("C")));
+        letterMenu = (JMenu) letters.add(tmpMenu = new JMenu("C"));
         tmpMenu.setMnemonic('c');
         subMenu = (JMenu) letterMenu.add(new JMenu("C is for Cookie"));
           cb = (JCheckBoxMenuItem) subMenu.add(new JCheckBoxMenuItem("Chocolate Chip"));
@@ -947,36 +942,36 @@ public class SwingSet extends JPanel
 
 
 	// Colors
-	JMenu colors = (JMenu) menuBar.add(new JMenu("Colors"));
+	JMenu colors = menuBar.add(new JMenu("Colors"));
 	colors.setMnemonic('C');
-	colors.setHorizontalTextPosition(JButton.RIGHT);
+	colors.setHorizontalTextPosition(SwingConstants.RIGHT);
 	colors.setIcon(new ColoredSquare(Color.orange));
 	menuBar.validate();
 
         JMenuItem red = colors.add(new JMenuItem("Red"));
-	red.setHorizontalTextPosition(JButton.RIGHT);
+	red.setHorizontalTextPosition(SwingConstants.RIGHT);
 	red.setIcon(new ColoredSquare(Color.red));
 
         JMenuItem blue = colors.add(new JMenuItem("Blue"));
-	blue.setHorizontalTextPosition(JButton.RIGHT);
+	blue.setHorizontalTextPosition(SwingConstants.RIGHT);
 	blue.setIcon(new ColoredSquare(Color.blue));
 
         JMenuItem green = colors.add(new JMenuItem("Green"));
-	green.setHorizontalTextPosition(JButton.RIGHT);
+	green.setHorizontalTextPosition(SwingConstants.RIGHT);
 	green.setIcon(new ColoredSquare(Color.green));
 
         JMenuItem yellow = colors.add(new JMenuItem("Yellow"));
-	yellow.setHorizontalTextPosition(JButton.RIGHT);
+	yellow.setHorizontalTextPosition(SwingConstants.RIGHT);
 	yellow.setIcon(new ColoredSquare(Color.yellow));
 
 	// Numbers
-	JMenu numbers = (JMenu) menuBar.add(new JMenu("Numbers"));
+	JMenu numbers = menuBar.add(new JMenu("Numbers"));
 	numbers.setMnemonic('u');
         numbers.add(new JMenuItem("1234"));
         numbers.add(new JMenuItem("1005"));
         numbers.add(new JMenuItem("2222"));
 
-	JMenu drinks = (JMenu) menuBar.add(new JMenu("Drinks"));
+	JMenu drinks = menuBar.add(new JMenu("Drinks"));
 	drinks.setMnemonic('D');
         drinks.add(new JMenuItem("Thai Iced Tea"));
         drinks.add(new JMenuItem("Root Beer"));
@@ -987,14 +982,14 @@ public class SwingSet extends JPanel
              loadImageIcon("images/ImageClub/food/softdrink.gif","soft drink");
         drinks.add(new JMenuItem("Softdrink", softdrink));
 
-	JMenu music = (JMenu) menuBar.add(new JMenu("Music"));
+	JMenu music = menuBar.add(new JMenu("Music"));
 	music.setMnemonic('s');
         music.add(new JMenuItem("Rock"));
         music.add(new JMenuItem("Country"));
         music.add(new JMenuItem("Classical"));
         music.add(new JMenuItem("Jazz"));
 
-	JMenu food = (JMenu) menuBar.add(new JMenu("Junk Food"));
+	JMenu food = menuBar.add(new JMenu("Junk Food"));
 	food.setMnemonic('J');
 	ImageIcon burger = loadImageIcon("images/ImageClub/food/burger.gif","burger");
 	ImageIcon fries  = loadImageIcon("images/ImageClub/food/fries.gif","fries");
@@ -1043,7 +1038,7 @@ public class SwingSet extends JPanel
 
 	JPanel textWrapper = new JPanel(new BorderLayout());
 	textWrapper.setAlignmentX(LEFT_ALIGNMENT);
- 	textWrapper.setBorder(swing.loweredBorder);
+ 	textWrapper.setBorder(SwingSet.loweredBorder);
 	
 	p1.add(textWrapper, BorderLayout.CENTER);
 
@@ -1051,6 +1046,8 @@ public class SwingSet extends JPanel
 	JTextArea textArea = new JTextArea(text);
 	textArea.getAccessibleContext().setAccessibleName("ToolBar information");
 	JScrollPane scroller = new JScrollPane() {
+	    private static final long serialVersionUID = -7297474276246934851L;
+
 	    public Dimension getPreferredSize() {
 		return new Dimension(10,10);
 	    }
@@ -1067,7 +1064,7 @@ public class SwingSet extends JPanel
     }
 
     void createOptionsMenu(JMenuBar menuBar) {
-	JMenu optionMenu = (JMenu)menuBar.add(new JMenu("Dialogs"));
+	JMenu optionMenu = menuBar.add(new JMenu("Dialogs"));
         optionMenu.setMnemonic('D');
 	JMenuItem item;
 	item = new JMenuItem("Message Dialog");
@@ -1092,10 +1089,11 @@ public class SwingSet extends JPanel
 	    public void actionPerformed(ActionEvent e) {
 		int        result;
 		result = JOptionPane.showConfirmDialog(SwingSet.this, "Is SWING cool?");
-		if(result == JOptionPane.YES_OPTION)
+		if(result == JOptionPane.YES_OPTION) {
 		    JOptionPane.showMessageDialog(SwingSet.this, "All right!");
-		else if(result == JOptionPane.NO_OPTION)
+		} else if(result == JOptionPane.NO_OPTION) {
 		    JOptionPane.showMessageDialog(SwingSet.this, "That is too bad, please send us email describing what you don't like and how we can change it.");
+		}
 	    }
 	});
 	optionMenu.add(item);
@@ -1139,11 +1137,11 @@ public class SwingSet extends JPanel
     }
 	
 
-    void addMenuItem(JMenu menu, String text, Icon g) {
+    static void addMenuItem(JMenu menu, String text, Icon g) {
 	JMenuItem mi = menu.add(new JMenuItem(text, g));
-	mi.setHorizontalTextPosition(JButton.CENTER);
-	mi.setHorizontalAlignment(JButton.LEFT);
-	mi.setVerticalTextPosition(JButton.BOTTOM);
+	mi.setHorizontalTextPosition(SwingConstants.CENTER);
+	mi.setHorizontalAlignment(SwingConstants.LEFT);
+	mi.setVerticalTextPosition(SwingConstants.BOTTOM);
     }
 
     public void addTool(JToolBar toolBar, String name) {
@@ -1158,7 +1156,7 @@ public class SwingSet extends JPanel
     /**
      * Text
      */
-    JPanel createText() {
+    static JPanel createText() {
 	return new JPanel();
     }
 
@@ -1211,7 +1209,7 @@ public class SwingSet extends JPanel
     /**
      *
      */
-    JPanel createControllButtons() {
+    static JPanel createControllButtons() {
 	JPanel p = new JPanel();
 	p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 	p.setBorder(emptyBorder5);
@@ -1267,6 +1265,8 @@ public class SwingSet extends JPanel
 	JOptionPane.setRootFrame(frame);
 
 	JPanel progressPanel = new JPanel() {
+	    private static final long serialVersionUID = -5819560143474236812L;
+
 	    public Insets getInsets() {
 		return new Insets(40,30,20,30);
 	    }
@@ -1404,6 +1404,8 @@ public class SwingSet extends JPanel
             
 
    class TabPlacementChanger extends JMenu implements ItemListener {
+       private static final long serialVersionUID = -8735379673352931081L;
+
        JRadioButtonMenuItem topRb, leftRb, rightRb, bottomRb;
 
        public TabPlacementChanger() {
@@ -1439,13 +1441,13 @@ public class SwingSet extends JPanel
                 String selected = rb.getText();
                 int placement;
                 if (selected.equals("Top")) {
-                    placement = JTabbedPane.TOP;
+                    placement = SwingConstants.TOP;
                 } else if (selected.equals("Left")) {
-                    placement = JTabbedPane.LEFT;
+                    placement = SwingConstants.LEFT;
                 } else if (selected.equals("Bottom")) {
-                    placement = JTabbedPane.BOTTOM;
+                    placement = SwingConstants.BOTTOM;
                 } else {
-                    placement = JTabbedPane.RIGHT;
+                    placement = SwingConstants.RIGHT;
                 }
                 tabbedPane.setTabPlacement(placement);
                 tabbedPane.validate();
@@ -1458,16 +1460,16 @@ public class SwingSet extends JPanel
             } else {
                 int placement = tabbedPane.getTabPlacement();
                 switch(placement) {
-                  case JTabbedPane.TOP:
+                  case SwingConstants.TOP:
                       topRb.setSelected(true);
                       break;
-                  case JTabbedPane.LEFT:
+                  case SwingConstants.LEFT:
                       leftRb.setSelected(true);
                       break;
-                  case JTabbedPane.BOTTOM:
+                  case SwingConstants.BOTTOM:
                       bottomRb.setSelected(true);
                       break;
-                  case JTabbedPane.RIGHT:
+                  case SwingConstants.RIGHT:
                       rightRb.setSelected(true);
                       break;
                   default:
@@ -1482,7 +1484,6 @@ public class SwingSet extends JPanel
     // *********** Create the button controls listeners **********
     // ***********************************************************
     ItemListener buttonPadListener = new ItemListener() {
-	Component c;
 	AbstractButton b;
 
 	public void itemStateChanged(ItemEvent e) {
@@ -1633,7 +1634,7 @@ public class SwingSet extends JPanel
     class ColoredSquare implements Icon {
 	Color color;
 	public ColoredSquare(Color c) {
-	    this.color = c;
+	    color = c;
 	}
 
 	public void paintIcon(Component c, Graphics g, int x, int y) {
@@ -1650,16 +1651,16 @@ public class SwingSet extends JPanel
   public ImageIcon loadImageIcon(String filename, String description) {
     if(applet == null) {
       return new ImageIcon(filename, description);
-    } else {
-      URL url;
-      try {
-	url = new URL(applet.getCodeBase(),filename);
-      } catch(MalformedURLException e) {
-	  System.err.println("Error trying to load image " + filename);
-	  return null;
-      }
-      return new ImageIcon(url, description);
     }
+
+	URL url;
+	try {
+	    url = new URL(applet.getCodeBase(), filename);
+	} catch (MalformedURLException e) {
+	    System.err.println("Error trying to load image " + filename);
+	    return null;
+	}
+	return new ImageIcon(url, description);
   }
 
   public static SwingSet sharedInstance() {
@@ -1671,29 +1672,29 @@ public class SwingSet extends JPanel
   }
 
   public boolean isApplet() {
-    return (applet != null);
+    return applet != null;
   }
 
   public Container getRootComponent() {
-    if(isApplet())
-      return applet;
-    else
-      return frame;
+    return isApplet() ? applet : (Container) frame;
   }
 
   public Frame getFrame() {
-    if(isApplet()) {
-      Container parent;
-      for(parent = getApplet(); parent != null && !(parent instanceof Frame) ; parent = parent.getParent());
-      if(parent != null)
-	return (Frame)parent;
-      else
-	return null;
-    } else
-      return frame;
+	if (isApplet()) {
+	    Container parent;
+	    for (parent = getApplet(); parent != null && !(parent instanceof Frame); parent = parent.getParent()) {
+
+	    }
+
+	    return parent != null ? (Frame) parent : null;
+	}
+
+	return frame;
   }
 
   class FilePreviewer extends JComponent implements PropertyChangeListener {
+      private static final long serialVersionUID = 3235857661744976469L;
+
       ImageIcon thumbnail = null;
       File f = null;
       

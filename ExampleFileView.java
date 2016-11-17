@@ -71,7 +71,7 @@ public class ExampleFileView extends FileView {
      */
     public String getDescription(File f) {
 	return (String) fileDescriptions.get(f);
-    };
+    }
 
     /**
      * Adds a human readable type description for files. Based on "dot"
@@ -103,7 +103,7 @@ public class ExampleFileView extends FileView {
      * Conveinience method that returnsa the "dot" extension for the
      * given file.
      */
-    public String getExtension(File f) {
+    public static String getExtension(File f) {
 	String name = f.getName();
 	if(name != null) {
 	    int extensionIndex = name.lastIndexOf('.');
@@ -145,14 +145,12 @@ public class ExampleFileView extends FileView {
      *
      * @see FileView#isHidden
      */
-    public Boolean isHidden(File f) {
+    public static Boolean isHidden(File f) {
 	String name = f.getName();
-	if(name != null && !name.equals("") && name.charAt(0) == '.') {
-	    return Boolean.TRUE;
-	} else {
-	    return Boolean.FALSE;
-	}
-    };
+	return name != null && name.length() != 0 && name.charAt(0) == '.'
+		? Boolean.TRUE
+		: Boolean.FALSE;
+    }
 
     /**
      * Whether the directory is traversable or not. Generic implementation
@@ -167,11 +165,7 @@ public class ExampleFileView extends FileView {
      * @see FileView#isTraversable
      */
     public Boolean isTraversable(File f) {
-	if(f.isDirectory()) {
-	    return Boolean.TRUE;
-	} else {
-	    return Boolean.FALSE;
-	}
-    };
+	return f.isDirectory() ? Boolean.TRUE : Boolean.FALSE;
+    }
 
 }

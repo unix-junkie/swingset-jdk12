@@ -8,7 +8,6 @@
 import javax.swing.*;
 import javax.swing.border.*;
 
-import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
@@ -20,6 +19,7 @@ import java.util.*;
  */ 
 
 public class DirectionPanel extends JPanel {
+    private static final long serialVersionUID = 1595976362847354739L;
 
     private ButtonGroup group;
 
@@ -97,7 +97,8 @@ public class DirectionPanel extends JPanel {
     public static ImageIcon trdn_dot = SwingSet.sharedInstance().loadImageIcon("images/layout/trdn.gif","selected top right layout button");
     
     public class DirectionButton extends JRadioButton {
-        
+	private static final long serialVersionUID = 8005740623282638103L;
+
         /**
          * A layout direction button
          */
@@ -105,8 +106,7 @@ public class DirectionPanel extends JPanel {
                                String description, ActionListener l, 
                                ButtonGroup group, boolean selected)
         {
-            super();
-            this.addActionListener(l);
+            addActionListener(l);
             setFocusPainted(false);
             setHorizontalTextPosition(CENTER);
             group.add(this);

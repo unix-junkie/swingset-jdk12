@@ -6,20 +6,11 @@
  */
 
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.accessibility.*;
-
-import java.awt.Panel;
-import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Rectangle;
 import java.awt.Container;
 
 /*
@@ -28,6 +19,8 @@ import java.awt.Container;
  * @author Peter Korn (accessibility support)
  */
 public class InternalWindowPanel extends JPanel implements ActionListener     {
+    private static final long serialVersionUID = -3310369790601473507L;
+
     // Maker values
     JCheckBox closeBox;
     JCheckBox maxBox;
@@ -154,11 +147,12 @@ public class InternalWindowPanel extends JPanel implements ActionListener     {
 
 class MyScrollPane extends JScrollPane
 {
+    private static final long serialVersionUID = 1306106309496467544L;
+
     static ImageIcon[] icon = new ImageIcon[5];
 
     public MyScrollPane(int layer, int count)
     {
-	super();
         if(icon[0] == null) {
            icon[0] = SwingSet.sharedInstance().loadImageIcon("images/ImageClub/misc/horn.gif", "Horn");
            icon[1] = SwingSet.sharedInstance().loadImageIcon("images/ImageClub/misc/fish.gif", "Fish");
@@ -172,8 +166,7 @@ class MyScrollPane extends JScrollPane
 	JLabel layerLabel = new JLabel("Layer "+layer);
 	layerLabel.setOpaque(false);
         
-	int it = count%5;
-        p.add(new JLabel(icon[count%5]), BorderLayout.CENTER);
+	p.add(new JLabel(icon[count % icon.length]), BorderLayout.CENTER);
 	p.add(layerLabel, BorderLayout.NORTH);
 
 	getViewport().add(p);

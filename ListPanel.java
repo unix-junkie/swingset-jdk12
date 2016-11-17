@@ -6,12 +6,9 @@
  */
 
 import javax.swing.*;
-import javax.swing.text.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-
 
 /**
  * ListBox!
@@ -21,6 +18,8 @@ import java.util.*;
  */
 public class ListPanel extends JPanel
 {
+    private static final long serialVersionUID = 4506800424035878759L;
+
     int fastfoodIndex;
     int dessertIndex;
     int fruitIndex;
@@ -60,8 +59,6 @@ public class ListPanel extends JPanel
     public ImageIcon radish   = SwingSet.sharedInstance().loadImageIcon("images/ImageClub/food/radish.gif","radish");
 
 
-    // The Frame
-    SwingSet swing;
     JList listBox;
     JScrollPane scrollPane;
 
@@ -83,9 +80,7 @@ public class ListPanel extends JPanel
     JCheckBox fastfoodCheckbox;
 
     public ListPanel(SwingSet swing) {
-	this.swing = swing;
-
-	setBorder(swing.emptyBorder5);
+	setBorder(SwingSet.emptyBorder5);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 	// create the list
@@ -94,37 +89,41 @@ public class ListPanel extends JPanel
         }
 
 	listBox = new JList(model) {
+	    private static final long serialVersionUID = -1379230497903765535L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(400, super.getMaximumSize().height);
 	    }
 	};
-        listBox.setCellRenderer(new TestCellRenderer(listBox));
+        listBox.setCellRenderer(new TestCellRenderer());
 
 	// Create the controls
 	JPanel controlPanel = new JPanel() {
+	    private static final long serialVersionUID = 4603620280712805256L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(300, super.getMaximumSize().height);
 	    }
 	};
 	controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
-	controlPanel.setBorder(swing.loweredBorder);
+	controlPanel.setBorder(SwingSet.loweredBorder);
 	controlPanel.setAlignmentY(TOP_ALIGNMENT);
 
 	// List operations
 
-	JPanel pricePanel = swing.createHorizontalPanel(false);
+	JPanel pricePanel = SwingSet.createHorizontalPanel(false);
 	pricePanel.setAlignmentY(TOP_ALIGNMENT);
 	pricePanel.setAlignmentX(LEFT_ALIGNMENT);
 	controlPanel.add(pricePanel);
 	purchase = new JButton("Purchase");
 	purchase.setToolTipText("Adds the selected item(s) to your grocery bill.");
 	pricePanel.add(purchase);
-	pricePanel.add(Box.createRigidArea(swing.hpad10));
+	pricePanel.add(Box.createRigidArea(SwingSet.hpad10));
 
 	priceLabel = new JLabel("Total:                           ");
 	pricePanel.add(priceLabel);
 
-	controlPanel.add(Box.createRigidArea(swing.vpad20));
+	controlPanel.add(Box.createRigidArea(SwingSet.vpad20));
 	JLabel l = new JLabel("Jump To:");
 	l.setFont(swing.boldFont);
 	controlPanel.add(l);
@@ -150,7 +149,7 @@ public class ListPanel extends JPanel
 	group.add(veggieRadioButton);
 	controlPanel.add(veggieRadioButton);
 
-	controlPanel.add(Box.createRigidArea(swing.vpad20));
+	controlPanel.add(Box.createRigidArea(SwingSet.vpad20));
 	l = new JLabel("Show:");
 	l.setFont(swing.boldFont);
 	controlPanel.add(l);
@@ -184,8 +183,8 @@ public class ListPanel extends JPanel
 	scrollPane.setAlignmentX(LEFT_ALIGNMENT);
 	scrollPane.setAlignmentY(TOP_ALIGNMENT);
 	add(scrollPane);
-	add(Box.createRigidArea(swing.hpad10));
- 	add(controlPanel);
+	add(Box.createRigidArea(SwingSet.hpad10));
+	add(controlPanel);
 
 	ActionListener purchaseListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -198,7 +197,7 @@ public class ListPanel extends JPanel
 		    Integer item = (Integer) model.getElementAt(i);
 		    listPrice += price[item.intValue()];
 		}
-		priceLabel.setText("Total: $" + ((double) listPrice)/100.0);
+		priceLabel.setText("Total: $" + listPrice / 100.0);
 		priceLabel.repaint();
 	    }
 	};
@@ -242,8 +241,9 @@ public class ListPanel extends JPanel
 			veggieRadioButton.setEnabled(false);
 			scrollPane.validate();
 		    }
-		    if(model.getSize() < 1)
-		        listBox.getParent().repaint();
+		    if(model.getSize() < 1) {
+			listBox.getParent().repaint();
+		    }
 		} else {
 		    if(label.equals("Fast Food")) {
 			model.insertElementAt(new Integer(4), 0);
@@ -370,9 +370,9 @@ public class ListPanel extends JPanel
 
     class TestCellRenderer extends DefaultListCellRenderer
     {
-	TestCellRenderer(JList listBox) {
-	    super();
+	private static final long serialVersionUID = 7538308867320939320L;
 
+	TestCellRenderer() {
 	    images = new ImageIcon[ITEMS];
 	    desc = new String[ITEMS];
 	    price = new int[ITEMS];
@@ -418,7 +418,7 @@ public class ListPanel extends JPanel
 	    int index = ((Integer)value).intValue();
 	    String text;
 	    if(isSelected) {
-		text = "  " + desc[index] + "    $" + ((double)price[index])/100.0;
+		text = "  " + desc[index] + "    $" + price[index] / 100.0;
 	    }
 	    else {
 		text = "  " + desc[index];

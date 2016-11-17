@@ -18,6 +18,8 @@ import java.awt.event.*;
  */
 class ComponentOrientationChanger extends JMenu implements ItemListener {
 
+    private static final long serialVersionUID = 6012088503691186810L;
+
     static ComponentOrientationChanger create() {
         
         return new ComponentOrientationChanger();
@@ -84,21 +86,6 @@ class ComponentOrientationChanger extends JMenu implements ItemListener {
             int ncomponents = container.getComponentCount();
             for (int i = 0 ; i < ncomponents ; ++i) {
                 applyOrientation( container.getComponent(i), o );
-            }
-        }
-    }
-
-    private void dumpOrientation(Component c, int level) {
-        ComponentOrientation o = c.getComponentOrientation();
-        for(int i=0; i<level; i++)
-            System.out.print("\t");
-        System.out.println(c + " isLTR=" + o.isLeftToRight() );
-
-        if( c instanceof Container ) {
-            Container container = (Container)c;
-            int ncomponents = container.getComponentCount();
-            for (int i = 0 ; i < ncomponents ; ++i) {
-                dumpOrientation( container.getComponent(i), level+1);
             }
         }
     }

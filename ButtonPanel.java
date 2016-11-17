@@ -7,12 +7,7 @@
 
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.*;
-import javax.swing.text.*;
-
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 
 
 /**
@@ -23,9 +18,7 @@ import java.util.*;
  */
 public class ButtonPanel extends JPanel 
 {
-
-    // The Frame
-    SwingSet swing;
+    private static final long serialVersionUID = -8345626217664033991L;
 
     ImageIcon left = SwingSet.sharedInstance().loadImageIcon("images/WebSpice/left.gif","fancy green arrow pointing left");
     ImageIcon leftDown = SwingSet.sharedInstance().loadImageIcon("images/WebSpice/leftDown.gif","fancy yellow arrow pointing left");
@@ -35,9 +28,7 @@ public class ButtonPanel extends JPanel
     ImageIcon rightRollover = SwingSet.sharedInstance().loadImageIcon("images/WebSpice/rightRollover.gif","fancy purple arrow pointing right");
 
     public ButtonPanel(SwingSet swing) {
-	this.swing = swing;
-
-	setBorder(swing.emptyBorder5);
+	setBorder(SwingSet.emptyBorder5);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 	// *************** buttons ****************
@@ -59,14 +50,14 @@ public class ButtonPanel extends JPanel
         button.setMnemonic('o');
 	swing.buttons.addElement(button);
 	textButtons.add(button);
-	textButtons.add(Box.createRigidArea(swing.hpad10));
+	textButtons.add(Box.createRigidArea(SwingSet.hpad10));
 	
 	button = new JButton("Two");
 	button.setToolTipText("This is a Button with Text");
         button.setMnemonic('t');
 	swing.buttons.addElement(button);
 	textButtons.add(button);
-	textButtons.add(Box.createRigidArea(swing.hpad10));
+	textButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	button = new JButton("Three");
 	button.setBackground(new Color(204, 204, 255));
@@ -77,7 +68,7 @@ public class ButtonPanel extends JPanel
 
 
 	// image buttons
-	JPanel imageButtons = swing.createHorizontalPanel(false);
+	JPanel imageButtons = SwingSet.createHorizontalPanel(false);
 	imageButtons.setAlignmentX(LEFT_ALIGNMENT);
 
 	buttonBorder = new TitledBorder(null, "Image Buttons", 
@@ -93,7 +84,7 @@ public class ButtonPanel extends JPanel
 	// button.setDebugGraphicsOptions(DebugGraphics.FLASH_OPTION);
 	swing.buttons.addElement(button);
 	imageButtons.add(button);
-	imageButtons.add(Box.createRigidArea(swing.hpad10));
+	imageButtons.add(Box.createRigidArea(SwingSet.hpad10));
 	
 	// 2 images
 	button = new JButton(swing.upButton);
@@ -102,7 +93,7 @@ public class ButtonPanel extends JPanel
 	swing.buttons.addElement(button);
 	button.setPressedIcon(swing.downButton);
 	imageButtons.add(button);
-	imageButtons.add(Box.createRigidArea(swing.hpad10));
+	imageButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	// 3 images
 	button = new JButton(swing.upButton);
@@ -114,7 +105,7 @@ public class ButtonPanel extends JPanel
 	imageButtons.add(button);
 
 	// text&image buttons
-	JPanel tiButtons = swing.createHorizontalPanel(false);
+	JPanel tiButtons = SwingSet.createHorizontalPanel(false);
 	tiButtons.setAlignmentX(LEFT_ALIGNMENT);
 	buttonBorder = new TitledBorder(null, "Rollover Image Buttons", 
 					       TitledBorder.LEFT, TitledBorder.TOP,
@@ -129,7 +120,7 @@ public class ButtonPanel extends JPanel
 	button.setToolTipText("This is a Button with a RolloverIcon");
 	swing.buttons.addElement(button);
 	tiButtons.add(button);
-	tiButtons.add(Box.createRigidArea(swing.hpad10));
+	tiButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	button = new JButton("Right", right);
 	button.setPressedIcon(rightDown);
@@ -141,7 +132,7 @@ public class ButtonPanel extends JPanel
 	tiButtons.add(Box.createHorizontalBox());
 
 	// Add button panels to buttonPanel
-	JPanel buttonPanel = swing.createVerticalPanel(true);
+	JPanel buttonPanel = SwingSet.createVerticalPanel(true);
 	buttonPanel.setAlignmentX(LEFT_ALIGNMENT);
 	buttonPanel.setAlignmentY(TOP_ALIGNMENT);
 
@@ -162,6 +153,8 @@ public class ButtonPanel extends JPanel
 
 	// *************** Create the button controls ****************
 	JPanel controls = new JPanel() {
+	    private static final long serialVersionUID = -2348847337953317210L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(300, super.getMaximumSize().height);
 	    }
@@ -170,20 +163,20 @@ public class ButtonPanel extends JPanel
 	controls.setAlignmentY(TOP_ALIGNMENT);
 	controls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel buttonControls = swing.createHorizontalPanel(true);
+	JPanel buttonControls = SwingSet.createHorizontalPanel(true);
 	buttonControls.setAlignmentY(TOP_ALIGNMENT);
 	buttonControls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel leftColumn = swing.createVerticalPanel(false);
+	JPanel leftColumn = SwingSet.createVerticalPanel(false);
 	leftColumn.setAlignmentX(LEFT_ALIGNMENT);
 	leftColumn.setAlignmentY(TOP_ALIGNMENT);
 
 	JPanel rightColumn = new LayoutControlPanel(swing, swing.buttons);
 
 	buttonControls.add(leftColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 	buttonControls.add(rightColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 
 	controls.add(buttonControls);
 
@@ -221,7 +214,7 @@ public class ButtonPanel extends JPanel
 	filled.addItemListener(swing.buttonDisplayListener);
 	leftColumn.add(filled);
 
-	leftColumn.add(Box.createRigidArea(swing.vpad20));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad20));
 	
 	l = new JLabel("Pad Amount:");
 	leftColumn.add(l);
@@ -250,10 +243,10 @@ public class ButtonPanel extends JPanel
  	tenPad.addItemListener(swing.buttonPadListener);
 	leftColumn.add(tenPad);
 
-	leftColumn.add(Box.createRigidArea(swing.vpad20));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad20));
 
 	add(buttonPanel);
-	add(Box.createRigidArea(swing.hpad10));
+	add(Box.createRigidArea(SwingSet.hpad10));
  	add(controls);
     }
 

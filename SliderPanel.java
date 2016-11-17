@@ -8,13 +8,9 @@
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.border.*;
-import javax.accessibility.*;
 
-import java.awt.Panel;
-import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.Font;
 
 class SliderListener implements ChangeListener {
 	JLabel tf;
@@ -34,10 +30,9 @@ class SliderListener implements ChangeListener {
  * @author Peter Korn (accessibility support)
  */
 public class SliderPanel extends JPanel      {
-    // The Frame
-    SwingSet swing;
+    private static final long serialVersionUID = 8594783010501894343L;
 
-    public SliderPanel(SwingSet swing)    {
+    public SliderPanel()    {
         JSlider s;
 	JPanel hp;
 	JPanel vp;
@@ -46,9 +41,7 @@ public class SliderPanel extends JPanel      {
 	JLabel tf;
 	ChangeListener listener;
 
-        this.swing = swing;
-
-	this.setLayout(new BorderLayout());
+	setLayout(new BorderLayout());
 
 	tf = new JLabel("Slider Value: " );
 	this.add(tf, BorderLayout.SOUTH);
@@ -65,7 +58,7 @@ public class SliderPanel extends JPanel      {
 	hp = new JPanel();
 	hp.setLayout(new BoxLayout(hp, BoxLayout.Y_AXIS));
 	hp.setBorder(new TitledBorder( 
-			swing.lightLoweredBorder, 
+			SwingSet.lightLoweredBorder, 
 			"Horizontal",
 			TitledBorder.LEFT,
 			TitledBorder.ABOVE_TOP));
@@ -74,7 +67,7 @@ public class SliderPanel extends JPanel      {
 	vp = new JPanel();
 	vp.setLayout(new BoxLayout(vp, BoxLayout.X_AXIS));
 	vp.setBorder(new TitledBorder( 
-			swing.lightLoweredBorder, 
+			SwingSet.lightLoweredBorder, 
 			"Vertical",
 			TitledBorder.LEFT,
 			TitledBorder.ABOVE_TOP));
@@ -89,11 +82,11 @@ public class SliderPanel extends JPanel      {
 	s.getAccessibleContext().setAccessibleDescription("A plain slider");
 	s.addChangeListener(listener);
 
-	p.add(Box.createRigidArea(swing.vpad5));
+	p.add(Box.createRigidArea(SwingSet.vpad5));
 	p.add(s);
-	p.add(Box.createRigidArea(swing.vpad5));
+	p.add(Box.createRigidArea(SwingSet.vpad5));
 	hp.add(p);
-	hp.add(Box.createRigidArea(swing.vpad10));
+	hp.add(Box.createRigidArea(SwingSet.vpad10));
 
 	// Horizontal Slider 2
 	p = new JPanel();
@@ -106,11 +99,11 @@ public class SliderPanel extends JPanel      {
 	s.getAccessibleContext().setAccessibleDescription("A slider showing major tick marks");
 	s.addChangeListener(listener);
 
-	p.add(Box.createRigidArea(swing.vpad5));
+	p.add(Box.createRigidArea(SwingSet.vpad5));
 	p.add(s);
-	p.add(Box.createRigidArea(swing.vpad5));
+	p.add(Box.createRigidArea(SwingSet.vpad5));
 	hp.add(p);
-	hp.add(Box.createRigidArea(swing.vpad10));
+	hp.add(Box.createRigidArea(SwingSet.vpad10));
 
 	// Horizontal Slider 3
 	p = new JPanel();
@@ -127,7 +120,7 @@ public class SliderPanel extends JPanel      {
 	s.setPaintLabels( true );
 	s.setSnapToTicks( true );
 
-	s.getLabelTable().put( new Integer( 11 ), new JLabel( "11", JLabel.CENTER ) );
+	s.getLabelTable().put( new Integer( 11 ), new JLabel( "11", SwingConstants.CENTER ) );
 	s.setLabelTable( s.getLabelTable() );
 
 	s.getAccessibleContext().setAccessibleName("Minor Ticks");
@@ -135,11 +128,11 @@ public class SliderPanel extends JPanel      {
 
 	s.addChangeListener(listener);
 
-	p.add(Box.createRigidArea(swing.vpad5));
+	p.add(Box.createRigidArea(SwingSet.vpad5));
 	p.add(s);
-	p.add(Box.createRigidArea(swing.vpad5));
+	p.add(Box.createRigidArea(SwingSet.vpad5));
 	hp.add(p);
-	hp.add(Box.createRigidArea(swing.vpad10));
+	hp.add(Box.createRigidArea(SwingSet.vpad10));
 
 	// Horizontal Slider 4
 	p = new JPanel();
@@ -156,9 +149,9 @@ public class SliderPanel extends JPanel      {
 	s.getAccessibleContext().setAccessibleDescription("A slider showing major and minor tick marks that is not enabled (cannot be manipulated)");
 	s.addChangeListener(listener);
 
-	p.add(Box.createRigidArea(swing.vpad5));
+	p.add(Box.createRigidArea(SwingSet.vpad5));
 	p.add(s);
-	p.add(Box.createRigidArea(swing.vpad5));
+	p.add(Box.createRigidArea(SwingSet.vpad5));
 	hp.add(p);
 	
 //////////////////////////////////////////////////////////////////////////////
@@ -167,21 +160,21 @@ public class SliderPanel extends JPanel      {
 	p = new JPanel();
 	p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 	p.setBorder(new TitledBorder("Plain"));
-	s = new JSlider(JSlider.VERTICAL, -10, 100, 20);
+	s = new JSlider(SwingConstants.VERTICAL, -10, 100, 20);
 	s.getAccessibleContext().setAccessibleName("Plain");
 	s.getAccessibleContext().setAccessibleDescription("A plain slider");
 	s.addChangeListener(listener);
-	p.add(Box.createRigidArea(swing.hpad10));
+	p.add(Box.createRigidArea(SwingSet.hpad10));
 	p.add(s);
-	p.add(Box.createRigidArea(swing.hpad10));
+	p.add(Box.createRigidArea(SwingSet.hpad10));
 	vp.add(p);
-	vp.add(Box.createRigidArea(swing.hpad5));
+	vp.add(Box.createRigidArea(SwingSet.hpad5));
 
 	// Vertical Slider 2
 	p = new JPanel();
 	p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 	p.setBorder(new TitledBorder("Major Ticks"));
-	s = new JSlider(JSlider.VERTICAL, 100, 1000, 400);
+	s = new JSlider(SwingConstants.VERTICAL, 100, 1000, 400);
 
 	s.putClientProperty( "JSlider.isFilled", Boolean.TRUE );
 
@@ -190,17 +183,17 @@ public class SliderPanel extends JPanel      {
 	s.getAccessibleContext().setAccessibleName("Major Ticks");
 	s.getAccessibleContext().setAccessibleDescription("A slider showing major tick marks");
 	s.addChangeListener(listener);
-	p.add(Box.createRigidArea(swing.hpad25));
+	p.add(Box.createRigidArea(SwingSet.hpad25));
 	p.add(s);
-	p.add(Box.createRigidArea(swing.hpad25));
+	p.add(Box.createRigidArea(SwingSet.hpad25));
 	vp.add(p);
-	vp.add(Box.createRigidArea(swing.hpad5));
+	vp.add(Box.createRigidArea(SwingSet.hpad5));
 
 	// Vertical Slider 3
 	p = new JPanel();
 	p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 	p.setBorder(new TitledBorder("Minor Ticks"));
-	s = new JSlider(JSlider.VERTICAL, 0, 100, 60);
+	s = new JSlider(SwingConstants.VERTICAL, 0, 100, 60);
 	s.setPaintTicks(true);
 	s.setMajorTickSpacing(20);
 	s.setMinorTickSpacing(5);
@@ -211,17 +204,17 @@ public class SliderPanel extends JPanel      {
 	s.getAccessibleContext().setAccessibleDescription("A slider showing major and minor tick marks, with slider action snapping to tick marks, with some ticks visibly labeled");
 
 	s.addChangeListener(listener);
-	p.add(Box.createRigidArea(swing.hpad10));
+	p.add(Box.createRigidArea(SwingSet.hpad10));
 	p.add(s);
-	p.add(Box.createRigidArea(swing.hpad10));
+	p.add(Box.createRigidArea(SwingSet.hpad10));
 	vp.add(p);
-	vp.add(Box.createRigidArea(swing.hpad5));
+	vp.add(Box.createRigidArea(SwingSet.hpad5));
 
 	// Vertical Slider 4
 	p = new JPanel();
 	p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
 	p.setBorder(new TitledBorder("Disabled"));
-	s = new JSlider(JSlider.VERTICAL, 0, 100, 80);
+	s = new JSlider(SwingConstants.VERTICAL, 0, 100, 80);
 	s.setPaintTicks(true);
 	s.setMajorTickSpacing(20);
 	s.setMinorTickSpacing(5);
@@ -229,9 +222,9 @@ public class SliderPanel extends JPanel      {
 	s.getAccessibleContext().setAccessibleName("Disabled");
 	s.getAccessibleContext().setAccessibleDescription("A slider showing major and minor tick marks that is not enabled (cannot be manipulated)");
 	s.addChangeListener(listener);
-	p.add(Box.createRigidArea(swing.hpad20));
+	p.add(Box.createRigidArea(SwingSet.hpad20));
 	p.add(s);
-	p.add(Box.createRigidArea(swing.hpad20));
+	p.add(Box.createRigidArea(SwingSet.hpad20));
 	vp.add(p);
     }
 }

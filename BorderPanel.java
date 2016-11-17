@@ -7,13 +7,11 @@
 
 import javax.swing.*;
 
-import java.awt.Panel;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Font;
 
-import javax.swing.event.*;
 import javax.swing.border.*;
 
 /*
@@ -21,9 +19,9 @@ import javax.swing.border.*;
  * @author Dave Kloba
  */
 public class BorderPanel extends JPanel      {
+    private static final long serialVersionUID = -6293894212491834255L;
 
     public BorderPanel()    {
-        JLabel l;
         JPanel tp;
 	GridLayout g;
 
@@ -81,6 +79,8 @@ public class BorderPanel extends JPanel      {
 }
 
 class BorderLabel extends JLabel {
+    private static final long serialVersionUID = 9136088785354592021L;
+
     public BorderLabel(String text, Border b) {
         super(text);
         setBorder(b);

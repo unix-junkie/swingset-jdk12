@@ -6,18 +6,14 @@
  */
 
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.text.*;
-import javax.swing.border.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.io.*;
 
 import java.applet.*;
 import SwingSet;
 
 public class SwingSetApplet extends JApplet {
+    private static final long serialVersionUID = -224546757455147774L;
+
     JPanel panel;
     
     public void init() {

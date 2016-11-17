@@ -6,12 +6,9 @@
  */
 
 import javax.swing.*;
-import javax.swing.text.*;
 import javax.swing.border.*;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 
 
 /**
@@ -22,17 +19,14 @@ import java.util.*;
  */
 public class CheckboxPanel extends JPanel 
 {
-    // The Frame
-    SwingSet swing;
+    private static final long serialVersionUID = -6036098383037724853L;
 
     ImageIcon bulb1 = SwingSet.sharedInstance().loadImageIcon("images/WebSpice/bulb1.gif","dim light bulb");
     ImageIcon bulb2 = SwingSet.sharedInstance().loadImageIcon("images/WebSpice/bulb2.gif","lit light bulb");
     ImageIcon bulb3 = SwingSet.sharedInstance().loadImageIcon("images/WebSpice/bulb3.gif","greyed out light bulb");
 
     public CheckboxPanel(SwingSet swing) {
-	this.swing = swing;
-
-	setBorder(swing.emptyBorder5);
+	setBorder(SwingSet.emptyBorder5);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 	// *************** Checkboxes ****************
@@ -53,14 +47,14 @@ public class CheckboxPanel extends JPanel
         button.setMnemonic('o');
 	swing.checkboxes.addElement(button);
 	textButtons.add(button);
-	textButtons.add(Box.createRigidArea(swing.hpad10));
+	textButtons.add(Box.createRigidArea(SwingSet.hpad10));
 	
 	button = new JCheckBox("Two");
 	button.setToolTipText("This is a Checkbox with Text");
         button.setMnemonic('t');
 	swing.checkboxes.addElement(button);
 	textButtons.add(button);
-	textButtons.add(Box.createRigidArea(swing.hpad10));
+	textButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	button = new JCheckBox("Three");
 	button.setToolTipText("This is a Checkbox with Text");
@@ -84,7 +78,7 @@ public class CheckboxPanel extends JPanel
 	button.getAccessibleContext().setAccessibleDescription("Image of a lightbulb");
 	swing.checkboxes.addElement(button);
 	imageButtons.add(button);
-	imageButtons.add(Box.createRigidArea(swing.hpad10));
+	imageButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	button = new JCheckBox("Two", bulb1);
 	button.setSelectedIcon(bulb2);
@@ -92,7 +86,7 @@ public class CheckboxPanel extends JPanel
 	button.getAccessibleContext().setAccessibleDescription("Image of a lightbulb");
 	swing.checkboxes.addElement(button);
 	imageButtons.add(button);
-	imageButtons.add(Box.createRigidArea(swing.hpad10));
+	imageButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	button = new JCheckBox("Three", bulb1);
 	button.setSelectedIcon(bulb2);
@@ -102,13 +96,13 @@ public class CheckboxPanel extends JPanel
 	imageButtons.add(button);
 
 	// Add button panels to buttonPanel
-	JPanel buttonPanel = swing.createVerticalPanel(true);
+	JPanel buttonPanel = SwingSet.createVerticalPanel(true);
 	buttonPanel.setAlignmentX(LEFT_ALIGNMENT);
 	buttonPanel.setAlignmentY(TOP_ALIGNMENT);
 
 
 	buttonPanel.add(textButtons);
-	buttonPanel.add(Box.createRigidArea(swing.vpad20));
+	buttonPanel.add(Box.createRigidArea(SwingSet.vpad20));
 	buttonPanel.add(imageButtons);
 
 	buttonPanel.add(Box.createGlue());
@@ -116,6 +110,8 @@ public class CheckboxPanel extends JPanel
 
 	// *************** Create the button controls ****************
 	JPanel controls = new JPanel() {
+	    private static final long serialVersionUID = 8713667530582254291L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(300, super.getMaximumSize().height);
 	    }
@@ -124,20 +120,20 @@ public class CheckboxPanel extends JPanel
 	controls.setAlignmentY(TOP_ALIGNMENT);
 	controls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel buttonControls = swing.createHorizontalPanel(true);
+	JPanel buttonControls = SwingSet.createHorizontalPanel(true);
 	buttonControls.setAlignmentY(TOP_ALIGNMENT);
 	buttonControls.setAlignmentX(LEFT_ALIGNMENT);
 
-	JPanel leftColumn = swing.createVerticalPanel(false);
+	JPanel leftColumn = SwingSet.createVerticalPanel(false);
 	leftColumn.setAlignmentX(LEFT_ALIGNMENT);
 	leftColumn.setAlignmentY(TOP_ALIGNMENT);
 
 	JPanel rightColumn = new LayoutControlPanel(swing, swing.checkboxes);
 
 	buttonControls.add(leftColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 	buttonControls.add(rightColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 
 	controls.add(buttonControls);
 
@@ -166,7 +162,7 @@ public class CheckboxPanel extends JPanel
 	enabled.addItemListener(swing.buttonDisplayListener);
 	leftColumn.add(enabled);
  
-	leftColumn.add(Box.createRigidArea(swing.vpad20));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad20));
 
 	
 	l = new JLabel("Pad Amount:");
@@ -196,11 +192,11 @@ public class CheckboxPanel extends JPanel
  	tenPad.addItemListener(swing.buttonPadListener);
 	leftColumn.add(tenPad);
 
-	leftColumn.add(Box.createRigidArea(swing.vpad20));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad20));
 
 	
 	add(buttonPanel);
-	add(Box.createRigidArea(swing.hpad10));
+	add(Box.createRigidArea(SwingSet.hpad10));
  	add(controls);
     }
 

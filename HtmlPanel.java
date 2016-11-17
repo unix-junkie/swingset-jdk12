@@ -8,7 +8,6 @@
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
-import javax.accessibility.*;
 
 import java.awt.*;
 import java.net.URL;
@@ -22,12 +21,12 @@ import java.io.IOException;
  * @author Peter Korn (accessibility support)
  */
 public class HtmlPanel extends JPanel implements HyperlinkListener {
-    SwingSet swing;
+    private static final long serialVersionUID = 3364508275690286949L;
+
     JEditorPane html;
 
-    public HtmlPanel(SwingSet swing) {
-	this.swing = swing;
-	setBorder(swing.emptyBorder10);
+    public HtmlPanel() {
+	setBorder(SwingSet.emptyBorder10);
         setLayout(new BorderLayout());
 	getAccessibleContext().setAccessibleName("HTML panel");
 	getAccessibleContext().setAccessibleDescription("A panel for viewing HTML documents, and following their links");
@@ -42,7 +41,6 @@ public class HtmlPanel extends JPanel implements HyperlinkListener {
             } catch (java.net.MalformedURLException exc) {
                    System.err.println("Attempted to open example.html "
                                       + "with a bad URL: " + url);
-                   url = null;
             }
             
             if(url != null) {
@@ -50,7 +48,7 @@ public class HtmlPanel extends JPanel implements HyperlinkListener {
                 html.setEditable(false);
                 html.addHyperlinkListener(this);
                 JScrollPane scroller = new JScrollPane();
-                scroller.setBorder(swing.loweredBorder);
+                scroller.setBorder(SwingSet.loweredBorder);
                 JViewport vp = scroller.getViewport();
                 vp.add(html);
                 vp.setBackingStoreEnabled(true);

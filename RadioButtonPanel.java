@@ -6,12 +6,9 @@
  */
 
 import javax.swing.*;
-import javax.swing.text.*;
 import javax.swing.border.*;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 
 
 /**
@@ -22,19 +19,16 @@ import java.util.*;
  */
 public class RadioButtonPanel extends JPanel 
 {
-    // The Frame
-    SwingSet swing;
+    private static final long serialVersionUID = -3498426084881049133L;
 
     ImageIcon radio = SwingSet.sharedInstance().loadImageIcon("images/WebSpice/radio.gif","Grey circle with blue triangle inside");
     ImageIcon radioSelected = SwingSet.sharedInstance().loadImageIcon("images/WebSpice/radioSelected.gif","Grey circle with green triangle inside");
     ImageIcon radioPressed = SwingSet.sharedInstance().loadImageIcon("images/WebSpice/radioPressed.gif","Grey circle with purple triangle inside");
 
     public RadioButtonPanel(SwingSet swing) {
-	this.swing = swing;
-
 	ButtonGroup group;
 
-	setBorder(swing.emptyBorder5);
+	setBorder(SwingSet.emptyBorder5);
 	setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
 	// *************** radio buttons ****************
@@ -57,7 +51,7 @@ public class RadioButtonPanel extends JPanel
         button.setMnemonic('o');
 	swing.radioButtons.addElement(button);
 	textButtons.add(button);
-	textButtons.add(Box.createRigidArea(swing.hpad10));
+	textButtons.add(Box.createRigidArea(SwingSet.hpad10));
 	
 	button = new JRadioButton("Two");
 	group.add(button);
@@ -65,7 +59,7 @@ public class RadioButtonPanel extends JPanel
 	button.setToolTipText("This is a RadioButton with Text");
 	swing.radioButtons.addElement(button);
 	textButtons.add(button);
-	textButtons.add(Box.createRigidArea(swing.hpad10));
+	textButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	button = new JRadioButton("Three");
 	group.add(button);
@@ -97,7 +91,7 @@ public class RadioButtonPanel extends JPanel
 	button.getAccessibleContext().setAccessibleName("Duke as a radio button");
 	swing.radioButtons.addElement(button);
 	imageButtons.add(button);
-	imageButtons.add(Box.createRigidArea(swing.hpad10));
+	imageButtons.add(Box.createRigidArea(SwingSet.hpad10));
 	
 	// 2 images
 	button = new JRadioButton(swing.duke2);
@@ -109,7 +103,7 @@ public class RadioButtonPanel extends JPanel
 	button.setToolTipText("This is a RadioButton with a Icon");
 	button.getAccessibleContext().setAccessibleName("Duke as a radio button");
 	imageButtons.add(button);
-	imageButtons.add(Box.createRigidArea(swing.hpad10));
+	imageButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	// 3 images
 	button = new JRadioButton(swing.duke2);
@@ -141,7 +135,7 @@ public class RadioButtonPanel extends JPanel
 	button.setPressedIcon(radioPressed);
 	swing.radioButtons.addElement(button);
 	tiButtons.add(button);
-	tiButtons.add(Box.createRigidArea(swing.hpad10));
+	tiButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	button = new JRadioButton("Center", radio);
 	group.add(button);
@@ -150,7 +144,7 @@ public class RadioButtonPanel extends JPanel
 	button.setSelectedIcon(radioSelected);
 	button.setPressedIcon(radioPressed);
 	tiButtons.add(button);
-	tiButtons.add(Box.createRigidArea(swing.hpad10));
+	tiButtons.add(Box.createRigidArea(SwingSet.hpad10));
 
 	button = new JRadioButton("Right", radio);
 	group.add(button);
@@ -182,6 +176,8 @@ public class RadioButtonPanel extends JPanel
 
 	// *************** Create the button controls ****************
 	JPanel controls = new JPanel() {
+	    private static final long serialVersionUID = 7509336839830514831L;
+
 	    public Dimension getMaximumSize() {
 		return new Dimension(300, super.getMaximumSize().height);
 	    }
@@ -201,9 +197,9 @@ public class RadioButtonPanel extends JPanel
 	JPanel rightColumn = new LayoutControlPanel(swing, swing.radioButtons);
 
 	buttonControls.add(leftColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 	buttonControls.add(rightColumn);
-	buttonControls.add(Box.createRigidArea(swing.hpad20));
+	buttonControls.add(Box.createRigidArea(SwingSet.hpad20));
 
 	controls.add(buttonControls);
 
@@ -233,7 +229,7 @@ public class RadioButtonPanel extends JPanel
 	leftColumn.add(enabled);
  
 
-	leftColumn.add(Box.createRigidArea(swing.vpad20));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad20));
 
 	
 	l = new JLabel("Pad Amount:");
@@ -263,10 +259,10 @@ public class RadioButtonPanel extends JPanel
  	tenPad.addItemListener(swing.buttonPadListener);
 	leftColumn.add(tenPad);
 	
-	leftColumn.add(Box.createRigidArea(swing.vpad20));
+	leftColumn.add(Box.createRigidArea(SwingSet.vpad20));
 
 	add(buttonPanel);
-	add(Box.createRigidArea(swing.hpad10));
+	add(Box.createRigidArea(SwingSet.hpad10));
  	add(controls);
     }
 

@@ -7,12 +7,8 @@
  
 import javax.swing.*;
 import javax.swing.Timer;
-import javax.swing.text.*;
-import javax.accessibility.*;
-
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 
 /**
@@ -23,7 +19,8 @@ import java.util.*;
  # @author Peter Korn (accessibility support)
  */
 public class ProgressPanel extends JPanel implements ActionListener {
-    SwingSet swing;
+    private static final long serialVersionUID = 6399341973797545023L;
+
     JProgressBar progressBar;
     JTextArea progressTextArea;
     JButton loadButton;
@@ -31,13 +28,11 @@ public class ProgressPanel extends JPanel implements ActionListener {
     Timer timer;
     Object  lock = new Object();
 
-    public ProgressPanel(SwingSet swing) {
-	this.swing = swing;
-
+    public ProgressPanel() {
 	setLayout(new BorderLayout());
 
 	JPanel textWrapper = new JPanel(new BorderLayout());
-	textWrapper.setBorder(swing.loweredBorder);
+	textWrapper.setBorder(SwingSet.loweredBorder);
 	textWrapper.setAlignmentX(LEFT_ALIGNMENT);
 	progressTextArea = new MyTextArea();
 	progressTextArea.getAccessibleContext().setAccessibleName("Text progressively being loaded in");
@@ -49,8 +44,10 @@ public class ProgressPanel extends JPanel implements ActionListener {
 	JPanel progressPanel = new JPanel();
 	add(progressPanel, BorderLayout.SOUTH);
 
-	progressBar = new JProgressBar(JProgressBar.HORIZONTAL,
+	progressBar = new JProgressBar(SwingConstants.HORIZONTAL,
 				       0, text.length()) {
+	    private static final long serialVersionUID = -8840866289967678247L;
+
 	    public Dimension getPreferredSize() {
 		return new Dimension(300, super.getPreferredSize().height);
 	    }
@@ -126,6 +123,8 @@ public class ProgressPanel extends JPanel implements ActionListener {
     }
 
     class MyTextArea extends JTextArea {
+	private static final long serialVersionUID = 3426959587618416819L;
+
         public MyTextArea() {
             super(null, 0, 0);
 	    setEditable(false);

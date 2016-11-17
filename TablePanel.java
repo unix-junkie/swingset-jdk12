@@ -12,7 +12,6 @@ import javax.swing.border.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 /*
  * @version 1.25 01/31/98
@@ -20,6 +19,8 @@ import java.util.*;
  * @author Steve Wilson
  */
 public class TablePanel extends JPanel {
+    private static final long serialVersionUID = -805399473018396162L;
+
     JTable      tableView;
     JScrollPane scrollpane;
     Dimension   origin = new Dimension(0, 0);
@@ -41,21 +42,17 @@ public class TablePanel extends JPanel {
     JComponent  selectionModeButtons;
     JComponent  resizeModeButtons;
 
-    JPanel      mainPanel;
     JPanel      controlPanel;
     JScrollPane tableAggregate;
 
-    public TablePanel(SwingSet swing) {
-	super();
-
+    public TablePanel() {
 	setLayout(new BorderLayout());
-        mainPanel = this;
 	controlPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 	JPanel column1 = new JPanel (new ColumnLayout() );
 	JPanel column2 = new JPanel (new ColumnLayout() );
 	JPanel column3 = new JPanel (new ColumnLayout() );
 
-	mainPanel.add(controlPanel, BorderLayout.NORTH);
+	add(controlPanel, BorderLayout.NORTH);
 
 
 	// start column 1
@@ -75,7 +72,7 @@ public class TablePanel extends JPanel {
         showHorizontalLinesCheckBox.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
-                tableView.setShowHorizontalLines(flag); ;
+                tableView.setShowHorizontalLines(flag);
                 tableView.repaint();
 	    }
         });
@@ -85,7 +82,7 @@ public class TablePanel extends JPanel {
         showVerticalLinesCheckBox.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
-                tableView.setShowVerticalLines(flag); ;
+                tableView.setShowVerticalLines(flag);
                 tableView.repaint();
 	    }
         });
@@ -93,7 +90,7 @@ public class TablePanel extends JPanel {
         interCellSpacingLabel = new JLabel("Inter-cell spacing:");
 	column1.add(interCellSpacingLabel);
 
-    	interCellSpacingSlider = new JSlider(JSlider.HORIZONTAL, 0, 10, 1);
+    	interCellSpacingSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 10, 1);
 	interCellSpacingSlider.getAccessibleContext().setAccessibleName("Inter-cell spacing");
 	interCellSpacingLabel.setLabelFor(interCellSpacingSlider);
         column1.add(interCellSpacingSlider);
@@ -114,7 +111,7 @@ public class TablePanel extends JPanel {
         isColumnSelectionAllowedCheckBox.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
-                tableView.setColumnSelectionAllowed(flag); ;
+                tableView.setColumnSelectionAllowed(flag);
                 tableView.repaint();
 	    }
         });
@@ -124,7 +121,7 @@ public class TablePanel extends JPanel {
         isRowSelectionAllowedCheckBox.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
-                tableView.setRowSelectionAllowed(flag); ;
+                tableView.setRowSelectionAllowed(flag);
                 tableView.repaint();
 	    }
         });
@@ -134,7 +131,7 @@ public class TablePanel extends JPanel {
         isRowAndColumnSelectionAllowedCheckBox.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 	        boolean flag = ((JCheckBox)e.getSource()).isSelected();
-                tableView.setCellSelectionEnabled(flag); ;
+                tableView.setCellSelectionEnabled(flag);
                 tableView.repaint();
 	    }
         });
@@ -142,7 +139,7 @@ public class TablePanel extends JPanel {
         rowHeightLabel = new JLabel("Row height:");
 	column2.add(rowHeightLabel);
 
-    	rowHeightSlider = new JSlider(JSlider.HORIZONTAL, 5, 100, 20);
+    	rowHeightSlider = new JSlider(SwingConstants.HORIZONTAL, 5, 100, 20);
 	rowHeightSlider.getAccessibleContext().setAccessibleName("Row height");
 	rowHeightLabel.setLabelFor(rowHeightSlider);
         column2.add(rowHeightSlider);
@@ -158,7 +155,7 @@ public class TablePanel extends JPanel {
 
         // Create the table.
         tableAggregate = createTable();
-        mainPanel.add(tableAggregate, BorderLayout.CENTER);
+        add(tableAggregate, BorderLayout.CENTER);
 
 
 
@@ -211,7 +208,7 @@ public class TablePanel extends JPanel {
     }
 
 
-    private ImageIcon loadIcon(String name, String description) {
+    private static ImageIcon loadIcon(String name, String description) {
 	String path = "images/ImageClub/food/" + name;
 	return SwingSet.sharedInstance().loadImageIcon(path, description);
     }
@@ -225,9 +222,7 @@ public class TablePanel extends JPanel {
 	ImageIcon burger = loadIcon("burger.gif","burger");
 	ImageIcon fries = loadIcon("fries.gif","fries");
 	ImageIcon softdrink = loadIcon("softdrink.gif","soft drink");
-	ImageIcon hotdog = loadIcon("hotdog.gif","hot dog");
 	ImageIcon pizza = loadIcon("pizza.gif","pizza");
-	ImageIcon icecream = loadIcon("icecream.gif","ice cream");
 	ImageIcon pie = loadIcon("pie.gif","pie");
 	ImageIcon cake = loadIcon("cake.gif","cake");
 	ImageIcon donut = loadIcon("donut.gif","donut");
@@ -282,7 +277,9 @@ public class TablePanel extends JPanel {
 
         // Create a model of the data.
         TableModel dataModel = new AbstractTableModel() {
-            public int getColumnCount() { return names.length; }
+	    private static final long serialVersionUID = -7680101787056290764L;
+
+	    public int getColumnCount() { return names.length; }
             public int getRowCount() { return data.length;}
             public Object getValueAt(int row, int col) {return data[row][col];}
             public String getColumnName(int column) {return names[column];}
@@ -297,6 +294,8 @@ public class TablePanel extends JPanel {
 
         // Show colors by rendering them in their own color.
         DefaultTableCellRenderer colorRenderer = new DefaultTableCellRenderer() {
+	    private static final long serialVersionUID = 4569015156668235636L;
+
 	    public void setValue(Object value) {
 	        if (value instanceof Color) {
 	            Color c = (Color)value;
@@ -307,7 +306,7 @@ public class TablePanel extends JPanel {
 
         };
 
-        colorRenderer.setHorizontalAlignment(JLabel.RIGHT);
+        colorRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
         tableView.getColumn("Favorite Color").setCellRenderer(colorRenderer);
 
         tableView.setRowHeight(20);
