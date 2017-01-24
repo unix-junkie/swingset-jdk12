@@ -74,7 +74,7 @@ public final class HtmlPanel extends JPanel implements HyperlinkListener {
     /**
      * Follows the reference in an
      * link.  The given url is the requested reference.
-     * By default this calls <a href="#setPage">setPage</a>,
+     * By default this calls {@linkplain JEditorPane#setPage(String) setPage},
      * and if an exception is thrown the original previous
      * document is restored and a beep sounded.  If an 
      * attempt was made to follow a link, but it represented
