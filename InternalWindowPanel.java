@@ -37,7 +37,6 @@ public final class InternalWindowPanel extends JPanel implements ActionListener 
     public InternalWindowPanel()    {
         setLayout(new BorderLayout());
         lc = new JDesktopPane();
-	lc.setOpaque(false);
         maker = createMakerFrame();
 	maker.setVisible(true);
         lc.add(maker, JLayeredPane.PALETTE_LAYER);  
