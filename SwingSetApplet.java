@@ -6,6 +6,9 @@
  */
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+
 import java.awt.*;
 
 import java.applet.*;
@@ -28,7 +31,16 @@ public final class SwingSetApplet extends JApplet {
 
 	// Force SwingSet to come up in the Cross Platform L&F
 	try {
-	    UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+	    final String lookAndFeelClassName = UIManager.getCrossPlatformLookAndFeelClassName();
+	    UIManager.setLookAndFeel(lookAndFeelClassName);
+	    if (lookAndFeelClassName.equals(MetalLookAndFeel.class.getName())) {
+                /*
+                 * Correct Look&Feel defaults for Java 1.4+.
+                 */
+                final ColorUIResource labelForeground = new ColorUIResource(102, 102, 153);
+                UIManager.put("Label.foreground", labelForeground);
+                UIManager.put("TitledBorder.titleColor", labelForeground);
+	    }
 	    // If you want the System L&F instead, comment out the above line and
 	    // uncomment the following:
 	    // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

@@ -8,6 +8,8 @@
 import javax.swing.*;
 import javax.swing.Timer;
 import javax.swing.event.*;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.border.*;
 
 import java.awt.*;
@@ -1246,7 +1248,16 @@ public class SwingSet extends JPanel
 
 	// Force SwingSet to come up in the Cross Platform L&F
 	try {
-	    UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+	    final String lookAndFeelClassName = UIManager.getCrossPlatformLookAndFeelClassName();
+	    UIManager.setLookAndFeel(lookAndFeelClassName);
+	    if (lookAndFeelClassName.equals(MetalLookAndFeel.class.getName())) {
+                /*
+                 * Correct Look&Feel defaults for Java 1.4+.
+                 */
+                final ColorUIResource labelForeground = new ColorUIResource(102, 102, 153);
+                UIManager.put("Label.foreground", labelForeground);
+                UIManager.put("TitledBorder.titleColor", labelForeground);
+	    }
 	    // If you want the System L&F instead, comment out the above line and
 	    // uncomment the following:
 	    // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -1326,16 +1337,34 @@ public class SwingSet extends JPanel
 	       if(rb.isSelected() && rb.getText().equals("Windows Style Look and Feel")) {
 		   currentUI = "Windows";
 	    	   UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		   /*
+		    * Restore Look&Feel defaults.
+		    */
+		   final UIDefaults lookAndFeelDefaults = UIManager.getLookAndFeelDefaults();
+		   UIManager.put("Label.foreground", lookAndFeelDefaults.getColor("Label.foreground"));
+		   UIManager.put("TitledBorder.titleColor", lookAndFeelDefaults.getColor("TitledBorder.titleColor"));
                    tabPlacement.setEnabled(true);
 	    	   SwingUtilities.updateComponentTreeUI(getRootComponent());
 	       } else if(rb.isSelected() && rb.getText().equals("Macintosh Look and Feel")) {
 		   currentUI = "Macintosh";
 	    	   UIManager.setLookAndFeel("com.sun.java.swing.plaf.mac.MacLookAndFeel");
+		   /*
+		    * Restore Look&Feel defaults.
+		    */
+		   final UIDefaults lookAndFeelDefaults = UIManager.getLookAndFeelDefaults();
+		   UIManager.put("Label.foreground", lookAndFeelDefaults.getColor("Label.foreground"));
+		   UIManager.put("TitledBorder.titleColor", lookAndFeelDefaults.getColor("TitledBorder.titleColor"));
                    tabPlacement.setEnabled(false);
 	    	   SwingUtilities.updateComponentTreeUI(getRootComponent());
 	       } else if(rb.isSelected() && rb.getText().equals("Motif Look and Feel")) {
 		   currentUI = "Motif";
 	    	   UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+		   /*
+		    * Restore Look&Feel defaults.
+		    */
+		   final UIDefaults lookAndFeelDefaults = UIManager.getLookAndFeelDefaults();
+		   UIManager.put("Label.foreground", lookAndFeelDefaults.getColor("Label.foreground"));
+		   UIManager.put("TitledBorder.titleColor", lookAndFeelDefaults.getColor("TitledBorder.titleColor"));
                    tabPlacement.setEnabled(true);
 	    	   SwingUtilities.updateComponentTreeUI(getRootComponent());
 	       } else if(rb.isSelected() && rb.getText().equals("Java Look and Feel")) {
@@ -1343,6 +1372,12 @@ public class SwingSet extends JPanel
                    // javax.swing.plaf.metal.MetalLookAndFeel.setCurrentTheme(
 		   //      new javax.swing.plaf.metal.DefaultMetalTheme());
 	    	   UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+		   /*
+		    * Correct Look&Feel defaults for Java 1.4+.
+		    */
+		   final ColorUIResource labelForeground = new ColorUIResource(102, 102, 153);
+		   UIManager.put("Label.foreground", labelForeground);
+		   UIManager.put("TitledBorder.titleColor", labelForeground);
                    tabPlacement.setEnabled(true);
 	    	   SwingUtilities.updateComponentTreeUI(getRootComponent());
 	       } 
